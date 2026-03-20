@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { localProductStore } from '../data/flagship_products.js';
+
 const router = express.Router();
 
 // --- SETTINGS MIGRATION (SUPABASE) ---
@@ -96,6 +98,59 @@ router.get('/stats', async (req, res) => {
     } catch (error) {
         console.error('Admin stats error:', error);
         res.status(500).json({ error: 'Server error fetching stats' });
+    }
+});
+
+// Sync local products to Supabase
+router.post('/sync-flagship', async (req, res) => {
+    try {
+        console.log('[Admin] Starting flagship inventory sync...');
+        
+        // 1. Fetch categories for mapping
+        const { data: catData, error: catError } = await supabase.from('categories').select('id, name');
+        if (catError) throw catError;
+
+        const catMap = {};
+        catData.forEach(c => {
+            const slug = c.name.toLowerCase().replace(/[^a-z]/g, '');
+            catMap[slug] = c.id;
+        });
+
+        // 2. Clear old products to avoid duplicates during mass-seed
+        await supabase.from('products').delete().neq('name', '___SYSTEM_RESERVED___');
+
+        // 3. Prepare products
+        const productsToInsert = localProductStore.map(p => {
+            const slug = p.category.toLowerCase().replace(/[^a-z]/g, '');
+            const categoryId = catMap[slug] || null;
+
+            return {
+                name: p.name,
+                description: p.description,
+                price: parseFloat(p.price),
+                image_url: p.image,
+                category_id: categoryId,
+                card_type: p.cardType,
+                set_name: p.set,
+                rarity: p.rarity,
+                condition: p.condition,
+                language: p.language,
+                stock: parseInt(p.stock) || 0,
+                featured: p.featured || false
+            };
+        });
+
+        // 4. Batch Insert
+        const { error: insertError } = await supabase.from('products').insert(productsToInsert);
+        if (insertError) throw insertError;
+
+        res.json({ 
+            message: 'Flagship inventory synchronized successfully!', 
+            count: productsToInsert.length 
+        });
+    } catch (error) {
+        console.error('Sync error:', error);
+        res.status(500).json({ error: 'Sync failed: ' + (error.message || JSON.stringify(error)) });
     }
 });
 
