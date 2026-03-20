@@ -17,9 +17,11 @@ const getSetting = async (key, defaultValue) => {
             .from('admin_settings')
             .select('value')
             .eq('key', key)
-            .single();
-        if (error || !data) return defaultValue;
-        return data.value;
+            .order('updated_at', { ascending: false })
+            .limit(1);
+            
+        if (error || !data || data.length === 0) return defaultValue;
+        return data[0].value;
     } catch (e) {
         return defaultValue;
     }
@@ -29,7 +31,10 @@ const updateSetting = async (key, value) => {
     try {
         const { error } = await supabase
             .from('admin_settings')
-            .upsert({ key, value, updated_at: new Date().toISOString() });
+            .upsert(
+                { key, value, updated_at: new Date().toISOString() },
+                { onConflict: 'key' }
+            );
         if (error) throw error;
     } catch (e) {
         console.error(`Failed to update setting ${key}`, e);
