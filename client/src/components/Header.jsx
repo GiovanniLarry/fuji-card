@@ -41,6 +41,12 @@ const Header = () => {
         }
       } catch (error) {
         console.error('Failed to fetch categories:', error);
+        // Fallback to primary Japanese TCG categories
+        setCategories([
+          { id: 'c1', name: 'pokemon' },
+          { id: 'c2', name: 'onepiece' },
+          { id: 'c3', name: 'other' }
+        ]);
       }
     };
     fetchCategories();

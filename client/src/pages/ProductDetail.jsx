@@ -29,10 +29,27 @@ const ProductDetail = () => {
       console.log('Fetching product with id:', id);
       setLoading(true);
       setImageError(false);
-      const response = await productsAPI.getOne(id);
-      console.log('Product API response:', response.data);
-      setProduct(response.data.product);
-      setRelated(response.data.related);
+      
+      try {
+        const response = await productsAPI.getOne(id);
+        console.log('Product API response:', response.data);
+        setProduct(response.data.product);
+        setRelated(response.data.related || []);
+      } catch (apiError) {
+        console.warn('ProductDetail API failed, attempting local fallback');
+        // Import local store on demand or ensure it's imported
+        const { localProductStore } = await import('../data/products');
+        const localProduct = localProductStore.find(p => p.id === id);
+        
+        if (localProduct) {
+          setProduct(localProduct);
+          // Simple related products logic: same category
+          const sameCategory = localProductStore.filter(p => p.category === localProduct.category && p.id !== id);
+          setRelated(sameCategory.slice(0, 4));
+        } else {
+          throw apiError; // Re-throw if even local fails
+        }
+      }
     } catch (error) {
       console.error('Failed to fetch product:', error);
     } finally {
