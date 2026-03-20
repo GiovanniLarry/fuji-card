@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import AnnouncementSlider from '../components/AnnouncementSlider';
+import HomeSlider from '../components/HomeSlider';
+import CurrencySelector from '../components/CurrencySelector';
 import './Home.css';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -93,38 +95,20 @@ const Home = () => {
   const displayProducts = showAllFeatured ? featuredProducts : featuredProducts.slice(0, isMobile ? 6 : 4);
 
   return (
-    <div className="home-page">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-bg-animation">
-          <div className="floating-card card-1"></div>
-          <div className="floating-card card-2"></div>
-          <div className="floating-card card-3"></div>
-        </div>
+    <div className="home-page-container">
+      {/* Top Controls Row */}
+      <div className="home-top-bar">
         <div className="container">
-          <div className="hero-content">
-            <div className="hero-badge">Trusted by 10,000+ Collectors</div>
-            <h1>Your Premier Japanese Trading Card Destination</h1>
-            <p>Discover authentic Pokemon, Yu-Gi-Oh!, One Piece cards and more. 99.99% sealed official Japanese products with buyer protection.</p>
-            <div className="hero-buttons">
-              <Link to="/products" className="btn btn-primary">Shop Now</Link>
-              <Link to="/products?featured=true" className="btn btn-outline">Featured Cards</Link>
-            </div>
-            <div className="hero-trust">
-              <div className="trust-item">
-                <span className="trust-stars">★★★★★</span>
-                <span>Excellent on Trustpilot</span>
-              </div>
-              <div className="trust-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <span>Buyer Protection</span>
-              </div>
-            </div>
-          </div>
+          <CurrencySelector />
         </div>
-      </section>
+      </div>
+
+      {/* Main Announcement Slider */}
+      <div className="home-main-hero">
+        <div className="container">
+          <HomeSlider />
+        </div>
+      </div>
 
       {/* Dynamic Announcement Slider */}
       <AnnouncementSlider />
