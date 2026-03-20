@@ -355,7 +355,8 @@ router.post('/paystack/initialize', async (req, res) => {
     res.json({ url: response.data.data.authorization_url });
   } catch (error) {
     console.error('Paystack initialize error:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to initialize Paystack payment' });
+    const backendMsg = error.response?.data?.message || error.message || 'Verification of Paystack credentials failed.';
+    res.status(500).json({ success: false, message: `Paystack Error: ${backendMsg}` });
   }
 });
 
@@ -462,7 +463,7 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
 
   } catch (error) {
     console.error('PayFast generate error:', error);
-    res.status(500).json({ error: 'Failed to generate payment payload' });
+    res.status(500).json({ success: false, message: `PayFast Configuration Failure: ${error.message || 'Signature handshake failed.'}` });
   }
 });
 
