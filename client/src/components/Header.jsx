@@ -180,16 +180,62 @@ const Header = () => {
         <>
           <div className="drawer-overlay" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="mobile-drawer-v2 open">
-             <div className="mobile-drawer-header">
-                 <h3>MENU</h3>
-                 <button onClick={() => setMobileMenuOpen(false)}><i className="fa-solid fa-xmark"></i></button>
-             </div>
-             <ul className="mobile-drawer-links">
-                 <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>HOME</Link></li>
-                 {categories.map(cat => (
-                     <li key={cat.id}><Link to={`/products?category=${cat.name}`} onClick={() => setMobileMenuOpen(false)}>{cat.name.toUpperCase()}</Link></li>
-                 ))}
-             </ul>
+            <div className="mobile-drawer-header">
+              <button className="drawer-close" onClick={() => setMobileMenuOpen(false)}>
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            
+            <nav className="mobile-drawer-nav">
+              <ul className="mobile-main-links">
+                <li>
+                  <Link to="/products?category=pokemon" onClick={() => setMobileMenuOpen(false)}>
+                    POKEMON <i className="fa-solid fa-chevron-down"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/products?category=onepiece" onClick={() => setMobileMenuOpen(false)}>
+                    ONE PIECE <i className="fa-solid fa-chevron-down"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/products?category=other" onClick={() => setMobileMenuOpen(false)}>
+                    OTHER TCG <i className="fa-solid fa-chevron-down"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/info" onClick={() => setMobileMenuOpen(false)}>
+                    INFO <i className="fa-solid fa-chevron-down"></i>
+                  </Link>
+                </li>
+              </ul>
+
+              {/* Mobile Integrated Search */}
+              <div className="mobile-search-slot">
+                <form className="mobile-search-integrated" onSubmit={handleSearch}>
+                  <div className="mobile-search-all">
+                    <span>All</span> <i className="fa-solid fa-chevron-down"></i>
+                  </div>
+                  <div className="mobile-input-wrapper">
+                    <input 
+                      type="text" 
+                      placeholder="Which item are you looking for.." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button type="submit">
+                      <i className="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div className="mobile-auth-links">
+                <Link to={isAuthenticated ? "/account" : "/login"} onClick={() => setMobileMenuOpen(false)}>
+                  {isAuthenticated ? (user?.name?.toUpperCase() || 'ACCOUNT') : 'LOGIN / REGISTER'}
+                </Link>
+              </div>
+            </nav>
           </div>
         </>
       )}
