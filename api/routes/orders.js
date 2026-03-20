@@ -414,9 +414,9 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     // PERSISTENT CONFIG
     const payfastConfig = await getSetting('payfast', {});
 
-    const MERCHANT_ID = payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID || '22427478';
-    const MERCHANT_KEY = payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY || 'kt2fwjkagmjli';
-    const PASSPHRASE = payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || 'Desormais190';
+    const MERCHANT_ID = payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID;
+    const MERCHANT_KEY = payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY;
+    const PASSPHRASE = payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE;
     const PAYFAST_URL = payfastConfig.url || process.env.PAYFAST_URL || 'https://www.payfast.co.za/eng/process';
 
     // Build payload WITHOUT signature first (so signature excludes itself)
