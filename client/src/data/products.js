@@ -336,21 +336,6 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op07_box_v4',
-    name: 'OP-07 500 Years into the Future Sealed Case',
-    category: 'onepiece',
-    price: 680.00,
-    image: '/onepiece/OP-07 500 Years into the Future Sealed Case.webp', 
-    description: 'The monumental OP-07 set featuring Egghead Island climax. Premium booster box.',
-    stock: 15,
-    set: 'OP-07',
-    rarity: 'Sealed Case',
-    condition: 'Factory Sealed',
-    language: 'Japanese',
-    cardType: 'Sealed Product',
-    featured: true
-  },
-  {
     id: 'op01_box_v4',
     name: 'OP-01 Romance Dawn Booster Box Japanese ONE PIECE CARD',
     category: 'onepiece',
@@ -426,52 +411,6 @@ export const localProductStore = [
     featured: true
   },
 
-  // --- BOUTIQUE SINGLES: ONE PIECE (20+ ITEMS) ---
-  {
-    id: 'op5_luffy_v4',
-    name: 'Monkey.D.Luffy Gear 5 Manga Art OP05-119',
-    category: 'onepiece',
-    price: 1200.00,
-    image: '/onepiece/Monkey.D.Luffy Gear 5 Manga Art OP05-119.webp',
-    description: 'The definitive Gear 5 SEC from the Anniversary set. Top-tier collectible asset.',
-    stock: 1,
-    set: 'Protagonist of the New Generation',
-    rarity: 'SEC (Manga Art)',
-    condition: 'Mint',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
-  {
-    id: 'op1_shanks_v4',
-    name: 'Shanks Manga Alternative Art OP01-120',
-    category: 'onepiece',
-    price: 850.00,
-    image: '/onepiece/2024 ONE PIECE EMPERORS IN THE NEW WORLD OP09-004 SHANKS MANGA ALT ART PSA 10.webp',
-    description: 'The Holy Grail of Romance Dawn. Highly valuable Manga Art secret rare.',
-    stock: 1,
-    set: 'Romance Dawn',
-    rarity: 'SEC (Manga Art)',
-    condition: 'Mint',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
-  {
-    id: 'op6_zoro_manga_v4',
-    name: 'Roronoa Zoro Manga Alternative Art OP06-118',
-    category: 'onepiece',
-    price: 780.00,
-    image: '/onepiece/One Piece 2024 Roronoa Zoro OP06-118 Manga Alt Art SR PRB01 GEM MINT PSA 10.webp',
-    description: 'The breathtaking Manga Art Zoro from Wings of the Captain. Legendary status card.',
-    stock: 1,
-    set: 'Wings of the Captain',
-    rarity: 'SEC (Manga Art)',
-    condition: 'Mint',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
   {
     id: 'op4_sabo_v4',
     name: 'Sabo Parallel SEC (Manga Art) - OP04-083 - Japanese',
@@ -533,36 +472,6 @@ export const localProductStore = [
     featured: false
   },
   {
-    id: 'op3_katakuri_v4',
-    name: 'Charlotte Katakuri SEC Alt Art OP03-123',
-    category: 'onepiece',
-    price: 65.00,
-    image: 'https://tcgplayer-cdn.tcgplayer.com/product/494553_in_1000x1000.jpg',
-    description: 'Alternative Art Katakuri from Pillars of Strength. Competitive mainstay.',
-    stock: 6,
-    set: 'Pillars of Strength',
-    rarity: 'SEC (Alt Art)',
-    condition: 'Mint',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
-  {
-    id: 'op4_rebecca_v1',
-    name: 'Rebecca Leader Parallel OP04-039',
-    category: 'onepiece',
-    price: 48.00,
-    image: '/onepiece/Rebecca Leader Parallel OP04-039.webp',
-    description: 'Dressrosa Princess Rebecca Parallel Leader. Highly popular Japanese character card.',
-    stock: 4,
-    set: 'Kingdoms of Intrigue',
-    rarity: 'L (Parallel)',
-    condition: 'Near Mint',
-    language: 'Japanese',
-    cardType: 'Leader',
-    featured: false
-  },
-  {
     id: 'op5_kaido_v1',
     name: 'Kaido Alternative Art - OP05-118 - Japanese',
     category: 'onepiece',
@@ -620,21 +529,6 @@ export const localProductStore = [
     condition: 'NM',
     language: 'Japanese',
     cardType: 'Character',
-    featured: false
-  },
-  {
-    id: 'op2_whitebeard_aa',
-    name: 'Edward Newgate (Whitebeard) OP02-001 Leader',
-    category: 'onepiece',
-    price: 110.00,
-    image: 'https://tcgplayer-cdn.tcgplayer.com/product/480004_in_1000x1000.jpg',
-    description: 'The legendary Whitebeard Parallel Leader from Paramount War.',
-    stock: 4,
-    set: 'Paramount War',
-    rarity: 'L (Parallel)',
-    condition: 'Near Mint',
-    language: 'Japanese',
-    cardType: 'Leader',
     featured: false
   },
   {
