@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { cartAPI } from '../services/api';
 import { useAuth } from './AuthContext';
+import { products as localProductStore } from '../data/products';
 
 const CartContext = createContext();
 
@@ -12,10 +13,33 @@ export const CartProvider = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   // Load from local storage for high-impact fallback persistence
-  const getLocalCart = () => {
+  const getLocalCart = useCallback(() => {
     const local = localStorage.getItem('fuji_local_cart');
-    return local ? JSON.parse(local) : { items: [], itemCount: 0, subtotal: '0.00' };
-  };
+    let cartData = local ? JSON.parse(local) : { items: [], itemCount: 0, subtotal: '0.00' };
+    
+    // RE-SYNC Product Info to Ensure Images/Prices are Correct in Fallback
+    if (cartData.items.length > 0) {
+      cartData.items = cartData.items.map(item => {
+        const fullProd = localProductStore.find(p => p.id === item.productId);
+        if (fullProd) {
+          return {
+            ...item,
+            product: {
+              ...fullProd,
+              image_url: fullProd.image // Map frontend field to expected API field
+            }
+          };
+        }
+        return item;
+      });
+      
+      const sub = cartData.items.reduce((sum, i) => sum + (parseFloat(i.product?.price || 0) * i.quantity), 0);
+      cartData.subtotal = sub.toFixed(2);
+      cartData.itemCount = cartData.items.reduce((sum, i) => sum + i.quantity, 0);
+    }
+    
+    return cartData;
+  }, []);
 
   const saveLocalCart = (cartData) => {
     localStorage.setItem('fuji_local_cart', JSON.stringify(cartData));
@@ -28,7 +52,7 @@ export const CartProvider = ({ children }) => {
     }
     // Initialize cart from local storage for instant UI visibility
     setCart(getLocalCart());
-  }, []);
+  }, [getLocalCart]);
 
   const fetchCart = useCallback(async () => {
     try {
@@ -42,7 +66,7 @@ export const CartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [getLocalCart]);
 
   useEffect(() => {
     fetchCart();
@@ -57,28 +81,29 @@ export const CartProvider = ({ children }) => {
         await cartAPI.add(productId, quantity);
         await fetchCart();
       } catch (apiError) {
-        console.warn('Server Add failed, implementing local persistence fallback');
-        // If API fails (e.g. Supabase down), fallback to full client-side logic
+        console.warn('Server Add failed, implementing high-fidelity local persistence fallback');
         const currentLocal = getLocalCart();
         
         // Find if item exists in local cart
         const existingIndex = currentLocal.items.findIndex(item => item.productId === productId);
+        const productInfo = localProductStore.find(p => p.id === productId);
         
-        // We need product info for local display - since we are adding from Home, we likely have MARQUEE available
-        // But for simplicity, we just increment itemCount for immediate feedback
         if (existingIndex > -1) {
           currentLocal.items[existingIndex].quantity += quantity;
         } else {
           currentLocal.items.push({
-            id: `local_${Date.now()}`,
+            id: `local_${Date.now()}_${productId}`,
             productId: productId,
             quantity: quantity,
-            product: { id: productId, name: 'Product', price: 0 } // Placeholder if API failing
+            product: productInfo ? { ...productInfo, image_url: productInfo.image } : { id: productId, name: 'Product', price: 0 }
           });
         }
         
+        const sub = currentLocal.items.reduce((sum, i) => sum + (parseFloat(i.product?.price || 0) * i.quantity), 0);
+        currentLocal.subtotal = sub.toFixed(2);
         currentLocal.itemCount = currentLocal.items.reduce((sum, item) => sum + item.quantity, 0);
-        setCart(currentLocal);
+        
+        setCart({...currentLocal});
         saveLocalCart(currentLocal);
       }
       
@@ -100,8 +125,12 @@ export const CartProvider = ({ children }) => {
         if (item) {
           if (quantity <= 0) local.items = local.items.filter(i => i.id !== itemId);
           else item.quantity = quantity;
+          
+          const sub = local.items.reduce((sum, i) => sum + (parseFloat(i.product?.price || 0) * i.quantity), 0);
+          local.subtotal = sub.toFixed(2);
           local.itemCount = local.items.reduce((sum, i) => sum + i.quantity, 0);
-          setCart(local);
+          
+          setCart({...local});
           saveLocalCart(local);
         }
       }
@@ -121,8 +150,12 @@ export const CartProvider = ({ children }) => {
       } catch (e) {
         const local = getLocalCart();
         local.items = local.items.filter(i => i.id !== itemId);
+        
+        const sub = local.items.reduce((sum, i) => sum + (parseFloat(i.product?.price || 0) * i.quantity), 0);
+        local.subtotal = sub.toFixed(2);
         local.itemCount = local.items.reduce((sum, i) => sum + i.quantity, 0);
-        setCart(local);
+        
+        setCart({...local});
         saveLocalCart(local);
       }
       await fetchCart();
