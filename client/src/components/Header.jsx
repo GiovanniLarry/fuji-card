@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_URL || '/api';
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [catDropdownOpen, setCatDropdownOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState([]);
@@ -53,6 +54,15 @@ const Header = () => {
     }
   };
 
+  const toggleCategories = () => {
+    // Determine screen size to either show drawer (mobile) or dropdown (desktop)
+    if (window.innerWidth <= 768) {
+      setMobileMenuOpen(true);
+    } else {
+      setCatDropdownOpen(!catDropdownOpen);
+    }
+  };
+
   return (
     <header className={`header-v2 ${isHeaderVisible ? 'visible' : 'hidden'}`}>
       {/* Top Bar - Blue */}
@@ -81,7 +91,6 @@ const Header = () => {
       {/* Main Bar - White */}
       <div className="header-middle-white">
         <div className="container middle-flex-container">
-          {/* Mobile Only Hamburger */}
           <button className="mobile-only-hamburger" onClick={() => setMobileMenuOpen(true)}>
              <i className="fa-solid fa-bars"></i>
           </button>
@@ -94,9 +103,23 @@ const Header = () => {
           {/* Desktop Search Bar */}
           <div className="desktop-search-container">
             <form className="search-box-desktop" onSubmit={handleSearch}>
-              <div className="search-all-dropdown">
-                <span>All</span>
-                <i className="fa-solid fa-chevron-down"></i>
+              <div className="search-all-dropdown-container">
+                <div className="search-all-dropdown" onClick={toggleCategories}>
+                  <span>All</span>
+                  <i className={`fa-solid fa-chevron-down ${catDropdownOpen ? 'rotated' : ''}`}></i>
+                </div>
+                
+                {catDropdownOpen && (
+                  <ul className="desktop-categories-dropdown">
+                    {categories.map(cat => (
+                      <li key={cat.id}>
+                        <Link to={`/products?category=${cat.name}`} onClick={() => setCatDropdownOpen(false)}>
+                          {cat.name.toUpperCase()}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <input 
                 type="text" 
@@ -120,7 +143,6 @@ const Header = () => {
 
             <div className="divider-desktop"></div>
 
-            {/* Mobile Only Search Box Button */}
             <button className="mobile-search-toggle" onClick={() => navigate('/products')}>
                <i className="fa-solid fa-magnifying-glass"></i>
             </button>
