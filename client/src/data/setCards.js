@@ -47,7 +47,6 @@ export const getDefaultShowcase = (setName) => [
   { name: `${setName} Chase 1`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg' },
   { name: `${setName} Chase 2`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/480088_in_1000x1000.jpg' },
   { name: `${setName} Chase 3`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/480112_in_1000x1000.jpg' },
-  { name: `${setName} Chase 4`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/494553_in_1000x1000.jpg' },
   { name: `${setName} Chase 5`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/516147_in_1000x1000.jpg' },
   { name: `${setName} Chase 6`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/501309_in_1000x1000.jpg' },
   { name: `${setName} Chase 7`, image: 'https://tcgplayer-cdn.tcgplayer.com/product/516147_in_1000x1000.jpg' },
