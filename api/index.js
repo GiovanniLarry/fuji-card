@@ -10,6 +10,14 @@ import orderRoutes from './routes/orders.js';
 import categoryRoutes from './routes/categories.js';
 import adminRoutes from './routes/admin.js';
 
+console.log('Backend starting up...');
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('UNHANDLED REJECTION at:', promise, 'reason:', reason);
+});
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
