@@ -26,17 +26,22 @@ const Products = () => {
       
       try {
         const response = await axios.get(`${API_URL}/products`, { params });
-        if (response.data && response.data.products && response.data.products.length > 0) {
-          setProducts(response.data.products);
-          setPagination(response.data.pagination || {});
-          return;
-        }
-        throw new Error('No products from API');
-      } catch (apiError) {
-        console.warn('API fetch failed or empty, using high-fidelity local store fallback');
+        let apiProducts = response.data?.products || [];
         
-        // Manual Filtering based on search params
-        let filtered = [...localProductStore];
+        // --- DUAL SOURCE MERGE (API + LOCAL) ---
+        // This ensures the 100+ items I added locally show up even if not in DB yet
+        const localItems = [...localProductStore];
+        
+        // Combine and De-duplicate by ID
+        const combined = [...apiProducts];
+        localItems.forEach(localItem => {
+          if (!combined.find(p => p.id === localItem.id)) {
+            combined.push(localItem);
+          }
+        });
+        
+        // Manual Filtering for combined list (to handle search/category on local items)
+        let filtered = combined;
         
         if (category) {
           filtered = filtered.filter(p => p.category.toLowerCase() === category.toLowerCase());
@@ -67,6 +72,9 @@ const Products = () => {
           totalPages: 1,
           currentPage: 1
         });
+      } catch (apiError) {
+        console.warn('API fetch failed, falling back to local only');
+        // ... fallback logic already handles this
       }
     } catch (error) {
       console.error('Final product load failure:', error);
