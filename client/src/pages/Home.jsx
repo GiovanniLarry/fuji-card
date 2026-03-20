@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import ProductCard from '../components/ProductCard';
-import AnnouncementSlider from '../components/AnnouncementSlider';
 import HomeSlider from '../components/HomeSlider';
+import PremiumProductCard from '../components/PremiumProductCard';
 import CurrencySelector from '../components/CurrencySelector';
 import './Home.css';
 
@@ -11,88 +9,51 @@ const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showAllFeatured, setShowAllFeatured] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+
+  // Mock Premium Products as per user's image if API doesn't have them yet
+  const premiumProductsData = [
+    {
+      id: 'mock-1',
+      name: "M4 Ninja Spinner booster box Japanese Pokemon Card",
+      category: "BOOSTER BOXES POKEMON",
+      price: 278.00 / 4.60, // Convert to GBP roughly (4.6 is AED rate)
+      image: "/slideshow/M4-back-300x167.webp",
+      stock: 5
+    },
+    {
+      id: 'mock-2',
+      name: "OP-15 Adventure on KAMI's Island booster box Japanese ONE PIECE CARD",
+      category: "BOOSTER BOXES ONE PIECE",
+      price: 285.00 / 4.60,
+      image: "/slideshow/OP-15-back-300x176.webp",
+      stock: 5
+    },
+    {
+      id: 'mock-3',
+      name: "OP-15 Adventure on KAMI's Island Sealed Case (12 boxes) Japanese ONE PIECE CARD",
+      category: "ONE PIECE",
+      price: 3398.00 / 4.60,
+      image: "/slideshow/OP-15-back-300x176.webp",
+      stock: 2
+    }
+  ];
 
   useEffect(() => {
-    console.log('Home useEffect triggered');
-    fetchData();
-    
-    // Detect mobile device
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const fetchFeatured = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/products?featured=true`);
+        if (response.data && response.data.products) {
+          setFeaturedProducts(response.data.products);
+        }
+      } catch (error) {
+        console.error('Failed to fetch featured products:', error);
+      } finally {
+        setLoading(false);
+      }
     };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
+    fetchFeatured();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      console.log('Fetching home page data...');
-      
-      // Fetch categories
-      const categoriesResponse = await axios.get(`${API_URL}/categories`);
-      console.log('Categories response:', categoriesResponse.data);
-      
-      // Fetch featured products - show more on mobile, limited on desktop
-      const limit = isMobile ? 12 : 8;
-      const productsResponse = await axios.get(`${API_URL}/products`, { 
-        params: { featured: 'true', limit } 
-      });
-      console.log('Featured products response:', productsResponse.data);
-      
-      if (categoriesResponse.data && categoriesResponse.data.categories) {
-        console.log('Setting categories:', categoriesResponse.data.categories.length, 'categories');
-        setCategories(categoriesResponse.data.categories);
-      } else {
-        console.log('No categories data in response');
-        setCategories([]);
-      }
-      
-      if (productsResponse.data && productsResponse.data.products) {
-        setFeaturedProducts(productsResponse.data.products);
-      } else {
-        setFeaturedProducts([]);
-      }
-      
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-      console.error('Error details:', error.response?.data || error.message);
-      // Set empty arrays to prevent undefined errors
-      setFeaturedProducts([]);
-      setCategories([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleShowMoreFeatured = async () => {
-    try {
-      setLoading(true);
-      const limit = isMobile ? 20 : 16; // Show more when "View More" is clicked
-      const productsResponse = await axios.get(`${API_URL}/products`, { 
-        params: { featured: 'true', limit } 
-      });
-      
-      if (productsResponse.data && productsResponse.data.products) {
-        setFeaturedProducts(productsResponse.data.products);
-        setShowAllFeatured(true);
-      }
-    } catch (error) {
-      console.error('Failed to fetch more featured products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const displayProducts = showAllFeatured ? featuredProducts : featuredProducts.slice(0, isMobile ? 6 : 4);
 
   return (
     <div className="home-page-container">
@@ -109,6 +70,32 @@ const Home = () => {
           <HomeSlider />
         </div>
       </div>
+
+      {/* Premium Products Collection (Matching User Mockup) */}
+      <section className="premium-collection-section">
+        <div className="container">
+          <div className="premium-grid">
+            {premiumProductsData.map(product => (
+              <PremiumProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* API Featured Products (Secondary) */}
+      {!loading && featuredProducts.length > 0 && (
+         <section className="featured-section">
+            <div className="container">
+              <h2 className="section-title">Explore Our Shop</h2>
+              <div className="products-grid">
+                {/* Fallback to regular cards for other products */}
+                {featuredProducts.map(product => (
+                  <PremiumProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+         </section>
+      )}
     </div>
   );
 };
