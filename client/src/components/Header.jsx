@@ -176,7 +176,6 @@ const Header = () => {
               <li><Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link></li>
-              <li><Link to="/cardlists">CARD LISTS <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link></li>
             </ul>
           </nav>

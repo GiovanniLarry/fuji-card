@@ -1,5 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { setShowcase, getDefaultShowcase } from '../data/setCards';
 import './Info.css';
+
+const SetItem = ({ name, id }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const cards = setShowcase[id] || getDefaultShowcase(name);
+
+  return (
+    <li className={`card-list-item ${isExpanded ? 'expanded' : ''}`}>
+      <div className="list-item-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <span>{name}</span>
+        <i className={`fa-solid fa-chevron-down toggle-icon`}></i>
+      </div>
+      {isExpanded && (
+        <div className="gallery-scroller">
+          {cards.map((card, idx) => (
+            <div key={idx} className="gallery-card">
+              <img src={card.image} alt={card.name} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      )}
+    </li>
+  );
+};
 
 const Info = () => {
   return (
@@ -20,82 +44,82 @@ const Info = () => {
             <span>MEGA SERIES</span>
           </div>
           <ul className="card-list">
-            <li><a href="#">Ninja Spinner</a></li>
-            <li><a href="#">Munikis Zero (Nihil Zero)</a></li>
-            <li><a href="#">MEGA Dream ex cardlist</a></li>
-            <li><a href="#">Inferno X cardlist</a></li>
-            <li><a href="#">Mega Brave cardlist</a></li>
-            <li><a href="#">Mega Symphonia cardlist</a></li>
+            <SetItem name="Ninja Spinner" id="ninja" />
+            <SetItem name="Munikis Zero (Nihil Zero)" id="munikis" />
+            <SetItem name="MEGA Dream ex" id="mega_dream" />
+            <SetItem name="Inferno X" id="inferno_x" />
+            <SetItem name="Mega Brave" id="mega_brave" />
+            <SetItem name="Mega Symphonia" id="mega_symphonia" />
           </ul>
 
           <div className="series-divider">
             <span>SCARLET & VIOLET SERIES</span>
           </div>
           <ul className="card-list grid-list">
-            <li><a href="#">White Flare</a></li>
-            <li><a href="#">Black Bolt</a></li>
-            <li><a href="#">Glory of Team Rocket</a></li>
-            <li><a href="#">Heat Wave Arena</a></li>
-            <li><a href="#">Battle Partners cardlist</a></li>
-            <li><a href="#">Terastal Festival Ex cardlist</a></li>
-            <li><a href="#">Super Electric Breaker cardlist</a></li>
-            <li><a href="#">Paradise Dragona cardlist</a></li>
-            <li><a href="#">Stella Miracle cardlist</a></li>
-            <li><a href="#">Night Wanderer cardlist</a></li>
-            <li><a href="#">Mask of change cardlist</a></li>
-            <li><a href="#">Crimson Haze cardlist</a></li>
-            <li><a href="#">Cyber Judge cardlist</a></li>
-            <li><a href="#">Wild Force cardlist</a></li>
-            <li><a href="#">Shiny Treasure Ex cardlist</a></li>
-            <li><a href="#">Ancient Roar cardlist</a></li>
-            <li><a href="#">Future Flash cardlist</a></li>
-            <li><a href="#">Raging Surf cardlist</a></li>
-            <li><a href="#">Ruler of the Black Flame cardlist</a></li>
-            <li><a href="#">Pokémon 151 cardlist</a></li>
-            <li><a href="#">Snow Hazard cardlist</a></li>
-            <li><a href="#">Clay Burst cardlist</a></li>
-            <li><a href="#">Triplet Beat cardlist</a></li>
-            <li><a href="#">Violet Ex cardlist</a></li>
-            <li><a href="#">Scarlet Ex cardlist</a></li>
+            <SetItem name="White Flare" id="white_flare" />
+            <SetItem name="Black Bolt" id="black_bolt" />
+            <SetItem name="Glory of Team Rocket" id="team_rocket" />
+            <SetItem name="Heat Wave Arena" id="heat_wave" />
+            <SetItem name="Battle Partners" id="partners" />
+            <SetItem name="Terastal Festival Ex" id="terastal" />
+            <SetItem name="Super Electric Breaker" id="electric" />
+            <SetItem name="Paradise Dragona" id="dragona" />
+            <SetItem name="Stella Miracle" id="stella" />
+            <SetItem name="Night Wanderer" id="night" />
+            <SetItem name="Mask of change" id="mask" />
+            <SetItem name="Crimson Haze" id="crimson" />
+            <SetItem name="Cyber Judge" id="cyber" />
+            <SetItem name="Wild Force" id="wild" />
+            <SetItem name="Shiny Treasure Ex" id="shiny" />
+            <SetItem name="Ancient Roar" id="ancient" />
+            <SetItem name="Future Flash" id="future" />
+            <SetItem name="Raging Surf" id="raging" />
+            <SetItem name="Ruler of the Black Flame" id="ruler" />
+            <SetItem name="Pokémon 151" id="p151" />
+            <SetItem name="Snow Hazard" id="snow" />
+            <SetItem name="Clay Burst" id="clay" />
+            <SetItem name="Triplet Beat" id="triplet" />
+            <SetItem name="Violet Ex" id="violet" />
+            <SetItem name="Scarlet Ex" id="scarlet" />
           </ul>
 
           <div className="series-divider">
             <span>SWORD & SHIELD SERIES</span>
           </div>
           <ul className="card-list grid-list">
-            <li><a href="#">Vstar Universe cardlist</a></li>
-            <li><a href="#">Paradigm Trigger cardlist</a></li>
-            <li><a href="#">Incandescent Arcana cardlist</a></li>
-            <li><a href="#">Lost Abyss cardlist</a></li>
-            <li><a href="#">Pokémon GO cardlist</a></li>
-            <li><a href="#">Dark Phantasma cardlist</a></li>
-            <li><a href="#">Time Gazer cardlist</a></li>
-            <li><a href="#">Space Juggler cardlist</a></li>
-            <li><a href="#">Battle Region cardlist</a></li>
-            <li><a href="#">Star Birth cardlist</a></li>
-            <li><a href="#">Start Deck 100 cardlist</a></li>
-            <li><a href="#">Vmax Climax cardlist</a></li>
-            <li><a href="#">25th Anniversary Promo cardlist</a></li>
-            <li><a href="#">25th Anniversary Collection cardlist</a></li>
-            <li><a href="#">Fusion Arts cardlist</a></li>
-            <li><a href="#">Blue Sky Stream cardlist</a></li>
-            <li><a href="#">Towering Perfection cardlist</a></li>
-            <li><a href="#">Eevee Heroes cardlist</a></li>
-            <li><a href="#">Jet Black Spirit cardlist</a></li>
-            <li><a href="#">Silver Lance cardlist</a></li>
-            <li><a href="#">Matchless Fighters cardlist</a></li>
-            <li><a href="#">Rapid Strike Master cardlist</a></li>
-            <li><a href="#">Single Strike Master cardlist</a></li>
-            <li><a href="#">Shiny Star V cardlist</a></li>
-            <li><a href="#">Shocking Volt Tackle cardlist</a></li>
-            <li><a href="#">Legendary Heartbeat cardlist</a></li>
-            <li><a href="#">Infinity Zone cardlist</a></li>
-            <li><a href="#">Explosive Flame Walker cardlist</a></li>
-            <li><a href="#">Rebellion Crash cardlist</a></li>
-            <li><a href="#">Vmax Rising cardlist</a></li>
-            <li><a href="#">Sword cardlist</a></li>
-            <li><a href="#">Shield cardlist</a></li>
-            <li><a href="#">Sword & Shield promos cardlist</a></li>
+            <SetItem name="Vstar Universe" id="vstar" />
+            <SetItem name="Paradigm Trigger" id="paradigm" />
+            <SetItem name="Incandescent Arcana" id="arcana" />
+            <SetItem name="Lost Abyss" id="lost" />
+            <SetItem name="Pokémon GO" id="pgo" />
+            <SetItem name="Dark Phantasma" id="phantasma" />
+            <SetItem name="Time Gazer" id="time" />
+            <SetItem name="Space Juggler" id="space" />
+            <SetItem name="Battle Region" id="region" />
+            <SetItem name="Star Birth" id="star" />
+            <SetItem name="Start Deck 100" id="deck100" />
+            <SetItem name="Vmax Climax" id="climax" />
+            <SetItem name="25th Anniversary Promo" id="promo25" />
+            <SetItem name="25th Anniversary Collection" id="coll25" />
+            <SetItem name="Fusion Arts" id="fusion" />
+            <SetItem name="Blue Sky Stream" id="blue_sky" />
+            <SetItem name="Towering Perfection" id="towering" />
+            <SetItem name="Eevee Heroes" id="eevee" />
+            <SetItem name="Jet Black Spirit" id="jet_black" />
+            <SetItem name="Silver Lance" id="silver" />
+            <SetItem name="Matchless Fighters" id="fighters" />
+            <SetItem name="Rapid Strike Master" id="rapid" />
+            <SetItem name="Single Strike Master" id="single" />
+            <SetItem name="Shiny Star V" id="shiny_star" />
+            <SetItem name="Shocking Volt Tackle" id="volt" />
+            <SetItem name="Legendary Heartbeat" id="heartbeat" />
+            <SetItem name="Infinity Zone" id="infinity" />
+            <SetItem name="Explosive Flame Walker" id="flame" />
+            <SetItem name="Rebellion Crash" id="rebellion" />
+            <SetItem name="Vmax Rising" id="rising" />
+            <SetItem name="Sword" id="sword" />
+            <SetItem name="Shield" id="shield" />
+            <SetItem name="Sword & Shield promos" id="swsh_promos" />
           </ul>
         </section>
 
@@ -110,39 +134,39 @@ const Info = () => {
             <span>ONE PIECE - MAIN SETS</span>
           </div>
           <ul className="card-list">
-            <li><a href="#">OP-15 Adventure on KAMI’s Island</a></li>
-            <li><a href="#">OP-14 The Azure Sea’s Seven</a></li>
-            <li><a href="#">OP-13 Carrying on His Will</a></li>
-            <li><a href="#">OP-12 Legacy of the Master</a></li>
-            <li><a href="#">OP-11 A Fist of Divine Speed</a></li>
-            <li><a href="#">OP-10 Royal Blood cardlist</a></li>
-            <li><a href="#">OP-09 Emperors in the new world cardlist</a></li>
-            <li><a href="#">OP-08 Two Legends cardlist</a></li>
-            <li><a href="#">OP-07 500 Years in the Future cardlist</a></li>
-            <li><a href="#">OP-06 Wings of the Captain cardlist</a></li>
-            <li><a href="#">OP-05 Awakening of the New Era cardlist</a></li>
-            <li><a href="#">OP-04 Kingdoms of Intrigue cardlist</a></li>
-            <li><a href="#">OP-03 Pillars of Strength cardlist</a></li>
-            <li><a href="#">OP-02 Paramount War cardlist</a></li>
-            <li><a href="#">OP-01 Romance Dawn cardlist</a></li>
+            <SetItem name="OP-15 Adventure on KAMI’s Island" id="op15" />
+            <SetItem name="OP-14 The Azure Sea’s Seven" id="op14" />
+            <SetItem name="OP-13 Carrying on His Will" id="op13" />
+            <SetItem name="OP-12 Legacy of the Master" id="op12" />
+            <SetItem name="OP-11 A Fist of Divine Speed" id="op11" />
+            <SetItem name="OP-10 Royal Blood" id="op10" />
+            <SetItem name="OP-09 Emperors in the new world" id="op09" />
+            <SetItem name="OP-08 Two Legends" id="op08" />
+            <SetItem name="OP-07 500 Years in the Future" id="op07" />
+            <SetItem name="OP-06 Wings of the Captain" id="op06" />
+            <SetItem name="OP-05 Awakening of the New Era" id="op05" />
+            <SetItem name="OP-04 Kingdoms of Intrigue" id="op04" />
+            <SetItem name="OP-03 Pillars of Strength" id="op03" />
+            <SetItem name="OP-02 Paramount War" id="op02" />
+            <SetItem name="OP-01 Romance Dawn" id="op01" />
           </ul>
 
           <div className="series-divider">
             <span>ONE PIECE - SPECIAL SETS & DECKS</span>
           </div>
           <ul className="card-list">
-            <li><a href="#">EB-04 EGGHEAD CRISIS</a></li>
-            <li><a href="#">EB-03 Heroines Edition</a></li>
-            <li><a href="#">Premium Card Collection Best Selection Vol.3 cardlist</a></li>
-            <li><a href="#">PRB-01 One Piece Card The Best cardlist</a></li>
-            <li><a href="#">EB-01 Memorial Collection cardlist</a></li>
-            <li><a href="#">Premium Card Collection Uta cardlist</a></li>
-            <li><a href="#">Premium Card Collection Girls Edition cardlist</a></li>
-            <li><a href="#">One Piece Card Game x 7-eleven collab cardlist</a></li>
-            <li><a href="#">Champion Ship set cardlist</a></li>
-            <li><a href="#">ST-13 Ultimate Deck the Three Brothers cardlist</a></li>
-            <li><a href="#">ST-12 Start Deck Zoro & Sanji cardlist</a></li>
-            <li><a href="#">ST-11 Start Deck Side Uta cardlist</a></li>
+            <SetItem name="EB-04 EGGHEAD CRISIS" id="eb04" />
+            <SetItem name="EB-03 Heroines Edition" id="eb03" />
+            <SetItem name="Premium Card Collection Best Selection Vol.3" id="best3" />
+            <SetItem name="PRB-01 One Piece Card The Best" id="prb01" />
+            <SetItem name="EB-01 Memorial Collection" id="eb01" />
+            <SetItem name="Premium Card Collection Uta" id="uta" />
+            <SetItem name="Premium Card Collection Girls Edition" id="girls" />
+            <SetItem name="One Piece Card Game x 7-eleven collab" id="seven_eleven" />
+            <SetItem name="Champion Ship set" id="champion" />
+            <SetItem name="ST-13 Ultimate Deck the Three Brothers" id="st13" />
+            <SetItem name="ST-12 Start Deck Zoro & Sanji" id="st12" />
+            <SetItem name="ST-11 Start Deck Side Uta" id="st11" />
           </ul>
         </section>
       </div>

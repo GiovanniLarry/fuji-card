@@ -14,10 +14,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Account from './pages/Account';
-import OrderConfirmation from './pages/OrderConfirmation';
-import PaymentMethodsPage from './pages/PaymentMethods';
 import Info from './pages/Info';
-import CardLists from './pages/CardLists';
 import AdminAuth from './pages/AdminAuth';
 import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
@@ -53,7 +50,6 @@ const AppContent = () => {
           <Route path="/order-confirmation/:id" element={<OrderConfirmation />} />
           <Route path="/payment-methods" element={<PaymentMethodsPage />} />
           <Route path="/info" element={<Info />} />
-          <Route path="/cardlists" element={<CardLists />} />
           <Route path="/secret-fuji-admin" element={<AdminAuth />} />
           <Route path="/secret-fuji-admin/dashboard" element={<AdminDashboard />} />
         </Routes>

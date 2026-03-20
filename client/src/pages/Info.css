@@ -73,27 +73,101 @@
   margin: 0;
 }
 
-.card-list li {
-  margin-bottom: 12px;
+.card-list-item {
+  margin-bottom: 25px;
+  background: #fdfdfd;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.card-list li a {
+.card-list-item.expanded {
+  border-color: #0088cc;
+  box-shadow: 0 10px 30px rgba(0, 136, 204, 0.1);
+}
+
+.list-item-header {
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+}
+
+.list-item-header:hover {
+  background: #f9f9f9;
+}
+
+.list-item-header span {
+  color: #333;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+.toggle-icon {
+  font-size: 14px;
+  color: #888;
+  transition: transform 0.3s ease;
+}
+
+.expanded .toggle-icon {
+  transform: rotate(180deg);
   color: #0088cc;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  transition: color 0.2s;
 }
 
-.card-list li a:hover {
-  color: #004aad;
-  text-decoration: underline;
+.gallery-scroller {
+  padding: 0 25px 25px;
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #eee transparent;
+  animation: slideDown 0.4s ease-out;
+}
+
+.gallery-scroller::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-scroller::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 10px;
+}
+
+.gallery-card {
+  min-width: 140px;
+  max-width: 140px;
+  aspect-ratio: 5/7;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: scale(1.05);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .grid-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px 30px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px 30px;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
@@ -104,5 +178,10 @@
   
   .grid-list {
     grid-template-columns: 1fr;
+  }
+  
+  .gallery-card {
+    min-width: 110px;
+    max-width: 110px;
   }
 }
