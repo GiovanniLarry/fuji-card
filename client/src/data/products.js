@@ -364,18 +364,18 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'bt23_goku_ui_v4',
+    id: 'goku_ui_ygo_v1',
     name: 'Goku Ultra Instinct Scion of Divinity SPR',
-    category: 'other',
+    category: 'yugioh',
     price: 110.00,
-    image: 'https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg',
-    description: 'The master of Divine Technique. Ultra Instinct Son Goku with stunning foil details and battle-ready mastery.',
-    stock: 5,
+    image: 'https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg',
+    description: 'The master of Divine Technique. Special edition Ultra Instinct Goku SPR for competitive and collection mastery.',
+    stock: 3,
     set: 'Critical Blow',
-    rarity: 'SPR/SR',
+    rarity: 'SPR',
     condition: 'NM',
     language: 'English',
-    cardType: 'Battle',
+    cardType: 'Promo',
     featured: true
   }
 ];
