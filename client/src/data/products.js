@@ -94,11 +94,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op07_box',
+    id: 'op07_box_v2',
     name: '500 Years in the Future Booster Box [OP-07] - Japanese',
     category: 'onepiece',
     price: 85.00,
-    image: '/images/products/op06_box.png', 
+    image: 'https://www.cardtrader.com/uploads/blueprints/image/289592/500-years-into-the-future-booster-box-asian-op-07-500-years-into-the-future.jpg', 
     description: 'The monumental OP-07 set featuring Egghead Island climax. Premium booster box.',
     stock: 15,
     set: 'OP-07',
@@ -109,11 +109,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op7_boa',
+    id: 'op7_boa_v2',
     name: 'Boa Hancock Parallel SR - OP07-038 - Japanese',
     category: 'onepiece',
     price: 110.00,
-    image: '/images/products/op06_box.png',
+    image: 'https://strawhat.cards/cdn/shop/files/one-piece-op07-500-years-into-the-future-monkey-d-dragon-015-sr-alt-art-parallel-card-jpn-trading-183.webp?v=1710693538&width=533',
     description: 'The elusive Boa Hancock SR from OP-07. Iconic artwork for global collectors.',
     stock: 5,
     set: 'OP-07',
@@ -124,7 +124,52 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op6_zoro',
+    id: 'op7_dragon',
+    name: 'Monkey D. Dragon Parallel SR - OP07-015 - Japanese',
+    category: 'onepiece',
+    price: 110.00,
+    image: 'https://strawhat.cards/cdn/shop/files/one-piece-op07-500-years-into-the-future-monkey-d-dragon-015-sr-alt-art-parallel-card-jpn-trading-183.webp?v=1710693538&width=533',
+    description: 'The Parallel Super Rare Monkey D. Dragon from OP-07. Featuring the leader of the Revolutionary Army.',
+    stock: 3,
+    set: 'OP-07',
+    rarity: 'SR (Parallel)',
+    condition: 'NM',
+    language: 'Japanese',
+    cardType: 'Character',
+    featured: true
+  },
+  {
+    id: 'op7_jinbe',
+    name: 'Jinbe Parallel SR - OP07-045 - Japanese',
+    category: 'onepiece',
+    price: 65.00,
+    image: 'https://strawhat.cards/cdn/shop/files/one-piece-op07-500-years-into-the-future-jinbe-045-sr-alt-art-parallel-card-jpn-trading-148.webp?v=1710693497&width=533',
+    description: 'The Parallel Super Rare Jinbe from OP-07. Essential for Wano and Egghead themes.',
+    stock: 4,
+    set: 'OP-07',
+    rarity: 'SR (Parallel)',
+    condition: 'NM',
+    language: 'Japanese',
+    cardType: 'Character',
+    featured: true
+  },
+  {
+    id: 'op7_sanji',
+    name: 'Sanji SR - OP07-064 - Japanese',
+    category: 'onepiece',
+    price: 45.00,
+    image: 'https://strawhat.cards/cdn/shop/files/one-piece-op07-500-years-into-the-future-sanji-064-sr-card-jpn-trading-255.webp?v=1710693599&width=533',
+    description: 'The Super Rare Sanji from OP-07. Masterful design and powerful effects.',
+    stock: 8,
+    set: 'OP-07',
+    rarity: 'SR',
+    condition: 'NM',
+    language: 'Japanese',
+    cardType: 'Character',
+    featured: true
+  },
+  {
+    id: 'op6_zoro_v2',
     name: 'Roronoa Zoro Parallel SEC - OP06-118 - Japanese',
     category: 'onepiece',
     price: 155.00,
@@ -139,7 +184,7 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op05_box',
+    id: 'op05_box_v2',
     name: 'Awakening of the New Era Booster Box [OP-05] - Japanese',
     category: 'onepiece',
     price: 145.00,
@@ -154,11 +199,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op5_luffy',
+    id: 'op5_luffy_v2',
     name: 'Monkey.D.Luffy Parallel SEC (Gear 5) - OP05-119 - Japanese',
     category: 'onepiece',
     price: 320.00,
-    image: '/images/products/op04_box.png',
+    image: 'https://onepiece-cardgame.com/images/cardlist/card/OP05-119_p1.png',
     description: 'The definitive Gear 5 SEC from the Anniversary set. Top-tier collectible asset.',
     stock: 2,
     set: 'OP-05',
@@ -169,7 +214,7 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'toy_pride',
+    id: 'ygo_pride_v2',
     name: 'Yu-Gi-Oh! Official OCG: Quarter Century Chronicles side:PRIDE',
     category: 'other',
     price: 75.00,
@@ -184,11 +229,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'toy_blueeyes',
+    id: 'ygo_blueeyes_v2',
     name: 'Blue-Eyes White Dragon QCR - Japanese',
     category: 'other',
     price: 280.00,
-    image: '/images/products/vstar_box.png',
+    image: 'https://www.yugioh-card.com/japan/lineup/ocg/qcc_pride/images/card_01.png',
     description: 'Legendary Blue-Eyes in Quarter Century Secret Rare finish. Iconic investment piece.',
     stock: 3,
     set: '25th Anniversary',
@@ -199,11 +244,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'toy_goku_sn',
+    id: 'db_goku_sn_v2',
     name: 'Son Goku Serial Number Card - Japanese Exclusive',
     category: 'other',
     price: 1500.00,
-    image: '/images/products/mega_brave.png',
+    image: 'https://www.dbs-cardgame.com/fw/images/cardlist/card/FB01-001_p1.png',
     description: 'Limited edition Serial Numbered Goku. One of the rarest modern cards in existence.',
     stock: 1,
     set: 'Exclusive PR',
@@ -214,11 +259,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op1_shanks',
+    id: 'op1_shanks_v2',
     name: 'Shanks Parallel SEC (Manga Art) - OP01-120 - Japanese',
     category: 'onepiece',
     price: 850.00,
-    image: '/images/products/op01_box.png',
+    image: 'https://onepiece-cardgame.com/images/cardlist/card/OP01-120_p1.png',
     description: 'The Holy Grail of Romance Dawn. Highly valuable Manga Art secret rare.',
     stock: 1,
     set: 'OP-01',
@@ -229,11 +274,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op4_sabo',
+    id: 'op4_sabo_v2',
     name: 'Sabo Parallel SEC (Manga Art) - OP04-083 - Japanese',
     category: 'onepiece',
     price: 480.00,
-    image: '/images/products/op04_box.png',
+    image: 'https://onepiece-cardgame.com/images/cardlist/card/OP04-083_p1.png',
     description: 'Manga Art Sabo from Kingdoms of Intrigue. Vibrant panels and textured foil.',
     stock: 1,
     set: 'OP-04',
@@ -244,11 +289,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'toy_dmg',
+    id: 'ygo_dmg_v2',
     name: 'Dark Magician Girl QCR - 25th Anniversary - Japanese',
     category: 'other',
     price: 420.00,
-    image: '/images/products/vstar_box.png',
+    image: 'https://www.yugioh-card.com/japan/lineup/ocg/qcc_pride/images/card_02.png',
     description: 'Fan favorite Dark Magician Girl in Quarter Century Secret Rare finish.',
     stock: 2,
     set: '25th Anniversary',
@@ -259,22 +304,7 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'toy_goku_ui',
-    name: 'Goku Ultra Instinct Scion of Divinity SPR',
-    category: 'other',
-    price: 110.00,
-    image: '/images/products/mega_brave.png',
-    description: 'Special Rare Ultra Instinct Goku from the Japanese Dragon Ball collection.',
-    stock: 4,
-    set: 'DBS Fusion',
-    rarity: 'SPR',
-    condition: 'NM',
-    language: 'Japanese',
-    cardType: 'Leader',
-    featured: true
-  },
-  {
-    id: 'op6_zoro_manga',
+    id: 'op6_zoro_manga_v2',
     name: 'Roronoa Zoro Manga Alternative Art OP06-118',
     category: 'onepiece',
     price: 780.00,
@@ -289,11 +319,11 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op3_katakuri',
+    id: 'op3_katakuri_v2',
     name: 'Charlotte Katakuri SEC Alt Art OP03-123',
     category: 'onepiece',
     price: 65.00,
-    image: '/images/products/op03_box.png',
+    image: 'https://onepiece-cardgame.com/images/cardlist/card/OP03-123_p1.png',
     description: 'Alternative Art Katakuri from Pillars of Strength. Competitive mainstay.',
     stock: 6,
     set: 'OP-03',
@@ -304,7 +334,7 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'p_eevee_coll',
+    id: 'p_eevee_coll_v2',
     name: 'Eevee Evolution VMAX Premium Collection Box',
     category: 'pokemon',
     price: 180.00,
@@ -319,52 +349,7 @@ export const localProductStore = [
     featured: true
   },
   {
-    id: 'op07_case_new',
-    name: 'OP-07 500 Years into the Future Sealed Case',
-    category: 'onepiece',
-    price: 680.00,
-    image: '/images/products/op14_azure_sea.png',
-    description: 'Full shipping case containing 12 booster boxes of OP-07. Direct from Japan.',
-    stock: 1,
-    set: 'OP-07',
-    rarity: 'Sealed Case',
-    condition: 'Factory Sealed',
-    language: 'Japanese',
-    cardType: 'Sealed Product',
-    featured: true
-  },
-  {
-    id: 'op5_luffy_manga_new',
-    name: 'Monkey.D.Luffy Gear 5 Manga Art OP05-119',
-    category: 'onepiece',
-    price: 1200.00,
-    image: '/images/products/op04_box.png',
-    description: 'The pinnacle of OP-05. Gear 5 Luffy in stunning Manga Art finish.',
-    stock: 1,
-    set: 'OP-05',
-    rarity: 'SEC (Manga Art)',
-    condition: 'NM',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
-  {
-    id: 'op1_shanks_manga_new',
-    name: 'Shanks Manga Alternative Art OP01-120',
-    category: 'onepiece',
-    price: 850.00,
-    image: '/images/products/op01_box.png',
-    description: 'Alternative Manga Art Shanks. The defining card of the One Piece TCG era.',
-    stock: 1,
-    set: 'OP-01',
-    rarity: 'SEC (Manga Alt)',
-    condition: 'NM',
-    language: 'Japanese',
-    cardType: 'Character',
-    featured: true
-  },
-  {
-    id: 'p151_box_new',
+    id: 'p151_box_v2',
     name: 'Pokemon Card 151 Booster Box Japanese',
     category: 'pokemon',
     price: 145.00,
@@ -377,23 +362,6 @@ export const localProductStore = [
     language: 'Japanese',
     cardType: 'Sealed Product',
     featured: true
-  },
-
-  // --- ADDITIONAL TCG INVENTORY ---
-  {
-    id: 'p1',
-    name: 'Pokemon Card 151 Booster Box (SV2a) - Japanese (Retail Edition)',
-    category: 'pokemon',
-    price: 185.00,
-    image: '/images/products/151_box.png',
-    description: 'Premium listing for the Japanese 151 set. Quick shipping available.',
-    stock: 12,
-    set: 'SV2a',
-    rarity: 'Booster Box',
-    condition: 'Factory Sealed',
-    language: 'Japanese',
-    cardType: 'Sealed Product',
-    featured: false
   }
 ];
 
