@@ -296,7 +296,7 @@ body {
   color: #1a1a2e;
 }
 
-.mobile-nav {
+.main-nav {
   position: fixed;
   top: 60px; /* Position below main header */
   left: 0;
@@ -347,16 +347,14 @@ body {
 .nav-links li a {
   display: block;
   padding: 15px 20px;
-  color: #1a1a2e;
+  color: white;
   text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  text-transform: capitalize;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
 }
 
 .nav-links li a:hover {
-  color: #e94560;
-  background: rgba(233, 69, 96, 0.05);
+  background: #e94560;
 }
 
 .nav-loading {
