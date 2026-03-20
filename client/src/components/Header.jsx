@@ -80,7 +80,7 @@ const Header = () => {
 
       {/* Main Bar - White */}
       <div className="header-middle-white">
-        <div className="container header-content">
+        <div className="container middle-content">
           <Link to="/" className="main-logo">
             <img src="/logo.png" alt="Fuji Card Shop" className="logo-img" />
           </Link>
