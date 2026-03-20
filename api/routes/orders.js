@@ -1,4 +1,5 @@
 import express from 'express';
+import axios from 'axios';
 import { supabase } from '../config/supabase.js';
 import { authenticateToken, optionalAuth } from '../middleware/auth.js';
 import crypto from 'crypto';
@@ -321,6 +322,36 @@ router.post('/checkout', optionalAuth, async (req, res) => {
   } catch (error) {
     console.error('Checkout error:', error);
     res.status(500).json({ error: error.message });
+  }
+});
+
+// Initialize Paystack payment (Standard Redirect)
+router.post('/paystack/initialize', async (req, res) => {
+  const { orderId, email, amount, currency = 'ZAR' } = req.body;
+  const SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+
+  try {
+    const response = await axios.post(
+      'https://api.paystack.co/transaction/initialize',
+      {
+        email,
+        amount: Math.round(amount * 100), // Paystack expects amount in kobo/cents
+        currency: currency,
+        reference: orderId,
+        callback_url: `https://${req.get('host')}/order-confirmation/${orderId}`
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${SECRET_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    res.json({ url: response.data.data.authorization_url });
+  } catch (error) {
+    console.error('Paystack initialize error:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to initialize Paystack payment' });
   }
 });
 

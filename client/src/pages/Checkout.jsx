@@ -24,7 +24,7 @@ const Checkout = () => {
     expiry: '',
     cvv: ''
   });
-  const [paystackKey, setPaystackKey] = useState('pk_live_6b5d612a3ab5346e25e4b3a2ec7accc82590f9b7');
+  const [paystackKey, setPaystackKey] = useState(import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || '');
 
   useEffect(() => {
     const fetchPaystackKey = async () => {
@@ -295,26 +295,40 @@ const Checkout = () => {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
 
-            // Trigger Paystack Popup
-            if (window.PaystackPop) {
-              const handler = window.PaystackPop.setup({
-                key: paystackKey,
+            // Initialize Paystack Redirect
+            try {
+              const res = await axios.post(`${import.meta.env.VITE_API_URL || '/api'}/orders/paystack/initialize`, {
+                orderId: order.id,
                 email: user?.email || 'customer@fuji-card.com',
-                amount: Math.round(total * 100), // convert to cents
-                currency: 'GHS', // Paystack default for your region or ZAR/NGN
-                ref: order.id,
-                callback: function (response) {
-                  navigate(`/order-confirmation/${order.id}`, { state: { order } });
-                  refreshCart();
-                },
-                onClose: function () {
-                  alert('Transaction cancelled');
-                  setLoading(false);
-                }
+                amount: total,
+                currency: 'GHS'
               });
-              handler.openIframe();
-            } else {
-              throw new Error('Paystack not loaded');
+
+              if (res.data?.url) {
+                window.location.href = res.data.url;
+                return;
+              }
+              throw new Error('Paystack initialization failed');
+            } catch (initErr) {
+              console.error('Paystack init err:', initErr);
+              // Fallback to Popup if redirect fails
+              if (window.PaystackPop) {
+                const handler = window.PaystackPop.setup({
+                  key: paystackKey,
+                  email: user?.email || 'customer@fuji-card.com',
+                  amount: Math.round(total * 100),
+                  currency: 'GHS',
+                  ref: order.id,
+                  callback: function (response) {
+                    navigate(`/order-confirmation/${order.id}`, { state: { order } });
+                    refreshCart();
+                  },
+                  onClose: () => { setLoading(false); }
+                });
+                handler.openIframe();
+              } else {
+                throw new Error('Paystack not available');
+              }
             }
             return;
           } else if (formData.paymentMethod === 'payfast') {
