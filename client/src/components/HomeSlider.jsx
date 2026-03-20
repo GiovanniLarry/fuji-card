@@ -7,14 +7,49 @@ const HomeSlider = () => {
   const slides = [
     {
       id: 1,
-      image: '/hero-1.png', // Placeholder, user will provide
+      image: '/slideshow/M4-back-300x167.webp',
       title: 'Pre-Order Start!!',
       subtitle: 'M4 Ninja Spinner',
       info: 'Releasing on March 13!',
       buttonText: 'ORDER NOW!',
       link: '/products?search=ninja'
     },
-    // Add more slides if needed
+    {
+      id: 2,
+      image: '/slideshow/M2a-back-300x186.jpg',
+      title: 'Now Available!!',
+      subtitle: 'M2a MEGA Dream ex',
+      info: 'Discover the latest Mega series!',
+      buttonText: 'ORDER NOW!',
+      link: '/products?search=mega'
+    },
+    {
+      id: 3,
+      image: '/slideshow/M3-back-300x167.webp',
+      title: 'Coming Soon!!',
+      subtitle: 'M3 Series Upgrade',
+      info: 'Official Series Arrival',
+      buttonText: 'VIEW MORE',
+      link: '/products?search=m3'
+    },
+    {
+      id: 4,
+      image: '/slideshow/OP-15-back-300x176.webp',
+      title: 'One Piece Card List!!',
+      subtitle: 'OP-15 Set Discovery',
+      info: 'All latest One Piece cards available',
+      buttonText: 'EXPLORE',
+      link: '/products?search=op-15'
+    },
+    {
+      id: 5,
+      image: '/slideshow/EB-04-back-300x171.webp',
+      title: 'Premium Selection!!',
+      subtitle: 'EB-04 Series',
+      info: 'Sealed Official Japanese Products',
+      buttonText: 'SHOP NOW',
+      link: '/products?search=eb-04'
+    }
   ];
 
   useEffect(() => {
@@ -30,7 +65,7 @@ const HomeSlider = () => {
         <div 
           key={slide.id} 
           className={`slide ${index === currentSlide ? 'active' : ''}`}
-          style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${slide.image})` }}
+          style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${slide.image})` }}
         >
           <div className="slide-content">
             <div className="glass-box">
