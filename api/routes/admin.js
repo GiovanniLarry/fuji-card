@@ -60,7 +60,7 @@ router.get('/paystack-key', async (req, res) => {
     const paystack = await getSetting('paystack', { publicKey: '' });
     res.json({ publicKey: paystack.publicKey });
 });
-const JWT_SECRET = process.env.JWT_SECRET || 'fujicard-secret-key-2024-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET || 'fujicard-secret-key-2024';
 
 // Admin authentication middleware
 const authenticateAdmin = (req, res, next) => {
