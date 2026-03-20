@@ -315,16 +315,18 @@
   .branding-mockup {
     position: static;
     transform: none;
-    gap: 0;
+    gap: 10px; /* Restore gap for logo and name */
   }
 
   .logo-mockup-round {
-    width: 60px;
-    height: 60px;
+    width: 45px; /* Slightly smaller on mobile to fit text */
+    height: 45px;
   }
 
   .name-mockup-bold {
-    display: none;
+    display: block; /* SHOW ON MOBILE */
+    font-size: 14px; /* Scaled down for mobile */
+    letter-spacing: -0.2px;
   }
 
   .desktop-search-container, .user-label-desktop, .cart-label-desktop, .divider-desktop {
