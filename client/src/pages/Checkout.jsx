@@ -364,9 +364,17 @@ const Checkout = () => {
             return;
           }
         } catch (apiError) {
-          console.warn('Real checkout API failed, automatically falling back to WhatsApp concierge');
-          // For high-impact retail preview, we redirect to WhatsApp rather than showing a generic error
-          sendWhatsAppOrder();
+          console.error('[Checkout] Direct payment API error:', apiError);
+          const errorMsg = apiError.response?.data?.error || apiError.message || 'Payment processing failed';
+          
+          // Only fallback to WhatsApp if the method is NOT intended for direct digital payment
+          const digitalMethods = ['paystack', 'payfast', 'cryptomus'];
+          if (!digitalMethods.includes(formData.paymentMethod)) {
+            console.warn('Falling back to WhatsApp concierge for non-digital method');
+            sendWhatsAppOrder();
+          } else {
+            alert(`Error: ${errorMsg}. Please try again or contact support if this persists.`);
+          }
           return;
         }
       }

@@ -360,16 +360,29 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
   try {
     const { orderId } = req.body;
 
-    // Get the order
-    const { data: order, error } = await supabase
-      .from('orders')
-      .select('*')
-      .eq('id', orderId)
-      .single();
-
-    if (error || !order) {
-      console.error('Fetch order error for PayFast:', error);
-      return res.status(404).json({ error: 'Order not found' });
+    // --- FALLBACK IF SUPABASE IS NOT CONFIGURED ---
+    let order = null;
+    if (!supabase) {
+      console.log('⚠️  Using mockup PayFast payload (Supabase not configured)');
+      order = {
+        id: orderId,
+        order_number: `ORD-MOCK-${Date.now()}`,
+        total: 100.00, // Default for mock if not provided
+        currency: 'GBP',
+        notes: JSON.stringify({ shippingAddress: { email: 'customer@fujicard.com' } })
+      };
+    } else {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('id', orderId)
+        .single();
+      
+      if (error || !data) {
+        console.error('Fetch order error for PayFast:', error);
+        return res.status(404).json({ error: 'Order not found' });
+      }
+      order = data;
     }
 
     let shippingDetails = {};
