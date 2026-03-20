@@ -16,12 +16,11 @@ const Home = () => {
       try {
         const response = await axios.get(`${API_URL}/products?featured=true`);
         if (response.data && response.data.products) {
-          // Sort or Filter to ensure marquee products are at the top
-          const marqueeIds = ["jp-m4-booster", "jp-op15-booster", "jp-op15-case"];
-          const marquee = response.data.products.filter(p => marqueeIds.includes(p.id));
-          const others = response.data.products.filter(p => !marqueeIds.includes(p.id));
+          // Filter to show all JP marquee products
+          const jpProducts = response.data.products.filter(p => p.id.startsWith('jp-'));
+          const others = response.data.products.filter(p => !p.id.startsWith('jp-'));
           
-          setFeaturedProducts([...marquee, ...others]);
+          setFeaturedProducts([...jpProducts, ...others]);
         }
       } catch (error) {
         console.error('Failed to fetch featured products:', error);
@@ -31,10 +30,6 @@ const Home = () => {
     };
     fetchFeatured();
   }, []);
-
-  // First 3 products are the 'Premium' marquee row
-  const premiumRow = featuredProducts.slice(0, 3);
-  const secondaryFeatured = featuredProducts.slice(3, 7);
 
   return (
     <div className="home-page-container">
@@ -52,30 +47,28 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Premium Products Collection (From Database) */}
+      {/* Full Premium Products Collection (Under Spinner) */}
       <section className="premium-collection-section">
         <div className="container">
-          {!loading && premiumRow.length > 0 ? (
+          {!loading ? (
             <div className="premium-grid">
-              {premiumRow.map(product => (
+              {featuredProducts.map(product => (
                 <PremiumProductCard key={product.id} product={product} />
               ))}
             </div>
-          ) : loading && (
+          ) : (
             <div className="loading">Loading Premium Collection...</div>
           )}
         </div>
       </section>
 
-      {/* API Featured Products (Secondary) */}
-      {!loading && secondaryFeatured.length > 0 && (
+      {/* API Featured Products (Secondary) if needed */}
+      {!loading && featuredProducts.length === 0 && (
          <section className="featured-section">
             <div className="container">
               <h2 className="section-title">Explore Our Shop</h2>
               <div className="products-grid">
-                {secondaryFeatured.map(product => (
-                  <PremiumProductCard key={product.id} product={product} />
-                ))}
+                 <p>Stay tuned for new arrivals!</p>
               </div>
             </div>
          </section>
