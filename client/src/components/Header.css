@@ -231,7 +231,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 40px;
+  gap: 35px;
 }
 
 .nav-links-mockup li a {
@@ -254,7 +254,7 @@
   .top-bar-content {
     justify-content: space-between;
     padding: 0 10px;
-    flex-wrap: nowrap; /* CRITICAL: Force horizontal alignment of all items */
+    flex-wrap: nowrap;
   }
   
   .top-text-section {
@@ -269,34 +269,20 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    flex-wrap: nowrap; /* CRITICAL: Prevent Facebook/Instagram from stacking */
+    flex-wrap: nowrap;
   }
 
   .social-nodes {
      display: flex;
-     flex-direction: row; /* Explicitly row */
+     flex-direction: row;
      gap: 6px;
   }
 
-  /* Logo Tuning */
-  .branding-mockup {
-    position: static;
-    transform: none;
-    margin-right: -10px; /* Pull towards center slightly */
+  .middle-flex-container {
+    justify-content: space-between;
+    padding: 0 5px;
   }
 
-  .logo-mockup-round {
-    width: 65px; /* Slightly larger for visibility */
-    height: 65px;
-    padding: 2px; /* Prevent clipping */
-    object-fit: contain;
-  }
-
-  .name-mockup-bold {
-    display: none;
-  }
-
-  /* Other mobile adjustments */
   .mobile-only-hamburger {
     display: block;
     background: none;
@@ -304,6 +290,23 @@
     font-size: 28px;
     color: #777;
     cursor: pointer;
+  }
+
+  .branding-mockup {
+    position: static;
+    transform: none;
+    margin-right: -10px;
+  }
+
+  .logo-mockup-round {
+    width: 60px;
+    height: 60px;
+    padding: 2px;
+    object-fit: contain;
+  }
+
+  .name-mockup-bold {
+    display: none;
   }
 
   .desktop-search-container, .user-label-desktop, .cart-label-desktop, .divider-desktop {
@@ -324,8 +327,43 @@
     gap: 12px;
   }
 
+  /* CRITICAL: Category Section Well Fitted on Mobile */
+  .header-bottom-red {
+    padding: 12px 0;
+  }
+
+  .nav-links-mockup {
+    display: flex;
+    justify-content: space-between; /* Spread items evenly */
+    align-items: center;
+    gap: 0; /* Clear explicit gaps */
+    flex-wrap: nowrap; /* CRITICAL: Force horizontal line */
+    overflow-x: hidden; /* Hide scrollbar if possible, adjust content instead */
+    width: 100%;
+    padding: 0 5px;
+  }
+
+  .nav-links-mockup li {
+    flex: 1; /* Give equal space to all links */
+    text-align: center;
+  }
+
+  .nav-links-mockup li a {
+    font-size: 10.5px; /* Scaled down to fit most screens */
+    letter-spacing: -0.2px;
+    gap: 2px;
+    white-space: nowrap;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+  }
+
+  .nav-links-mockup li a i {
+    font-size: 8px; /* Scale down indicator icons */
+  }
+
   body {
-    padding-top: 158px;
+    padding-top: 152px;
   }
 }
 
