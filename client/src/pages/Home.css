@@ -3,13 +3,16 @@
 }
 
 .home-top-bar {
-  background-color: #fff;
-  padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  background-color: #ffffff;
+  padding: 20px 0;
+  border-bottom: 2px solid #f8f9fa;
+  position: relative;
+  z-index: 10;
 }
 
 .home-main-hero {
-  background-color: #fff;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
   padding: 0;
 }
 
@@ -169,6 +172,10 @@
 }
 
 @media (max-width: 768px) {
+  .home-top-bar {
+    padding: 15px 0;
+  }
+
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
