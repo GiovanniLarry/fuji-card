@@ -1,5 +1,6 @@
 import express from 'express';
 import { supabase } from '../config/supabase.js';
+import { products as fallbackProducts } from '../data/store.js';
 
 const router = express.Router();
 
@@ -23,8 +24,53 @@ router.get('/', async (req, res) => {
 
     console.log('📦 Products API called with params:', { category, search, limit, page, featured });
 
+    // IF SUPABASE IS NOT AVAILABLE, USE FALLBACK DATA FROM STORE.JS
     if (!supabase) {
-      return res.status(500).json({ error: 'Fatal: Supabase connection unavailable' });
+      console.log('⚠️  Using fallback products data (Supabase not configured or available)');
+      let result = [...fallbackProducts];
+      
+      // Filter featured
+      if (featured === 'true') {
+        result = result.filter(p => p.featured);
+      }
+      
+      // Category filter
+      if (category) {
+        result = result.filter(p => p.category?.toLowerCase() === category.toLowerCase());
+      }
+
+      // Search
+      if (search) {
+        const s = search.toLowerCase();
+        result = result.filter(p => p.name.toLowerCase().includes(s) || p.description?.toLowerCase().includes(s));
+      }
+
+      // Sorting
+      if (sort === 'price_asc') {
+        result.sort((a, b) => a.price - b.price);
+      } else if (sort === 'price_desc') {
+        result.sort((a, b) => b.price - a.price);
+      } else {
+        // Default: newest IDs first (rough proxy for created_at)
+        result.reverse(); 
+      }
+
+      const pageSize = limit ? parseInt(limit) : 24;
+      const currentPage = parseInt(page);
+      const totalProducts = result.length;
+      const totalPages = Math.ceil(totalProducts / pageSize);
+      const startIndex = (currentPage - 1) * pageSize;
+      const paginated = result.slice(startIndex, startIndex + pageSize);
+
+      return res.json({
+        products: paginated,
+        pagination: {
+          currentPage,
+          totalPages,
+          totalProducts,
+          hasMore: currentPage < totalPages
+        }
+      });
     }
 
     // Build query - start with products and join categories
