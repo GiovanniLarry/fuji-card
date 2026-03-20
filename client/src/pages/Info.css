@@ -1,0 +1,108 @@
+.info-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.discovery-header {
+  text-align: center;
+  margin-bottom: 50px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 30px 0;
+  position: relative;
+}
+
+.discovery-header h1 {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 15px 40px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #444;
+  background: white;
+}
+
+.card-section {
+  margin-bottom: 60px;
+}
+
+.card-section h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.intro-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 40px;
+  max-width: 900px;
+}
+
+.series-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 40px 0 25px;
+}
+
+.series-divider::before,
+.series-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #eee;
+}
+
+.series-divider span {
+  padding: 0 20px;
+  font-weight: 800;
+  color: #555;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-list li {
+  margin-bottom: 12px;
+}
+
+.card-list li a {
+  color: #0088cc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.card-list li a:hover {
+  color: #004aad;
+  text-decoration: underline;
+}
+
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px 30px;
+}
+
+@media (max-width: 768px) {
+  .discovery-header h1 {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+  
+  .grid-list {
+    grid-template-columns: 1fr;
+  }
+}
