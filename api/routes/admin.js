@@ -107,6 +107,15 @@ router.get('/stats', async (req, res) => {
     }
 });
 
+// Debug environment configuration (Redacted values)
+router.get('/debug-env', (req, res) => {
+    res.json({
+        has_url: !!process.env.SUPABASE_URL,
+        has_key: !!process.env.SUPABASE_ANON_KEY,
+        keys: Object.keys(process.env).filter(k => k.includes('SUPABASE'))
+    });
+});
+
 // Sync local products to Supabase
 router.post('/sync-flagship', async (req, res) => {
     try {
