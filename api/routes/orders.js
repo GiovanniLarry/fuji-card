@@ -329,6 +329,10 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 router.post('/paystack/initialize', async (req, res) => {
   const { orderId, email, amount, currency = 'ZAR' } = req.body;
   const SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
+  if (!SECRET_KEY) {
+    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment variables!');
+    return res.status(500).json({ success: false, message: 'Payment gateway configuration error. Please contact merchant support.' });
+  }
 
   try {
     const response = await axios.post(

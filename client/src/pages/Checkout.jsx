@@ -373,7 +373,15 @@ const Checkout = () => {
             console.warn('Falling back to WhatsApp concierge for non-digital method');
             sendWhatsAppOrder();
           } else {
-            alert(`Error: ${errorMsg}. Please try again or contact support if this persists.`);
+            try {
+              throw apiError; // Re-throw to be caught by the new catch block
+            } catch (error) {
+              console.error('PAYMENT_ERROR:', error);
+              const errorMessage = error.response?.data?.message || error.message || 'Advanced payment initialization failed. Please check your network or try again.';
+              alert(`Payment Error: ${errorMessage}\n\nPlease verify your selection or contact support if the issue persists.`);
+            } finally {
+              // This finally block ensures setLoading(false) is called even if an alert is shown
+            }
           }
           return;
         }
