@@ -523,5 +523,5 @@ export const products = [
     featured: false
   }
 ];
-e x p o r t   c o n s t   c a t e g o r i e s   =   [ {   i d :   " p o k e m o n " ,   n a m e :   " P o k e m o n "   } ,   {   i d :   " o n e p i e c e " ,   n a m e :   " O n e   P i e c e "   } ,   {   i d :   " o t h e r " ,   n a m e :   " O t h e r   T C G "   } ,   {   i d :   " y u g i o h " ,   n a m e :   " Y u - G i - O h ! "   } ,   {   i d :   " a c c e s s o r i e s " ,   n a m e :   " A c c e s s o r i e s "   } ] ;  
- 
+
+export const categories = [{ id: "pokemon", name: "Pokemon" }, { id: "onepiece", name: "One Piece" }, { id: "other", name: "Other TCG" }, { id: "yugioh", name: "Yu-Gi-Oh!" }, { id: "accessories", name: "Accessories" }];
