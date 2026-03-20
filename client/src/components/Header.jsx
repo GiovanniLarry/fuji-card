@@ -87,7 +87,8 @@ const Header = () => {
 
           <div className="search-section">
             <form className="search-bar-v2" onSubmit={handleSearch}>
-              <div className="search-category-dropdown">
+              <div className="search-category-dropdown" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <i className="fa-solid fa-bars category-hamburger"></i>
                 <span>All</span>
                 <i className="fa-solid fa-chevron-down"></i>
               </div>
@@ -158,23 +159,24 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Button */}
-      <button className="mobile-menu-v2-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-         <i className="fa-solid fa-bars"></i>
-      </button>
-
       {/* Mobile Nav Drawer */}
       <div className={`mobile-drawer-v2 ${mobileMenuOpen ? 'open' : ''}`}>
            <div className="mobile-drawer-header">
-               <button onClick={() => setMobileMenuOpen(false)}>CLOSE</button>
+               <h3>CATEGORIES</h3>
+               <button onClick={() => setMobileMenuOpen(false)}>
+                   <i className="fa-solid fa-xmark"></i>
+               </button>
            </div>
            <ul className="mobile-drawer-links">
                <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>HOME</Link></li>
+               <li><Link to="/products" onClick={() => setMobileMenuOpen(false)}>ALL PRODUCTS</Link></li>
+               <div className="drawer-divider"></div>
                {categories.map(cat => (
                    <li key={cat.id}><Link to={`/products?category=${cat.name}`} onClick={() => setMobileMenuOpen(false)}>{cat.name.toUpperCase()}</Link></li>
                ))}
            </ul>
       </div>
+      {mobileMenuOpen && <div className="drawer-overlay" onClick={() => setMobileMenuOpen(false)}></div>}
     </header>
   );
 };
