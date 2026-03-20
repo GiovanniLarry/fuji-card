@@ -58,7 +58,7 @@ const Home = () => {
     console.log('Home useEffect triggered');
     
     // Test API connectivity first
-    fetch('http://localhost:5000/api/categories')
+    fetch('/api/categories')
       .then(response => {
         console.log('API test response status:', response.status);
         return response.json();

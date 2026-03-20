@@ -8,7 +8,7 @@ import { ordersAPI } from '../services/api';
 import './Checkout.css';
 import './CheckoutPayment.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Checkout = () => {
   const navigate = useNavigate();

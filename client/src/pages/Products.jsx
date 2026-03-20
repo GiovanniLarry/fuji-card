@@ -5,9 +5,7 @@ import ProductCard from '../components/ProductCard';
 import PriceRange from '../components/PriceRange';
 import './Products.css';
 
-const API_URL = window.location.hostname === 'localhost' 
-  ? `http://${window.location.hostname}:5000/api` 
-  : `http://${window.location.hostname}:5000/api`;
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();

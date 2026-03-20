@@ -6,10 +6,7 @@ import CurrencySelector from './CurrencySelector';
 import axios from 'axios';
 import './Header.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 
-  (window.location.hostname === 'localhost' 
-    ? `http://${window.location.hostname}:5000/api` 
-    : `http://${window.location.hostname}:5000/api`);
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');

@@ -8,5 +8,15 @@
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
     "heroku-postbuild": "npm run build"
+  },
+  "dependencies": {
+    "express": "^4.22.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "@supabase/supabase-js": "^2.99.1",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.1.1",
+    "uuid": "^11.1.0"
   }
 }

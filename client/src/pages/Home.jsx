@@ -5,9 +5,7 @@ import ProductCard from '../components/ProductCard';
 import AnnouncementSlider from '../components/AnnouncementSlider';
 import './Home.css';
 
-const API_URL = window.location.hostname === 'localhost' 
-  ? `http://${window.location.hostname}:5000/api` 
-  : `http://${window.location.hostname}:5000/api`;
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);

@@ -11,14 +11,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Debug: Log API URL being used
-  useEffect(() => {
-    const apiUrl = window.location.hostname === 'localhost' 
-      ? `http://${window.location.hostname}:5000/api` 
-      : `http://${window.location.hostname}:5000/api`;
-    console.log('Login component - API URL:', apiUrl);
-    console.log('Login component - Current hostname:', window.location.hostname);
-  }, []);
+
 
   const redirect = searchParams.get('redirect') || '/';
 

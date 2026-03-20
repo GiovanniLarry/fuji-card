@@ -17,7 +17,7 @@ const AdminAuth = () => {
 
     try {
       // Connects to the backend admin-login endpoint we are about to create
-      const API_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:5000/api`;
+      const API_URL = import.meta.env.VITE_API_URL || '/api';
       const response = await axios.post(`${API_URL}/auth/admin-login`, {
         username,
         password
