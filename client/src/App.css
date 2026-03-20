@@ -13,12 +13,11 @@ body {
   line-height: 1.6;
   color: #1a1a2e;
   background: #f8f9fa;
-  padding-top: 120px; /* Account for fixed header */
+  padding-top: 0; /* Header is relative, no padding needed */
 }
 
-/* Auth pages have smaller header */
 body.auth-page {
-  padding-top: 80px;
+  padding-top: 0;
 }
 
 .app {
@@ -53,7 +52,7 @@ body.auth-page {
   }
   
   body {
-    padding-top: 100px; /* Reduced header padding for mobile */
+    padding-top: 0;
   }
 }
 
@@ -139,7 +138,7 @@ img {
   
   body {
     font-size: 14px;
-    padding-top: 100px; /* Smaller header on mobile */
+    padding-top: 0;
   }
 }
 
@@ -149,6 +148,6 @@ img {
   }
   
   body {
-    padding-top: 90px; /* Even smaller header on small mobile */
+    padding-top: 0;
   }
 }
