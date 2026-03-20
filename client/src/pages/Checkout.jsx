@@ -294,7 +294,54 @@ const Checkout = () => {
           } else if (formData.paymentMethod === 'paystack') {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
-            // Trigger Paystack Popup (continues as before)
+
+            // Trigger Paystack Popup
+            if (window.PaystackPop) {
+              const handler = window.PaystackPop.setup({
+                key: paystackKey,
+                email: user?.email || 'customer@fuji-card.com',
+                amount: Math.round(total * 100), // convert to cents
+                currency: 'GHS', // Paystack default for your region or ZAR/NGN
+                ref: order.id,
+                callback: function (response) {
+                  navigate(`/order-confirmation/${order.id}`, { state: { order } });
+                  refreshCart();
+                },
+                onClose: function () {
+                  alert('Transaction cancelled');
+                  setLoading(false);
+                }
+              });
+              handler.openIframe();
+            } else {
+              throw new Error('Paystack not loaded');
+            }
+            return;
+          } else if (formData.paymentMethod === 'payfast') {
+            const response = await ordersAPI.checkout(orderData);
+            const order = response.data.order;
+            await refreshCart();
+
+            // Fetch PayFast payload
+            const payfastRes = await ordersAPI.generatePayfastPayload(order.id);
+            const { url, payload } = payfastRes.data;
+
+            // Create and submit PayFast form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = url;
+
+            Object.keys(payload).forEach(key => {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = payload[key];
+              form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+            return;
           } else {
             // Regular checkout
             const response = await ordersAPI.checkout(orderData);

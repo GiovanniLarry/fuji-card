@@ -181,8 +181,25 @@ router.post('/checkout', optionalAuth, async (req, res) => {
   try {
     const shippingAddress = req.body.shippingAddress || req.body.shipping_address;
     const paymentMethod = req.body.paymentMethod || req.body.payment_method;
-    const { billingAddress, currency = 'GBP', total } = req.body;
+    const { items: manualItems, currency = 'GBP', total: manualTotal } = req.body;
     const cartKey = req.user ? req.user.id : req.headers['x-session-id'] || 'guest';
+
+    // --- FALLBACK IF SUPABASE IS NOT CONFIGURED ---
+    if (!supabase) {
+      console.log('⚠️  Using mockup checkout (Supabase not configured)');
+      const orderId = `mock_${Date.now()}_${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
+      const mockOrder = {
+        id: orderId,
+        order_number: `ORD-${orderId}`,
+        status: 'pending',
+        payment_method: paymentMethod || 'card',
+        currency: currency,
+        subtotal: parseFloat(req.body.subtotal || 0).toFixed(2),
+        total: parseFloat(manualTotal || 0).toFixed(2),
+        created_at: new Date().toISOString()
+      };
+      return res.json({ order: mockOrder });
+    }
 
     // Get cart
     const { data: cart } = await supabase
@@ -234,22 +251,13 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       subtotal += product.price * cartItem.quantity;
     }
 
-    console.log('[Checkout] Items verified. Subtotal:', subtotal);
-
     const shipping = subtotal >= 50 ? 0 : 4.99;
-    const orderTotal = total || subtotal + shipping;
+    const orderTotal = manualTotal || subtotal + shipping;
 
-    // Check minimum order amount ($500)
-    if (subtotal < 500) {
-      return res.status(400).json({
-        error: `Minimum order value is $500. Your current total is $${subtotal.toFixed(2)}. Please add more items to checkout.`
-      });
-    }
-
-    // Create shipping address record first
+    // Create shipping address record
     let shippingAddressId = null;
     try {
-      const { data: newShippingAddress, error: shippingError } = await supabase
+      const { data: newShippingAddress } = await supabase
         .from('shipping_addresses')
         .insert({
           first_name: shippingAddress.firstName,
@@ -264,32 +272,8 @@ router.post('/checkout', optionalAuth, async (req, res) => {
         })
         .select()
         .single();
-
-      if (shippingError) {
-        console.log('Shipping address insert error, trying fallback:', shippingError.message);
-        // If shipping_addresses table doesn't exist, continue without it
-      } else {
-        shippingAddressId = newShippingAddress.id;
-      }
-    } catch (shippingError) {
-      console.log('Shipping address table might not exist, continuing...');
-    }
-
-    // Reduce stock for each product
-    for (const item of orderItems) {
-      const { data: product } = await supabase
-        .from('products')
-        .select('stock')
-        .eq('id', item.product_id)
-        .single();
-
-      if (product) {
-        await supabase
-          .from('products')
-          .update({ stock: product.stock - item.quantity })
-          .eq('id', item.product_id);
-      }
-    }
+      if (newShippingAddress) shippingAddressId = newShippingAddress.id;
+    } catch (e) {}
 
     // Create order
     const orderData = {
@@ -303,10 +287,7 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       subtotal: subtotal.toFixed(2),
       shipping_cost: shipping.toFixed(2),
       total: orderTotal.toFixed(2),
-      notes: JSON.stringify({
-        shippingAddress: shippingAddress,
-        paymentMethod: paymentMethod
-      })
+      notes: JSON.stringify({ shippingAddress, paymentMethod })
     };
 
     const { data: newOrder, error: orderError } = await supabase
@@ -319,16 +300,13 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 
     // Create order items
     for (const item of orderItems) {
-      await supabase
-        .from('order_items')
-        .insert({
-          order_id: newOrder.id,
-          product_id: item.product_id,
-          quantity: item.quantity
-        });
+      await supabase.from('order_items').insert({
+        order_id: newOrder.id,
+        product_id: item.product_id,
+        quantity: item.quantity
+      });
     }
 
-    // Clear cart only if NOT using PayFast (PayFast leaves cart intact until webhook succeeds)
     if (paymentMethod !== 'payfast') {
       await supabase.from('cart_items').delete().eq('cart_id', cart.id);
     }
@@ -336,13 +314,8 @@ router.post('/checkout', optionalAuth, async (req, res) => {
     res.json({
       order: {
         ...newOrder,
-        shippingAddress: shippingAddress, // Include shipping address in response
-        items: orderItems.map(item => ({
-          ...item,
-          id: item.product_id,
-          productId: item.product_id,
-          image: item.image_url
-        }))
+        shippingAddress: shippingAddress,
+        items: orderItems
       }
     });
   } catch (error) {
