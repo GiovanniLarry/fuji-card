@@ -13,7 +13,7 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState([]);
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
 
@@ -57,12 +57,12 @@ const Header = () => {
     <header className={`header-v2 ${isHeaderVisible ? 'visible' : 'hidden'}`}>
       {/* Top Bar - Blue */}
       <div className="header-top-blue">
-        <div className="container header-content">
+        <div className="container top-bar-content">
           <div className="top-left">
             <span>JAPANESE TCG SHOP</span>
           </div>
           <div className="top-right">
-            <Link to="/contact" className="contact-link">
+            <Link to="/contact" className="contact-link-blue">
               <i className="fa-solid fa-envelope"></i>
               CONTACT
             </Link>
@@ -80,54 +80,30 @@ const Header = () => {
 
       {/* Main Bar - White */}
       <div className="header-middle-white">
-        <div className="container middle-content">
-          <Link to="/" className="main-logo">
-            <img src="/logo.png" alt="Fuji Card Shop" className="logo-img" />
+        <div className="container middle-flex">
+          <button className="mobile-hamburger" onClick={() => setMobileMenuOpen(true)}>
+            <i className="fa-solid fa-bars"></i>
+          </button>
+
+          <Link to="/" className="site-brand">
+            <img src="/logo.png" alt="Fuji Card Shop" className="logo-img-circular" />
+            <span className="brand-name">FUJI CARD SHOP</span>
           </Link>
 
-          <div className="search-section">
-            <form className="search-bar-v2" onSubmit={handleSearch}>
-              <div className="search-category-dropdown" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                <i className="fa-solid fa-bars category-hamburger"></i>
-                <span>All</span>
-                <i className="fa-solid fa-chevron-down"></i>
-              </div>
-              <input 
-                type="text" 
-                placeholder="Which item are you looking for.." 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button type="submit" className="search-btn-v2">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </form>
-          </div>
-
-          <div className="header-user-actions">
-            {isAuthenticated ? (
-              <Link to="/account" className="user-profile-btn">
-                <span className="user-name">{user?.name || 'ACCOUNT'}</span>
-                <div className="user-avatar-placeholder">
-                  <i className="fa-regular fa-user"></i>
-                </div>
-              </Link>
-            ) : (
-              <Link to="/login" className="user-profile-btn">
-                <span className="user-name">LOGIN</span>
-                <div className="user-avatar-placeholder">
-                  <i className="fa-regular fa-user"></i>
-                </div>
-              </Link>
-            )}
-
-            <div className="divider-line"></div>
-
-            <Link to="/cart" className="cart-summary-v2">
-              <span className="cart-label">CART / £{(cart.totalPrice || 0).toFixed(2)}</span>
-              <div className="cart-icon-container">
-                <i className="fa-solid fa-shopping-bag main-cart-icon"></i>
-                <span className="cart-count-v2">{cart.itemCount}</span>
+          <div className="action-icons">
+            <button className="search-box-btn" onClick={() => navigate('/products')}>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <Link to={isAuthenticated ? "/account" : "/login"} className="user-icon-btn">
+              <i className="fa-solid fa-user"></i>
+            </Link>
+            <Link to="/cart" className="cart-box-btn">
+              <div className="cart-svg-container">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004aad" strokeWidth="2.5">
+                    <rect x="3" y="8" width="18" height="13" rx="2"></rect>
+                    <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
+                 </svg>
+                 <span className="cart-count-overlay">{cart.itemCount}</span>
               </div>
             </Link>
           </div>
@@ -137,46 +113,35 @@ const Header = () => {
       {/* Nav Bar - Red */}
       <div className="header-bottom-red">
         <div className="container">
-          <nav className="main-nav-v2">
-            <ul className="nav-list-v2">
-                   <li className="nav-item-v2">
-                <Link to="/">HOME <i className="fa-solid fa-chevron-down"></i></Link>
-              </li>
-              <li className="nav-item-v2">
-                <Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link>
-              </li>
-              <li className="nav-item-v2">
-                <Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link>
-              </li>
-              <li className="nav-item-v2">
-                <Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link>
-              </li>
-              <li className="nav-item-v2">
-                <Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link>
-              </li>
+          <nav className="scrolling-nav">
+            <ul className="nav-list-inline">
+              <li><Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li><Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li><Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link></li>
             </ul>
           </nav>
         </div>
       </div>
 
-      {/* Mobile Nav Drawer */}
-      <div className={`mobile-drawer-v2 ${mobileMenuOpen ? 'open' : ''}`}>
-           <div className="mobile-drawer-header">
-               <h3>CATEGORIES</h3>
-               <button onClick={() => setMobileMenuOpen(false)}>
-                   <i className="fa-solid fa-xmark"></i>
-               </button>
-           </div>
-           <ul className="mobile-drawer-links">
-               <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>HOME</Link></li>
-               <li><Link to="/products" onClick={() => setMobileMenuOpen(false)}>ALL PRODUCTS</Link></li>
-               <div className="drawer-divider"></div>
-               {categories.map(cat => (
-                   <li key={cat.id}><Link to={`/products?category=${cat.name}`} onClick={() => setMobileMenuOpen(false)}>{cat.name.toUpperCase()}</Link></li>
-               ))}
-           </ul>
-      </div>
-      {mobileMenuOpen && <div className="drawer-overlay" onClick={() => setMobileMenuOpen(false)}></div>}
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <>
+          <div className="drawer-overlay" onClick={() => setMobileMenuOpen(false)}></div>
+          <div className="mobile-drawer-v2 open">
+             <div className="mobile-drawer-header">
+                 <h3>MENU</h3>
+                 <button onClick={() => setMobileMenuOpen(false)}><i className="fa-solid fa-xmark"></i></button>
+             </div>
+             <ul className="mobile-drawer-links">
+                 <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>HOME</Link></li>
+                 {categories.map(cat => (
+                     <li key={cat.id}><Link to={`/products?category=${cat.name}`} onClick={() => setMobileMenuOpen(false)}>{cat.name.toUpperCase()}</Link></li>
+                 ))}
+             </ul>
+          </div>
+        </>
+      )}
     </header>
   );
 };
