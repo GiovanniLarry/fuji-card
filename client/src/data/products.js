@@ -398,4 +398,3 @@ export const localProductStore = [
 ];
 
 export const products = localProductStore;
-ore;
