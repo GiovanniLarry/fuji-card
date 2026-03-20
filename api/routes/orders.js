@@ -408,7 +408,7 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     const isLocal = originUrl.includes('localhost') || originUrl.includes('127.0.0.1');
 
     if (isLocal) {
-      spoofedBaseUrl = 'https://fujicardshop.app';
+      spoofedBaseUrl = 'https://fuji-card.com';
     }
 
     // PERSISTENT CONFIG
