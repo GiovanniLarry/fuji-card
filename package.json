@@ -1,0 +1,12 @@
+{
+  "name": "fujicard-monorepo",
+  "version": "1.0.0",
+  "description": "Fuji Card Market Monorepo for Vercel",
+  "private": true,
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "heroku-postbuild": "npm run build"
+  }
+}
