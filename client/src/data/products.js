@@ -308,7 +308,7 @@ export const localProductStore = [
     name: 'Roronoa Zoro Manga Alternative Art OP06-118',
     category: 'onepiece',
     price: 780.00,
-    image: 'https://cdn.chaoscards.co.uk/uploads/prod_img/2_252275_e.png?v=1713783331',
+    image: 'https://www.getcollectr.com/public-assets/products/product_10015270.png',
     description: 'The breathtaking Manga Art Zoro from Wings of the Captain. Legendary status card.',
     stock: 1,
     set: 'OP-06',
@@ -376,21 +376,6 @@ export const localProductStore = [
     condition: 'NM',
     language: 'English',
     cardType: 'Battle',
-    featured: true
-  },
-  {
-    id: 'goku_ui_ygo_v1',
-    name: 'Goku Ultra Instinct Scion of Divinity SPR',
-    category: 'yugioh',
-    price: 110.00,
-    image: 'https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg',
-    description: 'The master of Divine Technique. Special edition Ultra Instinct Goku SPR for competitive and collection mastery.',
-    stock: 3,
-    set: 'Critical Blow',
-    rarity: 'SPR',
-    condition: 'NM',
-    language: 'English',
-    cardType: 'Promo',
     featured: true
   }
 ];
