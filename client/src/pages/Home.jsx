@@ -11,40 +11,17 @@ const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Mock Premium Products as per user's image if API doesn't have them yet
-  const premiumProductsData = [
-    {
-      id: 'mock-1',
-      name: "M4 Ninja Spinner booster box Japanese Pokemon Card",
-      category: "BOOSTER BOXES POKEMON",
-      price: 278.00 / 4.60, // Convert to GBP roughly (4.6 is AED rate)
-      image: "/slideshow/M4-back-300x167.webp",
-      stock: 5
-    },
-    {
-      id: 'mock-2',
-      name: "OP-15 Adventure on KAMI's Island booster box Japanese ONE PIECE CARD",
-      category: "BOOSTER BOXES ONE PIECE",
-      price: 285.00 / 4.60,
-      image: "/slideshow/OP-15-back-300x176.webp",
-      stock: 5
-    },
-    {
-      id: 'mock-3',
-      name: "OP-15 Adventure on KAMI's Island Sealed Case (12 boxes) Japanese ONE PIECE CARD",
-      category: "ONE PIECE",
-      price: 3398.00 / 4.60,
-      image: "/slideshow/OP-15-back-300x176.webp",
-      stock: 2
-    }
-  ];
-
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
         const response = await axios.get(`${API_URL}/products?featured=true`);
         if (response.data && response.data.products) {
-          setFeaturedProducts(response.data.products);
+          // Sort or Filter to ensure marquee products are at the top
+          const marqueeIds = ["jp-m4-booster", "jp-op15-booster", "jp-op15-case"];
+          const marquee = response.data.products.filter(p => marqueeIds.includes(p.id));
+          const others = response.data.products.filter(p => !marqueeIds.includes(p.id));
+          
+          setFeaturedProducts([...marquee, ...others]);
         }
       } catch (error) {
         console.error('Failed to fetch featured products:', error);
@@ -54,6 +31,10 @@ const Home = () => {
     };
     fetchFeatured();
   }, []);
+
+  // First 3 products are the 'Premium' marquee row
+  const premiumRow = featuredProducts.slice(0, 3);
+  const secondaryFeatured = featuredProducts.slice(3, 7);
 
   return (
     <div className="home-page-container">
@@ -71,25 +52,28 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Premium Products Collection (Matching User Mockup) */}
+      {/* Premium Products Collection (From Database) */}
       <section className="premium-collection-section">
         <div className="container">
-          <div className="premium-grid">
-            {premiumProductsData.map(product => (
-              <PremiumProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {!loading && premiumRow.length > 0 ? (
+            <div className="premium-grid">
+              {premiumRow.map(product => (
+                <PremiumProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : loading && (
+            <div className="loading">Loading Premium Collection...</div>
+          )}
         </div>
       </section>
 
       {/* API Featured Products (Secondary) */}
-      {!loading && featuredProducts.length > 0 && (
+      {!loading && secondaryFeatured.length > 0 && (
          <section className="featured-section">
             <div className="container">
               <h2 className="section-title">Explore Our Shop</h2>
               <div className="products-grid">
-                {/* Fallback to regular cards for other products */}
-                {featuredProducts.map(product => (
+                {secondaryFeatured.map(product => (
                   <PremiumProductCard key={product.id} product={product} />
                 ))}
               </div>

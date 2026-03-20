@@ -1,4 +1,50 @@
 export const products = [
+  // Premium Marquee Products
+  {
+    id: "jp-m4-booster",
+    name: "M4 Ninja Spinner booster box Japanese Pokemon Card",
+    description: "Official Japanese Pokemon M4 Ninja Spinner Booster Box. 20 packs per box. Features the latest marquee series!",
+    price: 60.43, // 278.00 AED converted to GBP
+    image: "/slideshow/M4-back-300x167.webp",
+    category: "BOOSTER BOXES POKEMON",
+    cardType: "Booster Box",
+    set: "M4 Ninja Spinner",
+    rarity: "Premium",
+    condition: "Sealed",
+    language: "Japanese",
+    stock: 12,
+    featured: true
+  },
+  {
+    id: "jp-op15-booster",
+    name: "OP-15 Adventure on KAMI's Island booster box Japanese ONE PIECE CARD",
+    description: "Japanese ONE PIECE CARD GAME OP-15 Booster Box. Discover the Island of Kami with exclusive Japanese artwork.",
+    price: 61.96, // 285.00 AED converted to GBP
+    image: "/slideshow/OP-15-back-300x176.webp",
+    category: "BOOSTER BOXES ONE PIECE",
+    cardType: "Booster Box",
+    set: "OP-15",
+    rarity: "Premium",
+    condition: "Sealed",
+    language: "Japanese",
+    stock: 15,
+    featured: true
+  },
+  {
+    id: "jp-op15-case",
+    name: "OP-15 Adventure on KAMI's Island Sealed Case (12 boxes) Japanese ONE PIECE CARD",
+    description: "Official Sealed Case of 12 OP-15 Booster Boxes. Perfect for high-end collectors and investment quality.",
+    price: 738.70, // 3398.00 AED converted to GBP
+    image: "/slideshow/OP-15-back-300x176.webp",
+    category: "ONE PIECE",
+    cardType: "Sealed Case",
+    set: "OP-15",
+    rarity: "Master Case",
+    condition: "Sealed Case",
+    language: "Japanese",
+    stock: 2,
+    featured: true
+  },
   // Pokemon Cards
   {
     id: "pk-001",
