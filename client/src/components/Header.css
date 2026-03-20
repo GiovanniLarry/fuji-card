@@ -1,15 +1,12 @@
 .header-v2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative; /* CHANGED FROM FIXED */
   z-index: 1000;
-  transition: transform 0.3s ease;
   width: 100%;
+  background-color: white;
 }
 
 .header-v2.hidden {
-  transform: translateY(-100%);
+  display: none; /* Scrolling hide logic less relevant for non-fixed header */
 }
 
 .container {
@@ -368,15 +365,15 @@
     justify-content: center;
   }
 
-  /* CRITICAL: Extreme padding requested by user (approx +5cm) */
+  /* RESET PADDING for relative header */
   body {
-    padding-top: 440px;
+    padding-top: 0;
   }
 }
 
-/* CRITICAL: Extreme padding requested by user (approx +5cm) */
+/* RESET PADDING for relative header */
 body {
-    padding-top: 490px;
+    padding-top: 0;
 }
 
 /* Drawer CSS */
