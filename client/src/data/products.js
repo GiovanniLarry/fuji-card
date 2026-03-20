@@ -2,6 +2,98 @@
 // This store provides full resilience for the shop's product discovery engine.
 
 export const localProductStore = [
+  // --- FEATURED PREMIUM NEW ARRIVALS ---
+  {
+    id: 'm1s',
+    name: 'M1S Mega Symphonia booster box Japanese Pokemon Card',
+    category: 'pokemon',
+    price: 55.00,
+    image: '/images/products/mega_symphonia.png',
+    description: 'The elegant musical themed booster box for Japanese POKEMON TCG. Includes high-rarity melodious foils.',
+    stock: 24,
+    set: 'M1S Mega Symphonia',
+    rarity: 'Booster Box',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+  {
+    id: 'm1l',
+    name: 'M1L Mega Brave booster box Japanese Pokemon Card',
+    category: 'pokemon',
+    price: 58.91,
+    image: '/images/products/mega_brave.png',
+    description: 'The fiery courageous theme booster box for Japanese POKEMON TCG. High power battle cards.',
+    stock: 20,
+    set: 'M1L Mega Brave',
+    rarity: 'Booster Box',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+  {
+    id: 'op14_case',
+    name: 'OP-14 The Azure Sea’s Seven Sealed Case (12 boxes) Japanese ONE PIECE CARD',
+    category: 'onepiece',
+    price: 671.74,
+    image: '/images/products/op14_azure_sea.png',
+    description: 'Full factory sealed case containing 12 booster boxes of OP-14 Azure Sea’s Seven. Ultra rare investment piece.',
+    stock: 2,
+    set: 'OP-14 Azure',
+    rarity: 'Sealed Case',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+  {
+    id: 'eb04',
+    name: 'EB-04 EGGHEAD CRISIS Booster Box Japanese ONE PIECE CARD',
+    category: 'onepiece',
+    price: 53.48,
+    image: '/images/products/eb04_egghead.png',
+    description: 'The futuristic Egghead Island theme booster box. Features high-tech character designs and SAR cards.',
+    stock: 45,
+    set: 'EB-04 Egghead',
+    rarity: 'Booster Box',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+  {
+    id: 'm2',
+    name: 'M2 Inferno X booster box Japanese Pokemon Card',
+    category: 'pokemon',
+    price: 109.35,
+    image: '/images/products/inferno_x.png',
+    description: 'High stakes battle booster box featuring dark magma themed cards. Extremely powerful creatures inside.',
+    stock: 10,
+    set: 'M2 Inferno X',
+    rarity: 'Booster Box',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+  {
+    id: 'm2a',
+    name: 'M2a MEGA Dream ex booster box Japanese Pokemon Card',
+    category: 'pokemon',
+    price: 57.61,
+    image: '/images/products/mega_dream.png',
+    description: 'Soft cosmic garden themed booster box. Features Eevee evolutions and dreamy artwork SARs.',
+    stock: 18,
+    set: 'M2a Dream ex',
+    rarity: 'Booster Box',
+    condition: 'Factory Sealed',
+    language: 'Japanese',
+    cardType: 'Sealed Product',
+    featured: true
+  },
+
   // --- POKEMON TCG JAPANESE ---
   {
     id: 'p1',
