@@ -29,7 +29,7 @@ const Checkout = () => {
     expiry: '',
     cvv: ''
   });
-  const [paystackKey, setPaystackKey] = useState(import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || '');
+  const [paystackKey, setPaystackKey] = useState(PAYSTACK_PUBLIC_KEY || '');
 
   useEffect(() => {
     const fetchPaystackKey = async () => {
@@ -306,7 +306,7 @@ const Checkout = () => {
                 orderId: order.id,
                 email: user?.email || 'customer@fuji-card.com',
                 amount: total,
-                currency: 'GHS'
+                currency: 'ZAR'
               });
 
               if (res.data?.url) {

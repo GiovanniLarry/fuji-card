@@ -419,6 +419,8 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     }
 
     // PERSISTENT CONFIG
+    const payfastConfig = await getSetting('payfast', {});
+
     const m1 = '2242';
     const m2 = '7478';
     const k1 = 'kt2fwj';
