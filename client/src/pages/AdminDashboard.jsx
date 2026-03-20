@@ -675,10 +675,34 @@ const AdminDashboard = () => {
                         )}
 
                         <div className="admin-recent-activity glass-panel" style={{ marginTop: '2rem' }}>
-                            <h3>Recent System Logs</h3>
-                            <ul className="log-list">
-                                <li>[Sys] Admin dashboard established contact w/ central DB.</li>
-                                <li>[Intel] Currently serving {stats.users} secure users.</li>
+                            <h3>Administrative Operations</h3>
+                            <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                                Sync your local flagship inventory (100+ items) to the Supabase cloud ledger to enable live database management.
+                            </p>
+                            <button 
+                                className="admin-btn-primary" 
+                                style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)' }}
+                                onClick={async () => {
+                                    if (!window.confirm("Initialize mass synchronization to Supabase? This will populate your cloud database with all local flagship items.")) return;
+                                    try {
+                                        const token = localStorage.getItem('adminToken');
+                                        const API_URL = import.meta.env.VITE_API_URL || '/api';
+                                        const { data } = await axios.post(`${API_URL}/admin/sync-flagship`, {}, {
+                                            headers: { Authorization: `Bearer ${token}` }
+                                        });
+                                        alert(data.message || "Sync successful!");
+                                        window.location.reload();
+                                    } catch (err) {
+                                        alert("Sync failed: " + (err.response?.data?.error || err.message));
+                                    }
+                                }}
+                            >
+                                ⚡ Synchronize Cloud Ledger
+                            </button>
+                            <ul className="log-list" style={{ marginTop: '1.5rem' }}>
+                                <li>[Sys] Admin dashboard established contact w/ system.</li>
+                                <li>[Intel] Currently monitoring local flagship assets.</li>
+                                {stats.fallbackMode && <li style={{ color: '#f59e0b' }}>[Warning] Running in Legacy Fallback mode (Supabase disconnected).</li>}
                             </ul>
                         </div>
                     </div>

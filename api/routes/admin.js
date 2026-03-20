@@ -96,8 +96,14 @@ router.get('/stats', async (req, res) => {
             orders: orderCount || 0
         });
     } catch (error) {
-        console.error('Admin stats error:', error);
-        res.status(500).json({ error: 'Server error fetching stats' });
+        console.warn('Admin stats error (Supabase might be disconnected):', error);
+        // Fallback stats
+        res.json({
+            users: 0,
+            products: localProductStore.length,
+            orders: 0,
+            fallbackMode: true
+        });
     }
 });
 
