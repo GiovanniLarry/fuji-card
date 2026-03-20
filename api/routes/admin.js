@@ -134,26 +134,38 @@ router.post('/sync-flagship', async (req, res) => {
         // 2. Clear old products to avoid duplicates during mass-seed
         await supabase.from('products').delete().neq('name', '___SYSTEM_RESERVED___');
 
-        // 3. Prepare products
-        const productsToInsert = localProductStore.map(p => {
-            const slug = p.category.toLowerCase().replace(/[^a-z]/g, '');
-            const categoryId = catMap[slug] || null;
+            // 3. Prepare products
+            const productsToInsert = localProductStore.map(p => {
+                const slug = (p.category || 'other').toLowerCase().replace(/[^a-z]/g, '');
+                const categoryId = catMap[slug] || null;
 
-            return {
-                name: p.name,
-                description: p.description,
-                price: parseFloat(p.price),
-                image_url: p.image,
-                category_id: categoryId,
-                card_type: p.cardType,
-                set_name: p.set,
-                rarity: p.rarity,
-                condition: p.condition,
-                language: p.language,
-                stock: parseInt(p.stock) || 0,
-                featured: p.featured || false
-            };
-        });
+                // Map condition to Database ENUM values ('Mint', 'Near Mint', 'Excellent', 'Good', 'Fair', 'Poor', 'Sealed')
+                let dbCondition = 'Mint'; 
+                const rawCon = (p.condition || 'Mint').trim();
+                
+                if (rawCon.includes('Sealed')) dbCondition = 'Sealed';
+                else if (rawCon === 'NM' || rawCon === 'Near Mint') dbCondition = 'Near Mint';
+                else if (rawCon === 'M' || rawCon === 'Mint') dbCondition = 'Mint';
+                else if (rawCon === 'Excellent' || rawCon === 'EX') dbCondition = 'Excellent';
+                else if (rawCon === 'Good') dbCondition = 'Good';
+                else if (rawCon === 'Fair') dbCondition = 'Fair';
+                else if (rawCon === 'Poor') dbCondition = 'Poor';
+
+                return {
+                    name: p.name,
+                    description: p.description || '',
+                    price: parseFloat(p.price) || 0,
+                    image_url: p.image,
+                    category_id: categoryId,
+                    card_type: p.cardType || 'Character',
+                    set_name: p.set || 'N/A',
+                    rarity: p.rarity || 'N/A',
+                    condition: dbCondition,
+                    language: p.language || 'Japanese',
+                    stock: parseInt(p.stock) || 0,
+                    featured: p.featured || false
+                };
+            });
 
         // 4. Batch Insert
         const { error: insertError } = await supabase.from('products').insert(productsToInsert);
