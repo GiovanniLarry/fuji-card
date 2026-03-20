@@ -16,7 +16,7 @@ const Home = () => {
       try {
         const response = await axios.get(`${API_URL}/products?featured=true`);
         if (response.data && response.data.products) {
-          // Filter to show all JP marquee products
+          // Priority to specifically identified premium Japanese products
           const jpProducts = response.data.products.filter(p => p.id.startsWith('jp-'));
           const others = response.data.products.filter(p => !p.id.startsWith('jp-'));
           
@@ -47,7 +47,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Full Premium Products Collection (Under Spinner) */}
+      {/* Primary Products Grid (Directly below spinner as requested) */}
       <section className="premium-collection-section">
         <div className="container">
           {!loading ? (
@@ -57,22 +57,10 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <div className="loading">Loading Premium Collection...</div>
+            <div className="loading">Loading products...</div>
           )}
         </div>
       </section>
-
-      {/* API Featured Products (Secondary) if needed */}
-      {!loading && featuredProducts.length === 0 && (
-         <section className="featured-section">
-            <div className="container">
-              <h2 className="section-title">Explore Our Shop</h2>
-              <div className="products-grid">
-                 <p>Stay tuned for new arrivals!</p>
-              </div>
-            </div>
-         </section>
-      )}
     </div>
   );
 };
