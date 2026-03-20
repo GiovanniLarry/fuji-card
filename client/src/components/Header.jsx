@@ -85,7 +85,6 @@ const Header = () => {
         <div className="container header-content">
           <Link to="/" className="main-logo">
             <img src="/logo.png" alt="Fuji Card Shop" className="logo-img" />
-            <span className="logo-text-bold">FUJI CARD SHOP</span>
           </Link>
 
           <div className="search-section">
