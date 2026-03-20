@@ -460,3 +460,5 @@ export const localProductStore = [
     featured: true
   }
 ];
+e x p o r t   c o n s t   p r o d u c t s   =   l o c a l P r o d u c t S t o r e ;  
+ 
