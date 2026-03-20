@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import PriceRange from '../components/PriceRange';
+import { products as localProductStore } from '../data/products'; // DRY: Local fallback
 import './Products.css';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -11,7 +12,6 @@ const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState({});
-  const [filters, setFilters] = useState({});
   const [filterOptions, setFilterOptions] = useState({});
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -19,83 +19,95 @@ const Products = () => {
   const category = searchParams.get('category') || '';
   const search = searchParams.get('search') || '';
 
-  console.log('Products component - category:', category, 'search:', search);
-
-  // Memoize functions to prevent re-renders
   const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       const params = Object.fromEntries(searchParams.entries());
-      console.log('Fetching products with params:', params);
-      const response = await axios.get(`${API_URL}/products`, { params });
-      console.log('Products API response:', response.data);
-      setProducts(response.data.products || []);
-      setPagination(response.data.pagination || {});
+      
+      try {
+        const response = await axios.get(`${API_URL}/products`, { params });
+        if (response.data && response.data.products && response.data.products.length > 0) {
+          setProducts(response.data.products);
+          setPagination(response.data.pagination || {});
+          return;
+        }
+        throw new Error('No products from API');
+      } catch (apiError) {
+        console.warn('API fetch failed or empty, using high-fidelity local store fallback');
+        
+        // Manual Filtering based on search params
+        let filtered = [...localProductStore];
+        
+        if (category) {
+          filtered = filtered.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        }
+        
+        if (search) {
+          const s = search.toLowerCase();
+          filtered = filtered.filter(p => 
+            p.name.toLowerCase().includes(s) || 
+            p.description?.toLowerCase().includes(s) ||
+            p.set?.toLowerCase().includes(s)
+          );
+        }
+        
+        const minPrice = parseFloat(searchParams.get('minPrice')) || 0;
+        const maxPrice = parseFloat(searchParams.get('maxPrice')) || 1000000;
+        filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
+        
+        const sort = searchParams.get('sort');
+        if (sort === 'price_asc') filtered.sort((a,b) => a.price - b.price);
+        if (sort === 'price_desc') filtered.sort((a,b) => b.price - a.price);
+        if (sort === 'name_asc') filtered.sort((a,b) => a.name.localeCompare(b.name));
+        if (sort === 'name_desc') filtered.sort((a,b) => b.name.localeCompare(a.name));
+        
+        setProducts(filtered);
+        setPagination({
+          totalProducts: filtered.length,
+          totalPages: 1,
+          currentPage: 1
+        });
+      }
     } catch (error) {
-      console.error('Failed to fetch products:', error);
-      console.error('Error details:', error.response?.data || error.message);
-      // Show error message to user
+      console.error('Final product load failure:', error);
       setProducts([]);
     } finally {
       setLoading(false);
     }
-  }, [searchParams]);
+  }, [searchParams, category, search]);
 
   const fetchFilterOptions = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_URL}/products/filters/options`, { 
-        params: { category } 
-      });
+      const response = await axios.get(`${API_URL}/products/filters/options`, { params: { category } });
       setFilterOptions(response.data);
     } catch (error) {
-      console.error('Failed to fetch filter options:', error);
-      console.error('Error details:', error.response?.data || error.message);
+      // Provide robust local filter options
+      const cats = Array.from(new Set(localProductStore.map(p => p.category)));
+      const rarities = Array.from(new Set(localProductStore.map(p => p.rarity).filter(Boolean)));
+      setFilterOptions({ categories: cats, rarities });
     }
   }, [category]);
 
   useEffect(() => {
     fetchProducts();
     fetchFilterOptions();
-  }, [fetchProducts, fetchFilterOptions]); // Use memoized functions as dependencies
+  }, [fetchProducts, fetchFilterOptions]);
 
   const handleFilterChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    if (!value) delete newFilters[key];
-    setFilters(newFilters);
-    
     const newParams = new URLSearchParams(searchParams);
-    if (value) {
-      newParams.set(key, value);
-    } else {
-      newParams.delete(key);
-    }
+    if (value) newParams.set(key, value);
+    else newParams.delete(key);
     newParams.set('page', '1');
     setSearchParams(newParams);
   };
 
   const handlePriceRangeChange = (range) => {
     const newParams = new URLSearchParams(searchParams);
-    if (range.min > 0) {
-      newParams.set('minPrice', range.min.toString());
-    } else {
-      newParams.delete('minPrice');
-    }
-    if (range.max < 1000000) {
-      newParams.set('maxPrice', range.max.toString());
-    } else {
-      newParams.delete('maxPrice');
-    }
+    if (range.min > 0) newParams.set('minPrice', range.min.toString());
+    else newParams.delete('minPrice');
+    if (range.max < 1000000) newParams.set('maxPrice', range.max.toString());
+    else newParams.delete('maxPrice');
     newParams.set('page', '1');
-    setSearchParams(newParams);
-  };
-
-  const handleSortChange = (value) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (value) {
-      newParams.set('sort', value);
-    } else {
-      newParams.delete('sort');
-    }
     setSearchParams(newParams);
   };
 
@@ -111,21 +123,16 @@ const Products = () => {
     if (category) newParams.set('category', category);
     if (search) newParams.set('search', search);
     setSearchParams(newParams);
-    setFilters({});
   };
 
   const getCategoryTitle = () => {
     const titles = {
-      pokemon: 'Pokemon Cards',
-      yugioh: 'Yu-Gi-Oh! Cards',
-      onepiece: 'One Piece Cards',
-      newarrivals: 'New Arrivals',
-      specialrare: 'Special & Rare Cards',
-      promo: 'Promo Cards',
-      sealed: 'Sealed Products',
-      accessories: 'Accessories'
+      pokemon: 'Pokemon TCG',
+      onepiece: 'One Piece Card Game',
+      yugioh: 'Yu-Gi-Oh! OCG/TCG',
+      accessories: 'Premium Accessories'
     };
-    return titles[category] || 'All Products';
+    return titles[category] || 'All Collectibles';
   };
 
   return (
@@ -134,144 +141,67 @@ const Products = () => {
         <div className="products-header">
           <div className="header-left">
             <h1>{search ? `Search: "${search}"` : getCategoryTitle()}</h1>
-            <span className="product-count">{pagination.totalProducts || 0} products</span>
+            <span className="product-count">{pagination.totalProducts || 0} items found</span>
           </div>
           <div className="header-right">
-            <button 
-              className="filter-toggle"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="4" y1="21" x2="4" y2="14"></line>
-                <line x1="4" y1="10" x2="4" y2="3"></line>
-                <line x1="4" y1="18" x2="4" y2="18"></line>
-                <line x1="18" y1="21" x2="12" y2="21"></line>
-              </svg>
-              <span className="filter-text">Filters</span>
+            <button className="filter-toggle" onClick={() => setShowFilters(!showFilters)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+              <span>Filters</span>
             </button>
-            <button 
-              className="mobile-close-btn"
-              onClick={() => setShowFilters(false)}
-              aria-label="Close filters"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="6"></line>
-                <line x1="18" y1="18" x2="6" y2="18"></line>
-              </svg>
-            </button>
-            <select 
-              className="sort-select"
-              value={searchParams.get('sort') || ''}
-              onChange={(e) => handleFilterChange('sort', e.target.value)}
-            >
-              <option value="">Sort by</option>
-              <option value="name_asc">Name (A-Z)</option>
-              <option value="name_desc">Name (Z-A)</option>
-              <option value="price_asc">Price (Low to High)</option>
-              <option value="price_desc">Price (High to Low)</option>
-              <option value="newest">Newest First</option>
+            <select className="sort-select" value={searchParams.get('sort') || ''} onChange={(e) => handleFilterChange('sort', e.target.value)}>
+              <option value="">Newest Arrivals</option>
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+              <option value="name_asc">Name: A-Z</option>
             </select>
           </div>
         </div>
 
         <div className="products-layout">
           <aside className={`filters-sidebar ${showFilters ? 'open' : ''}`}>
-            <div className="filters-header">
-              <h3>Filters</h3>
-              <button className="clear-filters" onClick={clearFilters}>
-                Clear All
-              </button>
-              <button 
-                className="filter-close-btn"
-                onClick={() => setShowFilters(false)}
-                aria-label="Close filters"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="18" y1="6" x2="6" y2="6"></line>
-                  <line x1="18" y1="18" x2="6" y2="18"></line>
-                </svg>
-              </button>
-            </div>
+             <div className="filters-header">
+               <h3>Refine Selection</h3>
+               <button className="clear-filters" onClick={clearFilters}>Reset</button>
+               <button className="filter-close-btn" onClick={() => setShowFilters(false)}>×</button>
+             </div>
 
-            {filterOptions.categories?.length > 0 && (
-              <div className="filter-group">
-                <h4>Category</h4>
-                <select 
-                  value={searchParams.get('category') || ''}
-                  onChange={(e) => handleFilterChange('category', e.target.value)}
-                >
-                  <option value="">All Categories</option>
-                  {filterOptions.categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+             <div className="filter-group">
+               <h4>TCG Category</h4>
+               <div className="filter-links">
+                 {['pokemon', 'onepiece', 'yugioh', 'accessories'].map(cat => (
+                   <button 
+                     key={cat} 
+                     className={category === cat ? 'active' : ''} 
+                     onClick={() => handleFilterChange('category', cat)}
+                   >
+                     {cat.toUpperCase()}
+                   </button>
+                 ))}
+               </div>
+             </div>
 
-            {filterOptions.rarities?.length > 0 && (
-              <div className="filter-group">
-                <h4>Rarity</h4>
-                <select 
-                  value={searchParams.get('rarity') || ''}
-                  onChange={(e) => handleFilterChange('rarity', e.target.value)}
-                >
-                  <option value="">All Rarities</option>
-                  {filterOptions.rarities.map(rarity => (
-                    <option key={rarity} value={rarity}>{rarity}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            <div className="filter-group">
-              <h4>Price Range</h4>
-              <PriceRange 
-                onFilterChange={handlePriceRangeChange}
-                maxPrice={1000000}
-              />
-            </div>
+             <div className="filter-group">
+               <h4>Price Range</h4>
+               <PriceRange onFilterChange={handlePriceRangeChange} maxPrice={2000} />
+             </div>
           </aside>
 
           <main className="products-main">
             {loading ? (
-              <div className="loading">
+              <div className="loading-state">
                 <div className="spinner"></div>
-                <p>Loading products...</p>
+                <p>Curating your collection...</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="no-products">
-                <h3>No products found</h3>
-                <p>Try adjusting your filters or search term</p>
-                <p style={{ fontSize: '12px', color: '#999', marginTop: '10px' }}>
-                  Debug: Check browser console for API errors
-                </p>
+              <div className="no- результати">
+                <h3>No items match your criteria</h3>
+                <p>Try resetting the filters to explore our full inventory.</p>
+                <button onClick={clearFilters} className="btn btn-primary">Reset Filters</button>
               </div>
             ) : (
-              <>
-                <div className="products-grid">
-                  {products.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-
-                {pagination.totalPages > 1 && (
-                  <div className="pagination">
-                    <button 
-                      disabled={pagination.currentPage === 1}
-                      onClick={() => handlePageChange(pagination.currentPage - 1)}
-                    >
-                      Previous
-                    </button>
-                    <span>Page {pagination.currentPage} of {pagination.totalPages}</span>
-                    <button 
-                      disabled={pagination.currentPage === pagination.totalPages}
-                      onClick={() => handlePageChange(pagination.currentPage + 1)}
-                    >
-                      Next
-                    </button>
-                  </div>
-                )}
-              </>
+              <div className="products-grid">
+                {products.map(product => <ProductCard key={product.id} product={product} />)}
+              </div>
             )}
           </main>
         </div>

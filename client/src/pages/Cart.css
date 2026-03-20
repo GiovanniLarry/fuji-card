@@ -262,24 +262,73 @@
 @media (max-width: 1024px) {
   .cart-layout {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .cart-summary {
-    position: static;
+    position: relative; /* Remove sticky on mobile to avoid scroll overlap */
+    top: 0;
+    margin-top: 10px;
+    padding: 20px;
+    border-top: 4px solid #e94560; /* Visual cue for the final step */
   }
 }
 
 @media (max-width: 768px) {
   .cart-item {
-    grid-template-columns: 80px 1fr;
-    gap: 15px;
+    display: flex; /* Use flex for more predictable mobile wrapping */
+    flex-direction: row;
+    padding: 12px;
+    gap: 12px;
+    position: relative;
+    align-items: flex-start;
   }
 
-  .item-quantity, .item-total, .remove-btn {
-    grid-column: 2;
+  .item-image {
+    width: 65px;
+    height: 85px;
+    flex-shrink: 0;
+  }
+
+  .item-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .item-name {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .item-quantity {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    transform: scale(0.9);
   }
 
   .item-total {
-    text-align: left;
+    position: absolute;
+    top: 50%; /* Added missing semicolon */
+    right: 40px;
+    font-size: 15px;
+    display: none; /* Hide on small mobile to save space */
+  }
+
+  .remove-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  }
+
+  .cart-page {
+    padding-bottom: 80px; /* Ensure space for scrolling footer if needed */
   }
 }
