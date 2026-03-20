@@ -182,24 +182,25 @@ const Header = () => {
             </svg>
           </button>
           <ul className="nav-links">
-            <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
+            <li><Link to="/" style={{ color: '#1a1a2e' }} onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
             {categoriesLoading ? (
               <li className="nav-loading">Loading categories...</li>
             ) : categories.length > 0 ? (
               categories.map(category => (
                 <li key={category.id || category.name}>
-                  <Link 
-                    to={`/products?category=${encodeURIComponent(category.name.toLowerCase())}`} 
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
+                    <Link 
+                      to={`/products?category=${encodeURIComponent(category.name.toLowerCase())}`} 
+                      style={{ color: '#1a1a2e' }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {category.name}
+                    </Link>
                 </li>
               ))
             ) : (
               <li className="nav-error">Categories unavailable</li>
             )}
-            <li><Link to="/products" onClick={() => setMobileMenuOpen(false)}>All Products</Link></li>
+            <li><Link to="/products" style={{ color: '#1a1a2e' }} onClick={() => setMobileMenuOpen(false)}>All Products</Link></li>
           </ul>
         </div>
       </nav>
