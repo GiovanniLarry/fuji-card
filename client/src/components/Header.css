@@ -22,41 +22,45 @@
 .header-top-blue {
   background-color: #004aad;
   color: white;
-  padding: 8px 0;
+  padding: 10px 0;
   font-size: 13px;
   font-weight: 700;
 }
 
-.top-bar-content {
+.header-top-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.top-left {
-  display: flex;
-  align-items: center;
-}
-
-.top-right {
+.top-right-actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.contact-link-blue {
+.shop-tagline {
+  margin-right: 15px;
+}
+
+.contact-btn-mockup {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   color: white;
   text-decoration: none;
   font-weight: 800;
   background: rgba(255, 255, 255, 0.15);
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
 }
 
-.social-icon {
+.social-nodes {
+  display: flex;
+  gap: 10px;
+}
+
+.node {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,84 +80,140 @@
   border-bottom: 2px solid #f0f0f0;
 }
 
-.middle-flex {
+.middle-bar-grid {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
-.mobile-hamburger {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #777;
-  cursor: pointer;
-  padding: 8px;
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: #000;
   flex-shrink: 0;
 }
 
-.site-brand {
+.logo-round {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.brand-bold {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.search-composite {
+  flex: 1;
+  max-width: 650px;
+}
+
+.search-form-mockup {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.all-dropdown-mockup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+}
+
+.search-form-mockup input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px 15px;
+  font-size: 15px;
+  outline: none;
+}
+
+.search-trigger {
+  background: transparent;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
+
+.account-cart-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.user-info-mockup {
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #000;
-  position: absolute; /* Force center for identical look */
-  left: 50%;
-  transform: translateX(-50%);
+  color: #333;
+  font-weight: 800;
+  font-size: 14px;
 }
 
-.logo-img-circular {
-  width: 50px;
-  height: 50px;
+.user-icon-circle {
+  width: 44px;
+  height: 44px;
+  background-color: #bbb;
   border-radius: 50%;
-  object-fit: cover;
-}
-
-.brand-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   font-size: 18px;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  white-space: nowrap;
 }
 
-.action-icons {
+.vertical-divider {
+  width: 1px;
+  height: 35px;
+  background-color: #eee;
+}
+
+.cart-preview-mockup {
   display: flex;
   align-items: center;
   gap: 15px;
-  flex-shrink: 0;
-}
-
-.search-box-btn {
-  background: none;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 8px;
-  color: #ccc;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.user-icon-btn {
-  color: #777;
-  font-size: 22px;
   text-decoration: none;
+  color: #333;
+  font-weight: 800;
 }
 
-.cart-box-btn {
-  text-decoration: none;
-}
-
-.cart-svg-container {
+.cart-box-styled {
   position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cart-count-overlay {
+.cart-count-badge {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -15%);
-  font-size: 11px;
+  font-size: 12px;
   color: #004aad;
   font-weight: 900;
 }
@@ -161,61 +221,76 @@
 /* Layer 3: Bottom Bar - Red */
 .header-bottom-red {
   background-color: #e13e3e;
-  padding: 12px 0;
+  padding: 15px 0;
 }
 
-.scrolling-nav {
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-.nav-list-inline {
+.nav-items-unified {
   display: flex;
   justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 25px;
+  gap: 40px;
 }
 
-.nav-list-inline li a {
+.nav-items-unified li a {
   color: white;
   text-decoration: none;
   font-weight: 900;
-  font-size: 14px;
+  font-size: 15px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   text-transform: uppercase;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  padding-right: 20px;
 }
 
-/* Responsive Overrides */
+.nav-items-unified li:last-child a {
+  border-right: none;
+}
+
+/* Responsive / Well Fitted */
+@media (max-width: 1024px) {
+  .brand-bold, .shop-tagline { display: none; }
+  .middle-bar-grid { gap: 15px; }
+  .container { padding: 0 10px; }
+}
+
 @media (max-width: 768px) {
-  .top-left span {
-    font-size: 11px;
+  .middle-bar-grid {
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 12px;
   }
   
-  .brand-name {
-    font-size: 16px;
+  .brand-section { order: 1; }
+  .account-cart-section { order: 2; width: 100%; justify-content: center; }
+  .search-composite { order: 3; width: 100%; margin: 0; }
+  
+  .nav-items-unified {
+    flex-wrap: wrap;
+    gap: 10px 20px;
   }
   
-  .logo-img-circular {
-    width: 40px;
-    height: 40px;
+  .nav-items-unified li a {
+    border-right: none;
+    padding-right: 0;
+    font-size: 13px;
   }
 
-  .nav-list-inline {
-    justify-content: flex-start;
-    padding-left: 10px;
+  .user-name-text, .cart-total-text {
+    display: none;
   }
 
-  body {
-    padding-top: 158px; /* Fit for mobile header height */
-  }
+  body { padding-top: 185px; }
 }
 
-/* Drawer & Overlay */
+body {
+  padding-top: 175px;
+}
+
+/* Drawer CSS */
 .drawer-overlay {
   position: fixed;
   top: 0;
@@ -230,14 +305,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 80%;
-  max-width: 320px;
+  width: 320px;
   height: 100vh;
   background: white;
   z-index: 2000;
   padding: 20px;
-}
-
-body {
-    padding-top: 172px;
 }
