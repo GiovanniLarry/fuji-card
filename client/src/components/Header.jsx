@@ -148,7 +148,7 @@ const Header = () => {
             </button>
 
             <Link to="/cart" className="cart-action-mockup">
-              <span className="cart-label-desktop">CART / £{(cart.totalPrice || 0).toFixed(2)}</span>
+              <span className="cart-label-desktop">CART</span>
               <div className="cart-blue-bag">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004aad" strokeWidth="2.5">
                   <rect x="3" y="8" width="18" height="13" rx="1.5"></rect>
