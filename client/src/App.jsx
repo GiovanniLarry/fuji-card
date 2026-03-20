@@ -14,6 +14,8 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Account from './pages/Account';
+import OrderConfirmation from './pages/OrderConfirmation';
+import PaymentMethodsPage from './pages/PaymentMethods';
 import Info from './pages/Info';
 import AdminAuth from './pages/AdminAuth';
 import AdminDashboard from './pages/AdminDashboard';
