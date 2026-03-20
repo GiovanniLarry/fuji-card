@@ -22,28 +22,24 @@
 .header-top-blue {
   background-color: #004aad;
   color: white;
-  padding: 10px 0;
+  padding: 8px 0;
   font-size: 13px;
   font-weight: 700;
 }
 
-.header-top-content {
+.top-bar-content {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 
-.top-right-actions {
+.top-right-mockup {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.shop-tagline {
-  margin-right: 15px;
-}
-
-.contact-btn-mockup {
+.contact-pill {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -51,13 +47,8 @@
   text-decoration: none;
   font-weight: 800;
   background: rgba(255, 255, 255, 0.15);
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 20px;
-}
-
-.social-nodes {
-  display: flex;
-  gap: 10px;
 }
 
 .node {
@@ -80,14 +71,14 @@
   border-bottom: 2px solid #f0f0f0;
 }
 
-.middle-bar-grid {
+.middle-flex-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  position: relative;
 }
 
-.brand-section {
+.branding-mockup {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -96,26 +87,27 @@
   flex-shrink: 0;
 }
 
-.logo-round {
+.logo-mockup-round {
   width: 55px;
   height: 55px;
   border-radius: 50%;
   object-fit: contain;
 }
 
-.brand-bold {
+.name-mockup-bold {
   font-size: 20px;
   font-weight: 900;
   letter-spacing: -0.5px;
   text-transform: uppercase;
 }
 
-.search-composite {
+.desktop-search-container {
   flex: 1;
   max-width: 650px;
+  margin: 0 40px;
 }
 
-.search-form-mockup {
+.search-box-desktop {
   display: flex;
   align-items: center;
   background-color: #f5f5f5;
@@ -124,7 +116,7 @@
   border: 1px solid #e0e0e0;
 }
 
-.all-dropdown-mockup {
+.search-all-dropdown {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -135,9 +127,10 @@
   cursor: pointer;
   color: #666;
   font-size: 14px;
+  font-weight: 700;
 }
 
-.search-form-mockup input {
+.search-box-desktop input {
   flex: 1;
   background: transparent;
   border: none;
@@ -146,23 +139,22 @@
   outline: none;
 }
 
-.search-trigger {
+.search-icon-trigger {
   background: transparent;
   border: none;
   padding: 0 15px;
   cursor: pointer;
-  font-size: 18px;
   color: #333;
 }
 
-.account-cart-section {
+.user-cart-mockup {
   display: flex;
   align-items: center;
   gap: 20px;
   flex-shrink: 0;
 }
 
-.user-info-mockup {
+.user-action-mockup {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -172,7 +164,7 @@
   font-size: 14px;
 }
 
-.user-icon-circle {
+.user-circle-mockup {
   width: 44px;
   height: 44px;
   background-color: #bbb;
@@ -184,13 +176,13 @@
   font-size: 18px;
 }
 
-.vertical-divider {
+.divider-desktop {
   width: 1px;
   height: 35px;
   background-color: #eee;
 }
 
-.cart-preview-mockup {
+.cart-action-mockup {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -199,7 +191,7 @@
   font-weight: 800;
 }
 
-.cart-box-styled {
+.cart-blue-bag {
   position: relative;
   width: 44px;
   height: 44px;
@@ -208,7 +200,7 @@
   justify-content: center;
 }
 
-.cart-count-badge {
+.cart-digit {
   position: absolute;
   top: 55%;
   left: 50%;
@@ -218,13 +210,17 @@
   font-weight: 900;
 }
 
+.mobile-only-hamburger, .mobile-search-toggle {
+  display: none;
+}
+
 /* Layer 3: Bottom Bar - Red */
 .header-bottom-red {
   background-color: #e13e3e;
   padding: 15px 0;
 }
 
-.nav-items-unified {
+.nav-links-mockup {
   display: flex;
   justify-content: center;
   list-style: none;
@@ -233,7 +229,7 @@
   gap: 40px;
 }
 
-.nav-items-unified li a {
+.nav-links-mockup li a {
   color: white;
   text-decoration: none;
   font-weight: 900;
@@ -242,52 +238,99 @@
   align-items: center;
   gap: 6px;
   text-transform: uppercase;
-  border-right: 1px solid rgba(255, 255, 255, 0.4);
-  padding-right: 20px;
 }
 
-.nav-items-unified li:last-child a {
-  border-right: none;
-}
-
-/* Responsive / Well Fitted */
-@media (max-width: 1024px) {
-  .brand-bold, .shop-tagline { display: none; }
-  .middle-bar-grid { gap: 15px; }
-  .container { padding: 0 10px; }
-}
-
+/* Mobile Overrides (Max-width 768px as per user preference) */
 @media (max-width: 768px) {
-  .middle-bar-grid {
-    flex-direction: column;
-    padding: 10px 0;
-    gap: 12px;
-  }
-  
-  .brand-section { order: 1; }
-  .account-cart-section { order: 2; width: 100%; justify-content: center; }
-  .search-composite { order: 3; width: 100%; margin: 0; }
-  
-  .nav-items-unified {
+  .top-bar-content {
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px 20px;
+    gap: 10px;
   }
   
-  .nav-items-unified li a {
-    border-right: none;
-    padding-right: 0;
-    font-size: 13px;
+  .top-text-section {
+    width: 100%;
+    text-align: center;
   }
 
-  .user-name-text, .cart-total-text {
+  /* Hamburger on left */
+  .mobile-only-hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #777;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Centered branding */
+  .branding-mockup {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 8px;
+  }
+
+  .logo-mockup-round {
+    width: 42px;
+    height: 42px;
+  }
+
+  .name-mockup-bold {
+    font-size: 16px;
+  }
+
+  /* Hide desktop search and labels */
+  .desktop-search-container, .user-label-desktop, .cart-label-desktop, .divider-desktop {
     display: none;
   }
 
-  body { padding-top: 185px; }
+  /* Show mobile search toggle as grey box */
+  .mobile-search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    color: #ccc;
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .user-cart-mockup {
+    gap: 15px;
+  }
+
+  .user-circle-mockup {
+    width: auto;
+    height: auto;
+    background: none;
+    color: #777;
+    font-size: 22px;
+  }
+
+  .nav-links-mockup {
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links-mockup li a {
+    font-size: 13px;
+    gap: 4px;
+  }
+
+  body {
+    padding-top: 158px;
+  }
 }
 
 body {
-  padding-top: 175px;
+    padding-top: 175px;
 }
 
 /* Drawer CSS */
@@ -310,4 +353,22 @@ body {
   background: white;
   z-index: 2000;
   padding: 20px;
+}
+.mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+.mobile-drawer-links {
+  list-style: none;
+  padding: 20px 0;
+}
+.mobile-drawer-links li a {
+  display: block;
+  padding: 15px 0;
+  color: #333;
+  font-weight: 800;
+  text-decoration: none;
 }

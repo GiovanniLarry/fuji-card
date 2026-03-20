@@ -57,10 +57,12 @@ const Header = () => {
     <header className={`header-v2 ${isHeaderVisible ? 'visible' : 'hidden'}`}>
       {/* Top Bar - Blue */}
       <div className="header-top-blue">
-        <div className="container header-top-content">
-          <div className="top-right-actions">
-            <span className="shop-tagline">JAPANESE TCG SHOP</span>
-            <Link to="/contact" className="contact-btn-mockup">
+        <div className="container top-bar-content">
+          <div className="top-text-section">
+             <span>JAPANESE TCG SHOP</span>
+          </div>
+          <div className="top-right-mockup">
+            <Link to="/contact" className="contact-pill">
               <i className="fa-solid fa-envelope"></i>
               CONTACT
             </Link>
@@ -76,17 +78,23 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Middle Bar - White */}
+      {/* Main Bar - White */}
       <div className="header-middle-white">
-        <div className="container middle-bar-grid">
-          <Link to="/" className="brand-section">
-            <img src="/logo.png" alt="Fuji Card Shop" className="logo-round" />
-            <span className="brand-bold">FUJI CARD SHOP</span>
+        <div className="container middle-flex-container">
+          {/* Mobile Only Hamburger */}
+          <button className="mobile-only-hamburger" onClick={() => setMobileMenuOpen(true)}>
+             <i className="fa-solid fa-bars"></i>
+          </button>
+
+          <Link to="/" className="branding-mockup">
+            <img src="/logo.png" alt="Fuji Card Shop" className="logo-mockup-round" />
+            <span className="name-mockup-bold">FUJI CARD SHOP</span>
           </Link>
 
-          <div className="search-composite">
-            <form className="search-form-mockup" onSubmit={handleSearch}>
-              <div className="all-dropdown-mockup" onClick={() => setMobileMenuOpen(true)}>
+          {/* Desktop Search Bar */}
+          <div className="desktop-search-container">
+            <form className="search-box-desktop" onSubmit={handleSearch}>
+              <div className="search-all-dropdown">
                 <span>All</span>
                 <i className="fa-solid fa-chevron-down"></i>
               </div>
@@ -96,41 +104,46 @@ const Header = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <button type="submit" className="search-trigger">
+              <button type="submit" className="search-icon-trigger">
                 <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </form>
           </div>
 
-          <div className="account-cart-section">
-            <Link to={isAuthenticated ? "/account" : "/login"} className="user-info-mockup">
-              <span className="user-name-text">{isAuthenticated ? (user?.name || 'ACCOUNT') : 'LOGIN'}</span>
-              <div className="user-icon-circle">
+          <div className="user-cart-mockup">
+            <Link to={isAuthenticated ? "/account" : "/login"} className="user-action-mockup">
+              <span className="user-label-desktop">{isAuthenticated ? (user?.name || 'ACCOUNT') : 'LOGIN'}</span>
+              <div className="user-circle-mockup">
                 <i className="fa-solid fa-user"></i>
               </div>
             </Link>
 
-            <div className="vertical-divider"></div>
+            <div className="divider-desktop"></div>
 
-            <Link to="/cart" className="cart-preview-mockup">
-              <span className="cart-total-text">CART / £{(cart.totalPrice || 0).toFixed(2)}</span>
-              <div className="cart-box-styled">
+            {/* Mobile Only Search Box Button */}
+            <button className="mobile-search-toggle" onClick={() => navigate('/products')}>
+               <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <Link to="/cart" className="cart-action-mockup">
+              <span className="cart-label-desktop">CART / £{(cart.totalPrice || 0).toFixed(2)}</span>
+              <div className="cart-blue-bag">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004aad" strokeWidth="2.5">
                   <rect x="3" y="8" width="18" height="13" rx="1.5"></rect>
                   <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
                 </svg>
-                <span className="cart-count-badge">{cart.itemCount}</span>
+                <span className="cart-digit">{cart.itemCount}</span>
               </div>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar - Red */}
+      {/* Nav Bar - Red */}
       <div className="header-bottom-red">
         <div className="container">
-          <nav className="centered-nav">
-            <ul className="nav-items-unified">
+          <nav className="centered-navigation">
+            <ul className="nav-links-mockup">
               <li><Link to="/">HOME <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
@@ -141,13 +154,13 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <>
           <div className="drawer-overlay" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="mobile-drawer-v2 open">
              <div className="mobile-drawer-header">
-                 <h3>CATEGORIES</h3>
+                 <h3>MENU</h3>
                  <button onClick={() => setMobileMenuOpen(false)}><i className="fa-solid fa-xmark"></i></button>
              </div>
              <ul className="mobile-drawer-links">
