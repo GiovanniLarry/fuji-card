@@ -51,6 +51,7 @@ const Header = () => {
     if (searchQuery.trim()) {
       navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
       setSearchQuery('');
+      setMobileMenuOpen(false); // CLOSE MENU AFTER SEARCH
     }
   };
 
