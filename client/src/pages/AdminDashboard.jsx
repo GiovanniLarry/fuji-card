@@ -721,7 +721,7 @@ const AdminDashboard = () => {
                                             ×
                                         </button>
                                         <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>📁</div>
-                                        <h3>{cat.name}</h3>
+                                        <h3 style={{ color: '#3b82f6', fontSize: '1.2rem', textTransform: 'uppercase' }}>{cat.name}</h3>
                                         <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginTop: '0.5rem' }}>
                                             {products.filter(p => (p.categories?.name || p.category_id || p.category_name) === cat.name || (p.categories?.id === cat.id)).length} Items
                                         </p>
