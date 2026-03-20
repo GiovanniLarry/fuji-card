@@ -368,15 +368,15 @@
     justify-content: center;
   }
 
-  /* CRITICAL: Increased padding for mobile visibility on smaller screens */
+  /* CRITICAL: Aggressive padding for mobile visibility */
   body {
-    padding-top: 220px;
+    padding-top: 250px;
   }
 }
 
-/* CRITICAL: Large padding for PC visibility */
+/* CRITICAL: Aggressive padding for PC visibility */
 body {
-    padding-top: 250px;
+    padding-top: 300px;
 }
 
 /* Drawer CSS */
