@@ -239,7 +239,7 @@
   text-transform: uppercase;
 }
 
-/* Mobile Overrides (Max-width 768px as per user preference) */
+/* Mobile Overrides (Max-width: 768px) */
 @media (max-width: 768px) {
   .top-bar-content {
     justify-content: space-between;
@@ -274,16 +274,17 @@
   .branding-mockup {
     position: static;
     transform: none;
-    gap: 6px;
+    gap: 0; /* Remove gap if name is hidden */
   }
 
   .logo-mockup-round {
-    width: 45px;
-    height: 45px;
+    width: 60px; /* Slightly larger to stand out alone */
+    height: 60px;
   }
 
+  /* CRITICAL: Hiding the name as requested per user */
   .name-mockup-bold {
-    font-size: 16px;
+    display: none;
   }
 
   /* Desktop elements hidden */
@@ -362,4 +363,22 @@ body {
   background: white;
   z-index: 2000;
   padding: 20px;
+}
+.mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+.mobile-drawer-links {
+  list-style: none;
+  padding: 20px 0;
+}
+.mobile-drawer-links li a {
+  display: block;
+  padding: 15px 0;
+  color: #333;
+  font-weight: 800;
+  text-decoration: none;
 }
