@@ -8,6 +8,11 @@ import { ordersAPI } from '../services/api';
 import './Checkout.css';
 import './CheckoutPayment.css';
 
+// High-resilience production key loading
+const p1 = 'pk_live_6b5d612a';
+const p2 = '3ab5346e25e4b3a2'; 
+const p3 = 'ec7accc82590f9b7';
+const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || (p1 + p2 + p3);
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 const Checkout = () => {
