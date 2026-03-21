@@ -23,6 +23,7 @@ const Products = () => {
     try {
       setLoading(true);
       const params = Object.fromEntries(searchParams.entries());
+      params._t = Date.now(); // Cache busting
       let combined = [];
 
       try {

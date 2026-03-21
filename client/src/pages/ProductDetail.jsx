@@ -31,7 +31,7 @@ const ProductDetail = () => {
       setImageError(false);
       
       try {
-        const response = await productsAPI.getOne(id);
+        const response = await productsAPI.getOne(id, { params: { _t: Date.now() } });
         console.log('Product API response:', response.data);
         setProduct(response.data.product);
         setRelated(response.data.related || []);
@@ -102,7 +102,7 @@ const ProductDetail = () => {
           <span>/</span>
           <Link to="/products">Products</Link>
           <span>/</span>
-          <Link to={`/products?category=${product.category}`}>{product.category}</Link>
+          <Link to={`/products?category=${product.category || product.categories?.name}`}>{product.category || product.categories?.name}</Link>
           <span>/</span>
           <span>{product.name}</span>
         </nav>
@@ -111,7 +111,7 @@ const ProductDetail = () => {
           <div className="product-image-section">
             <div className="main-image">
               <img 
-                src={imageError ? placeholderImage : product.image} 
+                src={imageError ? placeholderImage : (product.image || product.image_url)} 
                 alt={product.name}
                 onError={() => setImageError(true)}
               />
@@ -133,23 +133,23 @@ const ProductDetail = () => {
             <div className="product-attributes">
               <div className="attribute">
                 <span className="label">Set:</span>
-                <span className="value">{product.set}</span>
+                <span className="value">{product.set || product.set_name || 'N/A'}</span>
               </div>
               <div className="attribute">
                 <span className="label">Rarity:</span>
-                <span className="value">{product.rarity}</span>
+                <span className="value">{product.rarity || 'N/A'}</span>
               </div>
               <div className="attribute">
                 <span className="label">Condition:</span>
-                <span className="value">{product.condition}</span>
+                <span className="value">{product.condition || 'Mint'}</span>
               </div>
               <div className="attribute">
                 <span className="label">Language:</span>
-                <span className="value">{product.language}</span>
+                <span className="value">{product.language || 'English'}</span>
               </div>
               <div className="attribute">
                 <span className="label">Card Type:</span>
-                <span className="value">{product.cardType}</span>
+                <span className="value">{product.cardType || product.card_type || 'Character'}</span>
               </div>
             </div>
 

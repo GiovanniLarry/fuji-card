@@ -6,6 +6,8 @@ const router = express.Router();
 
 // Get all products with filtering
 router.get('/', async (req, res) => {
+  // Prevent Vercel/Browser caching of stale product data
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   try {
     const {
       category,
@@ -185,6 +187,7 @@ router.get('/', async (req, res) => {
 
 // Get single product
 router.get('/:id', async (req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   try {
     const { data: product, error } = await supabase
       .from('products')

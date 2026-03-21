@@ -41,7 +41,7 @@ export const authAPI = {
 // Products API
 export const productsAPI = {
   getAll: (params) => api.get('/products', { params }),
-  getOne: (id) => api.get(`/products/${id}`),
+  getOne: (id, config) => api.get(`/products/${id}`, config),
   getFilters: (category) => api.get('/products/filters/options', { params: { category } })
 };
 
