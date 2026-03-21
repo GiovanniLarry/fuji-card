@@ -84,9 +84,9 @@ router.get('/', async (req, res) => {
         )
       `, { count: 'estimated' });
 
-    // Filter by category
+    // Filter by category (case-insensitive)
     if (category) {
-      query = query.eq('categories.name', category);
+      query = query.ilike('categories.name', category);
     }
 
     // Search by name or description

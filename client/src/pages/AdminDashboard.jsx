@@ -309,12 +309,13 @@ const AdminDashboard = () => {
                 await axios.put(`${API_URL}/admin/products/${isEditing}`, editForm, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-            }
             setIsEditing(null);
-            fetchProducts(); // Refresh list
+            await fetchProducts(); // Refresh list
+            alert(`Card "${editForm.name}" ${isEditing === 'new' ? 'created' : 'updated'} successfully! Changes are now live on the database.`);
         } catch (error) {
             console.error('Failed to save product', error);
-            alert('Failed to save product. Check console logs.');
+            const errorMsg = error.response?.data?.error || error.message || 'Unknown error';
+            alert(`Failed to save product: ${errorMsg}`);
         }
     };
 
