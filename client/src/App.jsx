@@ -19,6 +19,7 @@ import PaymentMethodsPage from './pages/PaymentMethods';
 import Info from './pages/Info';
 import AdminAuth from './pages/AdminAuth';
 import AdminDashboard from './pages/AdminDashboard';
+import Contact from './pages/Contact';
 import './App.css';
 
 // Component to conditionally render header and footer
@@ -51,6 +52,7 @@ const AppContent = () => {
           <Route path="/account" element={<Account />} />
           <Route path="/order-confirmation/:id" element={<OrderConfirmation />} />
           <Route path="/payment-methods" element={<PaymentMethodsPage />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/info" element={<Info />} />
           <Route path="/secret-fuji-admin" element={<AdminAuth />} />
           <Route path="/secret-fuji-admin/dashboard" element={<AdminDashboard />} />
