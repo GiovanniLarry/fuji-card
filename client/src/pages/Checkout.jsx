@@ -299,13 +299,16 @@ const Checkout = () => {
           } else if (formData.paymentMethod === 'paystack') {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
+            
+            // Calculate correct amount in ZAR for Paystack
+            const amountZAR = convertPrice(total, 'ZAR');
 
             // Initialize Paystack Redirect
             try {
-              const res = await axios.post(`${import.meta.env.VITE_API_URL || '/api'}/orders/paystack/initialize`, {
+              const res = await axios.post(`${API_URL}/orders/paystack/initialize`, {
                 orderId: order.id,
                 email: user?.email || 'customer@fuji-card.com',
-                amount: total,
+                amount: amountZAR,
                 currency: 'ZAR'
               });
 
@@ -341,8 +344,12 @@ const Checkout = () => {
             const order = response.data.order;
             await refreshCart();
 
-            // Fetch PayFast payload
-            const payfastRes = await ordersAPI.generatePayfastPayload(order.id);
+            // Fetch PayFast payload (with ZAR conversion)
+            const amountZAR = convertPrice(total, 'ZAR');
+            const payfastRes = await ordersAPI.generatePayfastPayload({ 
+              orderId: order.id, 
+              amountZAR: amountZAR 
+            });
             const { url, payload } = payfastRes.data;
 
             // Create and submit PayFast form

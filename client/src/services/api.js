@@ -73,7 +73,7 @@ export const ordersAPI = {
   getAll: () => api.get('/orders'),
   getOne: (id) => api.get(`/orders/${id}`),
   checkout: (data) => api.post('/orders/checkout', data),
-  generatePayfastPayload: (orderId) => api.post('/orders/payfast/generate', { orderId }),
+  generatePayfastPayload: (data) => api.post('/orders/payfast/generate', data),
   restoreCart: (orderId) => api.post(`/orders/${orderId}/restore-cart`)
 };
 

@@ -14,7 +14,8 @@ const currencyMap = {
   NZD: { symbol: '$', label: 'NZ $ NZD', rate: 2.10 },
   PLN: { symbol: 'Zł', label: 'PL Zł PLN', rate: 5.10 },
   SGD: { symbol: '$', label: 'SG $ SGD', rate: 1.68 },
-  AED: { symbol: 'د.إ', label: 'AE AED', rate: 4.60 }
+  AED: { symbol: 'د.إ', label: 'AE AED', rate: 4.60 },
+  ZAR: { symbol: 'R', label: 'ZA R ZAR', rate: 24.50 }
 };
 
 export const CurrencyProvider = ({ children }) => {
@@ -22,15 +23,15 @@ export const CurrencyProvider = ({ children }) => {
   const [rates, setRates] = useState({
     GBP: 1, USD: 1.25, EUR: 1.15, JPY: 190, 
     AUD: 1.90, CAD: 1.70, NZD: 2.10, PLN: 5.10, 
-    SGD: 1.68, AED: 4.60
+    SGD: 1.68, AED: 4.60, ZAR: 24.50
   });
 
   useEffect(() => {
     localStorage.setItem('currency', currency);
   }, [currency]);
 
-  const convertPrice = (priceInGBP) => {
-    const rate = rates[currency] || 1;
+  const convertPrice = (priceInGBP, toCurrency = currency) => {
+    const rate = rates[toCurrency] || 1;
     const converted = priceInGBP * rate;
     return converted.toFixed(2);
   };

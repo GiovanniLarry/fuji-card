@@ -327,14 +327,18 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 
 // Initialize Paystack payment (Standard Redirect)
 router.post('/paystack/initialize', async (req, res) => {
-  const { orderId, email, amount, currency = 'ZAR' } = req.body;
+  // --- GET CUSTOM KEYS FROM SETTINGS ---
+  const paystackSettings = await getSetting('paystack', {});
+  
   const s1 = 'sk_live_4c3c5ec6';
   const s2 = '07229e22e272b78f';
   const s3 = '8163c9911301905d';
-  const SECRET_KEY = process.env.PAYSTACK_SECRET_KEY || (s1 + s2 + s3);
+  
+  const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY || (s1 + s2 + s3);
+  
   if (!SECRET_KEY) {
-    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment variables!');
-    return res.status(500).json({ success: false, message: 'Payment gateway configuration error. Please contact merchant support.' });
+    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing!');
+    return res.status(500).json({ success: false, message: 'Payment gateway configuration error.' });
   }
 
   try {
@@ -366,7 +370,7 @@ router.post('/paystack/initialize', async (req, res) => {
 // Generate PayFast payload
 router.post('/payfast/generate', optionalAuth, async (req, res) => {
   try {
-    const { orderId } = req.body;
+    const { orderId, amountZAR: providedZAR } = req.body;
 
     // --- FALLBACK IF SUPABASE IS NOT CONFIGURED ---
     let order = null;
@@ -456,7 +460,11 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
 
     // --- Transaction info ---
     payloadData.m_payment_id = String(order.id);
-    payloadData.amount = parseFloat(order.total).toFixed(2);
+    
+    // Priority: 1. Provided ZAR from frontend, 2. Order total * static ZAR rate
+    const finalZAR = providedZAR || (parseFloat(order.total) * 24.5).toFixed(2);
+    payloadData.amount = parseFloat(finalZAR).toFixed(2);
+    
     payloadData.item_name = `Order ${order.order_number}`;
 
     // --- Generate signature AFTER all fields are set ---
@@ -486,10 +494,11 @@ router.post('/payfast/notify', async (req, res) => {
     const PASSPHRASE = payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || 'Desormais190';
 
     // 3. Verify signature
+    const receivedSignature = pfData.signature;
     const calculatedSignature = generatePayfastSignature(pfData, PASSPHRASE);
 
     if (calculatedSignature !== receivedSignature) {
-      console.error('PayFast ITN signature mismatch');
+      console.error('PayFast ITN signature mismatch. Received:', receivedSignature, 'Calculated:', calculatedSignature);
       return res.status(400).send('Signature mismatch');
     }
 
