@@ -450,13 +450,12 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     const pass1 = 'Desor';
     const pass2 = 'mais190';
     
-    const MERCHANT_ID = payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID || (m1 + m2);
-    const MERCHANT_KEY = payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY || (k1 + k2);
+    const MERCHANT_ID = (payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID || (m1 + m2)).toString().trim();
+    const MERCHANT_KEY = (payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY || (k1 + k2)).toString().trim();
     
-    // CRITICAL: DO NOT use a hardcoded passphrase if the merchant hasn't provided one.
-    // Sandbox uses no passphrase by default. Live uses whatever the user set.
-    const PASSPHRASE = payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || null;
-    const PAYFAST_URL = payfastConfig.url || process.env.PAYFAST_URL || 'https://payfast.co.za/eng/process';
+    // CRITICAL: Trimming the passphrase prevents signature mismatches from copy-paste whitespace
+    const PASSPHRASE = (payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || null)?.toString().trim();
+    const PAYFAST_URL = (payfastConfig.url || process.env.PAYFAST_URL || 'https://www.payfast.co.za/eng/process').toString().trim();
 
     // Build payload WITHOUT signature first (so signature excludes itself)
     const payloadData = {};
