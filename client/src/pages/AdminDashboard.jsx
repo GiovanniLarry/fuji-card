@@ -16,6 +16,7 @@ const AdminDashboard = () => {
     const [products, setProducts] = useState([]);
     const [isEditing, setIsEditing] = useState(null);
     const [editForm, setEditForm] = useState({});
+    const [isSaving, setIsSaving] = useState(false);
 
     // Users State
     const [usersList, setUsersList] = useState([]);
@@ -114,8 +115,8 @@ const AdminDashboard = () => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            // For admin we fetch all. Let's assume pagination limit 100 or infinite here for simplicity.
-            const { data } = await axios.get(`${API_URL}/products?limit=100`);
+            // Add cache busting to admin product list
+            const { data } = await axios.get(`${API_URL}/products?limit=150&_t=${Date.now()}`);
             setProducts(data.products || data);
         } catch (err) {
             console.error("Failed to fetch products", err);
@@ -297,16 +298,32 @@ const AdminDashboard = () => {
         reader.readAsDataURL(file);
     };
 
+    const isUUID = (str) => {
+        const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        return regex.test(str);
+    };
+
     const handleSaveProduct = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('adminToken');
         try {
+            setIsSaving(true);
             if (isEditing === 'new') {
                 await axios.post(`${API_URL}/admin/products`, editForm, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
             } else {
-                await axios.put(`${API_URL}/admin/products/${isEditing}`, editForm, {
+                // Determine if we update (UUID) or convert to DB (Non-UUID)
+                const url = isUUID(isEditing)
+                    ? `${API_URL}/admin/products/${isEditing}`
+                    : `${API_URL}/admin/products`;
+
+                const method = isUUID(isEditing) ? 'put' : 'post';
+
+                await axios({
+                    method,
+                    url,
+                    data: editForm,
                     headers: { Authorization: `Bearer ${token}` }
                 });
             }
@@ -317,6 +334,8 @@ const AdminDashboard = () => {
             console.error('Failed to save product', error);
             const errorMsg = error.response?.data?.error || error.message || 'Unknown error';
             alert(`Failed to save product: ${errorMsg}`);
+        } finally {
+            setIsSaving(false);
         }
     };
 
@@ -378,11 +397,11 @@ const AdminDashboard = () => {
     const handleRestockAllLowStock = async () => {
         const amount = parseInt(bulkAllLowStock, 10);
         if (!amount || amount <= 0) return alert('Enter a valid quantity to add.');
-        
+
         const lowStockIds = products
             .filter(p => Number(p.stock) < 10)
             .map(p => p.id);
-            
+
         if (lowStockIds.length === 0) return alert('No low stock products found.');
 
         const token = localStorage.getItem('adminToken');
@@ -497,7 +516,22 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="admin-dashboard-container">
+        <div className="admin-dashboard">
+            <style>{`
+                .spinner-mini {
+                    width: 16px;
+                    height: 16px;
+                    border: 2px solid rgba(255,255,255,0.3);
+                    border-top: 2px solid white;
+                    border-radius: 50%;
+                    animation: spin 0.8s linear infinite;
+                }
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `}</style>
+            {/* Sidebar Toggle for Mobile */}
             <nav className="admin-sidebar glass-panel">
                 <div className="admin-logo">
                     <h2>Fuji Admin</h2>
@@ -685,8 +719,8 @@ const AdminDashboard = () => {
                             <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '1rem' }}>
                                 Sync your local flagship inventory (100+ items) to the Supabase cloud ledger to enable live database management.
                             </p>
-                            <button 
-                                className="admin-btn-primary" 
+                            <button
+                                className="admin-btn-primary"
                                 style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)' }}
                                 onClick={async () => {
                                     if (!window.confirm("Initialize mass synchronization to Supabase? This will populate your cloud database with all local flagship items.")) return;
@@ -730,21 +764,21 @@ const AdminDashboard = () => {
                                     </button>
                                 )}
                             </div>
-                            
+
                             {!isEditing && (
                                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                     <div className="admin-search-wrapper" style={{ position: 'relative' }}>
-                                        <input 
-                                            type="text" 
-                                            placeholder="Global Card Search..." 
+                                        <input
+                                            type="text"
+                                            placeholder="Global Card Search..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            style={{ 
-                                                padding: '0.6rem 1rem', 
+                                            style={{
+                                                padding: '0.6rem 1rem',
                                                 paddingLeft: '2.5rem',
-                                                borderRadius: '12px', 
-                                                border: '1px solid rgba(255,255,255,0.1)', 
-                                                background: 'rgba(255,255,255,0.05)', 
+                                                borderRadius: '12px',
+                                                border: '1px solid rgba(255,255,255,0.1)',
+                                                background: 'rgba(255,255,255,0.05)',
                                                 color: '#fff',
                                                 width: '300px',
                                                 outline: 'none',
@@ -756,7 +790,7 @@ const AdminDashboard = () => {
                                         />
                                         <span style={{ position: 'absolute', left: '0.8rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔍</span>
                                         {searchTerm && (
-                                            <button 
+                                            <button
                                                 onClick={() => setSearchTerm('')}
                                                 style={{ position: 'absolute', right: '0.8rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '1.2rem' }}
                                             >
@@ -891,7 +925,18 @@ const AdminDashboard = () => {
                                         </div>
 
                                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                            <button type="submit" className="admin-btn-primary" style={{ flex: 1 }}>Commit Changes</button>
+                                            <button
+                                                type="submit"
+                                                className="admin-btn-primary"
+                                                disabled={isSaving}
+                                                style={{ width: '100%', marginTop: 'auto', background: isSaving ? '#64748b' : 'linear-gradient(135deg, #3b82f6, #2563eb)' }}
+                                            >
+                                                {isSaving ? (
+                                                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                                        <div className="spinner-mini"></div> Commit In Progress...
+                                                    </span>
+                                                ) : 'Commit Changes'}
+                                            </button>
                                             <button type="button" className="admin-btn-secondary" style={{ flex: 1, marginTop: '1rem' }} onClick={() => setIsEditing(null)}>Abort</button>
                                         </div>
                                     </form>
@@ -999,41 +1044,41 @@ const AdminDashboard = () => {
                                             })
                                             .filter(p => p?.name?.toLowerCase()?.includes(searchTerm.toLowerCase()))
                                             .map(p => (
-                                            <tr key={p.id}>
-                                                {selectedCategory === 'SOLD_OUT' && (
-                                                    <td style={{ textAlign: 'center' }}>
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={selectedProducts.has(p.id)}
-                                                            onChange={(e) => {
-                                                                const newSet = new Set(selectedProducts);
-                                                                if (e.target.checked) newSet.add(p.id);
-                                                                else newSet.delete(p.id);
-                                                                setSelectedProducts(newSet);
-                                                            }}
-                                                        />
+                                                <tr key={p.id}>
+                                                    {selectedCategory === 'SOLD_OUT' && (
+                                                        <td style={{ textAlign: 'center' }}>
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedProducts.has(p.id)}
+                                                                onChange={(e) => {
+                                                                    const newSet = new Set(selectedProducts);
+                                                                    if (e.target.checked) newSet.add(p.id);
+                                                                    else newSet.delete(p.id);
+                                                                    setSelectedProducts(newSet);
+                                                                }}
+                                                            />
+                                                        </td>
+                                                    )}
+                                                    <td>{p.name}</td>
+                                                    <td>{p.categories?.name || p.category_id}</td>
+                                                    <td>£{Number(p.price).toFixed(2)}</td>
+                                                    <td style={{ color: Number(p.stock) === 0 ? '#ef4444' : 'inherit', fontWeight: Number(p.stock) === 0 ? 'bold' : 'normal' }}>{p.stock}</td>
+                                                    <td className="admin-table-actions">
+                                                        <button onClick={() => handleEditClick(p)}>Edit</button>
+                                                        <button className="danger" onClick={() => handleDeleteProduct(p.id)}>Delete</button>
                                                     </td>
-                                                )}
-                                                <td>{p.name}</td>
-                                                <td>{p.categories?.name || p.category_id}</td>
-                                                <td>£{Number(p.price).toFixed(2)}</td>
-                                                <td style={{ color: Number(p.stock) === 0 ? '#ef4444' : 'inherit', fontWeight: Number(p.stock) === 0 ? 'bold' : 'normal' }}>{p.stock}</td>
-                                                <td className="admin-table-actions">
-                                                    <button onClick={() => handleEditClick(p)}>Edit</button>
-                                                    <button className="danger" onClick={() => handleDeleteProduct(p.id)}>Delete</button>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                                </tr>
+                                            ))}
                                         {products
                                             .filter(p => {
                                                 if (searchTerm && !selectedCategory) return true;
                                                 return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
                                             .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).length === 0 && (
-                                            <tr>
-                                                <td colSpan={selectedCategory === 'SOLD_OUT' ? 6 : 5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No items found in this section.</td>
-                                            </tr>
-                                        )}
+                                                <tr>
+                                                    <td colSpan={selectedCategory === 'SOLD_OUT' ? 6 : 5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No items found in this section.</td>
+                                                </tr>
+                                            )}
                                     </tbody>
                                 </table>
                             </div>
