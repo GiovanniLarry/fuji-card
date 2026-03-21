@@ -269,11 +269,29 @@ router.post('/admin-login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    // 1. Check Database for Custom Credentials
+    const { data: dbCreds } = await supabase
+      .from('settings')
+      .select('value')
+      .eq('key', 'admin_credentials')
+      .single();
+
+    if (dbCreds && dbCreds.value) {
+      const { username: dbUser, passwordHash } = dbCreds.value;
+      if (username === dbUser) {
+        const isValid = await bcrypt.compare(password, passwordHash);
+        if (isValid) {
+          const token = jwt.sign({ id: 'fuji-admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
+          return res.json({ message: 'Admin authenticated', token });
+        }
+      }
+    }
+
+    // 2. Fallback to ENV (Default/Initial)
     const adminUser = process.env.ADMIN_USERNAME || 'fujiadmin';
     const adminPass = process.env.ADMIN_PASSWORD || 'fujisecret';
 
     if (username === adminUser && password === adminPass) {
-      // Issue a specific token for admin
       const token = jwt.sign({ id: 'fuji-admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
       return res.json({ message: 'Admin authenticated', token });
     }
@@ -282,6 +300,48 @@ router.post('/admin-login', async (req, res) => {
   } catch (error) {
     console.error('Admin login error:', error);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Admin Change Password
+router.post('/admin-change-password', async (req, res) => {
+  try {
+    const { username, oldPassword, newPassword } = req.body;
+
+    // 1. Verify current credentials (ENV or DB)
+    let authenticated = false;
+    
+    // Check DB first
+    const { data: dbCreds } = await supabase.from('settings').select('value').eq('key', 'admin_credentials').single();
+    if (dbCreds && dbCreds.value) {
+      if (username === dbCreds.value.username) {
+        authenticated = await bcrypt.compare(oldPassword, dbCreds.value.passwordHash);
+      }
+    } else {
+      // Fallback to ENV for initial change
+      const adminUser = process.env.ADMIN_USERNAME || 'fujiadmin';
+      const adminPass = process.env.ADMIN_PASSWORD || 'fujisecret';
+      authenticated = (username === adminUser && oldPassword === adminPass);
+    }
+
+    if (!authenticated) {
+      return res.status(401).json({ error: 'Authentication failed: current credentials incorrect.' });
+    }
+
+    // 2. Hash and save new credentials
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    const { error: upsertError } = await supabase.from('settings').upsert({
+      key: 'admin_credentials',
+      value: { username, passwordHash },
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'key' });
+
+    if (upsertError) throw upsertError;
+
+    res.json({ message: 'Administrative passcode updated successfully.' });
+  } catch (error) {
+    console.error('Admin change password error:', error);
+    res.status(500).json({ error: 'Critical system error during credential rotation.' });
   }
 });
 
