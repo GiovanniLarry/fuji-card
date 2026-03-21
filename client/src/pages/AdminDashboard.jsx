@@ -516,7 +516,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="admin-dashboard">
+        <div className="admin-dashboard-container">
             <style>{`
                 .spinner-mini {
                     width: 16px;
