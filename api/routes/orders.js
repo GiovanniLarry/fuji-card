@@ -71,9 +71,9 @@ const generatePayfastSignature = (data, passPhrase = null) => {
 
   let pfParamString = parts.join('&');
 
-  // Step 4: Append passphrase if set
+  // Step 4: Append passphrase if set (RAW value, NOT urlencoded)
   if (passPhrase && passPhrase.trim() !== '') {
-    pfParamString += `&passphrase=${phpUrlEncode(passPhrase.trim())}`;
+    pfParamString += `&passphrase=${passPhrase.trim()}`;
   }
 
   // Debug: console.log('[PayFast] Signature String Base:', pfParamString);
@@ -348,11 +348,8 @@ router.post('/paystack/initialize', async (req, res) => {
   const s2 = '07229e22e272b78f';
   const s3 = '8163c9911301905d';
   
-  const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY || (s1 + s2 + s3);
-  
-  // Use Merchant's preferred currency, defaulting to USD for international accounts
-  // If providedCurrency is explicitly sent, we try to use it
-  const targetCurrency = paystackSettings.currency || providedCurrency || 'USD';
+  const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY;
+  const targetCurrency = paystackSettings.currency || providedCurrency || 'ZAR';
 
   if (!SECRET_KEY) {
     console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing!');
