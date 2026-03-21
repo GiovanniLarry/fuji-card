@@ -44,7 +44,10 @@ const Products = () => {
         let filtered = combined;
         
         if (category) {
-          filtered = filtered.filter(p => p.category.toLowerCase() === category.toLowerCase());
+          filtered = filtered.filter(p => {
+            const pCat = (p.categories?.name || p.category?.name || p.category || 'other').toLowerCase();
+            return pCat === category.toLowerCase();
+          });
         }
         
         if (search) {
