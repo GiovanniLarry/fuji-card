@@ -35,8 +35,23 @@ const router = express.Router();
  * urlencode in PHP converts spaces to + and encodes special chars.
  * We replicate that with encodeURIComponent(...).replace(/%20/g, '+').
  */
+/**
+ * Generate PayFast MD5 signature.
+ * Mimics PHP urlencode perfectly by encoding special chars like !, ', (, ), *
+ */
+const phpUrlEncode = (str) => {
+  return encodeURIComponent(str)
+    .replace(/!/g, '%21')
+    .replace(/'/g, '%27')
+    .replace(/\(/g, '%28')
+    .replace(/\)/g, '%29')
+    .replace(/\*/g, '%2A')
+    .replace(/%20/g, '+')
+    .replace(/~/g, '%7E');
+};
+
 const generatePayfastSignature = (data, passPhrase = null) => {
-  // Step 1: Remove empty/null/undefined values AND the signature field itself
+  // Step 1: Remove empty/null/undefined values AND the signature field
   const filtered = {};
   for (const key of Object.keys(data)) {
     if (key === 'signature') continue;
@@ -49,19 +64,19 @@ const generatePayfastSignature = (data, passPhrase = null) => {
   // Step 2: Sort keys alphabetically
   const sortedKeys = Object.keys(filtered).sort();
 
-  // Step 3: Build query string exactly like PHP urlencode() does
+  // Step 3: Build query string with PHP-style encoding
   const parts = sortedKeys.map(key => {
-    const encoded = encodeURIComponent(filtered[key]).replace(/%20/g, '+');
-    return `${key}=${encoded}`;
+    return `${key}=${phpUrlEncode(filtered[key])}`;
   });
 
   let pfParamString = parts.join('&');
 
   // Step 4: Append passphrase if set
   if (passPhrase && passPhrase.trim() !== '') {
-    // PayFast signature string expects the passphrase suffix after the base string
-    pfParamString += `&passphrase=${encodeURIComponent(passPhrase.trim()).replace(/%20/g, '+')}`;
+    pfParamString += `&passphrase=${phpUrlEncode(passPhrase.trim())}`;
   }
+
+  // Debug: console.log('[PayFast] Signature String Base:', pfParamString);
 
   // Step 5: MD5 hash
   return crypto.createHash('md5').update(pfParamString).digest('hex');
