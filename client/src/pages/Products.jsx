@@ -38,7 +38,7 @@ const Products = () => {
       
       // Combine and De-duplicate by ID or Name
       localItems.forEach(localItem => {
-        if (!combined.find(p => p.id === localItem.id || p.name === localItem.name)) {
+        if (!combined.find(p => p.id === localItem.id || (p.name && localItem.name && p.name.toLowerCase() === localItem.name.toLowerCase()))) {
           combined.push(localItem);
         }
       });

@@ -286,10 +286,13 @@ router.put('/products/:id', async (req, res) => {
         if (updateData.featured !== undefined) updateData.featured = updateData.featured === 'true' || updateData.featured === true;
         if (updateData.promo !== undefined) updateData.promo = updateData.promo === 'true' || updateData.promo === true;
 
-        console.log(`[Admin] Updating product ${req.params.id} with data:`, updateData);
-
+        console.log(`[Admin] UPSERTING product ${req.params.id} with data:`, updateData);
+        
         if (supabase) {
-            const { data, error } = await supabase.from('products').update(updateData).eq('id', req.params.id).select();
+            const { data, error } = await supabase.from('products').upsert({
+                ...updateData,
+                id: req.params.id
+            }).select();
             if (error) throw error;
             
             if (!data || data.length === 0) {
