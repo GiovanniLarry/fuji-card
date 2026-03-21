@@ -130,7 +130,7 @@ const Checkout = () => {
   ];
 
   const sendWhatsAppOrder = () => {
-    const whatsappNumber = '819076098954';
+    const whatsappNumber = '8180023903373'; // Updated prioritized contact number
 
     // Create highly professional and fully detailed order message
     let message = `Greetings!\n`;
@@ -230,7 +230,7 @@ const Checkout = () => {
 
   // Notify admin via WhatsApp after a crypto payment is initiated
   const sendCryptoWhatsApp = (orderId, coin, address) => {
-    const waNumber = '819076098954';
+    const waNumber = '8180023903373';
     let message = `Hi! I just made a *Crypto Payment* on Fuji Card Market.\n\n`;
     message += `🪙 *Coin:* ${coin}\n`;
     message += `📬 *Sent to:* ${address}\n`;
