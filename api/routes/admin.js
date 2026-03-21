@@ -12,6 +12,46 @@ import { localProductStore } from '../data/flagship_products.js';
 
 const router = express.Router();
 
+// --- IMAGE PROCESSING HELPERS ---
+const uploadBase64Image = async (base64Str, productName) => {
+    if (!base64Str || !base64Str.startsWith('data:')) return base64Str; // Not a base64 or already a URL
+
+    try {
+        const matches = base64Str.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
+        if (!matches || matches.length !== 3) return base64Str;
+
+        const extension = matches[1];
+        const base64Data = matches[2];
+        const buffer = Buffer.from(base64Data, 'base64');
+        const fileName = `products/${productName.replace(/[^A-Za-z0-9]/g, '_')}_${Date.now()}.${extension}`;
+
+        // Attempt upload. Bucket name 'product-images' or 'products'
+        const { data, error } = await supabase.storage
+            .from('products')
+            .upload(fileName, buffer, {
+                contentType: `image/${extension}`,
+                upsert: true
+            });
+
+        if (error) {
+            console.error('[Admin] Supabase Storage upload error:', error);
+            // Fallback to original string (usually it works but is slow)
+            return base64Str;
+        }
+
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+            .from('products')
+            .getPublicUrl(fileName);
+
+        console.log(`[Admin] Image successfully uploaded to Supabase Storage: ${publicUrl}`);
+        return publicUrl;
+    } catch (err) {
+        console.error('[Admin] Image processing failed:', err);
+        return base64Str;
+    }
+};
+
 // --- SETTINGS MIGRATION (SUPABASE) ---
 const getSetting = async (key, defaultValue) => {
     try {
@@ -203,8 +243,9 @@ router.post('/products', async (req, res) => {
             delete newProduct.category_name;
         }
 
-        if (!supabase) {
-            return res.status(501).json({ error: 'Database disconnected. Cannot create new products locally.' });
+        // Handle base64 image upload to storage
+        if (newProduct.image_url && newProduct.image_url.startsWith('data:')) {
+            newProduct.image_url = await uploadBase64Image(newProduct.image_url, newProduct.name);
         }
 
         const { data, error } = await supabase.from('products').insert([newProduct]).select().single();
@@ -305,8 +346,11 @@ router.put('/products/:id', async (req, res) => {
         if (updateData.featured !== undefined) updateData.featured = updateData.featured === 'true' || updateData.featured === true;
         if (updateData.promo !== undefined) updateData.promo = updateData.promo === 'true' || updateData.promo === true;
 
-        console.log(`[Admin] UPSERTING product ${req.params.id} with data:`, updateData);
-        
+        // Handle base64 image update
+        if (updateData.image_url && updateData.image_url.startsWith('data:')) {
+            updateData.image_url = await uploadBase64Image(updateData.image_url, updateData.name || 'Edited Product');
+        }
+
         if (supabase) {
             const { data, error } = await supabase.from('products').upsert({
                 ...updateData,
