@@ -53,6 +53,9 @@ const AdminDashboard = () => {
     const [lowStockAmounts, setLowStockAmounts] = useState({});
     const [bulkAllLowStock, setBulkAllLowStock] = useState('');
 
+    // Search filtering state
+    const [searchTerm, setSearchTerm] = useState('');
+
     // File Input Ref for click-to-upload
     const fileInputRef = useRef(null);
 
@@ -724,12 +727,48 @@ const AdminDashboard = () => {
                                     </button>
                                 )}
                             </div>
-                            {!isEditing && selectedCategory && (
-                                <button className="admin-btn-primary" onClick={() => handleEditClick({})}>+ Add {selectedCategory} Card</button>
+                            
+                            {!isEditing && (
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                    <div className="admin-search-wrapper" style={{ position: 'relative' }}>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Global Card Search..." 
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            style={{ 
+                                                padding: '0.6rem 1rem', 
+                                                paddingLeft: '2.5rem',
+                                                borderRadius: '12px', 
+                                                border: '1px solid rgba(255,255,255,0.1)', 
+                                                background: 'rgba(255,255,255,0.05)', 
+                                                color: '#fff',
+                                                width: '300px',
+                                                outline: 'none',
+                                                transition: 'all 0.2s',
+                                                boxShadow: searchTerm ? '0 0 15px rgba(59, 130, 246, 0.2)' : 'none'
+                                            }}
+                                            onFocus={(e) => e.target.style.border = '1px solid #3b82f6'}
+                                            onBlur={(e) => e.target.style.border = '1px solid rgba(255,255,255,0.1)'}
+                                        />
+                                        <span style={{ position: 'absolute', left: '0.8rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔍</span>
+                                        {searchTerm && (
+                                            <button 
+                                                onClick={() => setSearchTerm('')}
+                                                style={{ position: 'absolute', right: '0.8rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '1.2rem' }}
+                                            >
+                                                ×
+                                            </button>
+                                        )}
+                                    </div>
+                                    {selectedCategory && (
+                                        <button className="admin-btn-primary" onClick={() => handleEditClick({})}>+ Add {selectedCategory} Card</button>
+                                    )}
+                                </div>
                             )}
                         </header>
 
-                        {!isEditing && !selectedCategory && (
+                        {!isEditing && !selectedCategory && !searchTerm && (
                             <div className="admin-category-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
                                 {categories.map(cat => (
                                     <div key={cat.id} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'transform 0.2s', position: 'relative' }}
@@ -899,8 +938,10 @@ const AdminDashboard = () => {
                                     )}
                                 </div>
                             </div>
-                        ) : !isEditing && selectedCategory ? (
+                        ) : !isEditing && (selectedCategory || searchTerm) ? (
                             <div className="admin-table-container glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+                                {searchTerm && !selectedCategory && <h3 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#60a5fa' }}>Global Search Results</h3>}
+
                                 {selectedCategory === 'SOLD_OUT' && (
                                     <div style={{ display: 'flex', gap: '1rem', padding: '1rem', background: 'rgba(0,0,0,0.2)', alignItems: 'center', borderRadius: '8px 8px 0 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                                         <h4 style={{ margin: 0, color: '#e2e8f0' }}>Bulk Stock Update</h4>
@@ -947,7 +988,13 @@ const AdminDashboard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {products.filter(p => selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory).map(p => (
+                                        {products
+                                            .filter(p => {
+                                                if (searchTerm && !selectedCategory) return true; // Show all for global search
+                                                return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
+                                            })
+                                            .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                                            .map(p => (
                                             <tr key={p.id}>
                                                 {selectedCategory === 'SOLD_OUT' && (
                                                     <td style={{ textAlign: 'center' }}>
@@ -973,7 +1020,12 @@ const AdminDashboard = () => {
                                                 </td>
                                             </tr>
                                         ))}
-                                        {products.filter(p => selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory).length === 0 && (
+                                        {products
+                                            .filter(p => {
+                                                if (searchTerm && !selectedCategory) return true;
+                                                return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
+                                            })
+                                            .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).length === 0 && (
                                             <tr>
                                                 <td colSpan={selectedCategory === 'SOLD_OUT' ? 6 : 5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No items found in this section.</td>
                                             </tr>
