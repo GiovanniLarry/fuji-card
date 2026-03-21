@@ -127,9 +127,10 @@ const AdminDashboard = () => {
     const fetchCategories = async () => {
         try {
             const { data } = await axios.get(`${API_URL}/categories`);
-            setCategories(data.categories || []);
+            setCategories(Array.isArray(data?.categories) ? data.categories : []);
         } catch (err) {
             console.error("Failed to fetch categories", err);
+            setCategories([]);
         }
     };
 
@@ -140,7 +141,7 @@ const AdminDashboard = () => {
             const { data } = await axios.get(`${API_URL}/admin/users`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setUsersList(data || []);
+            setUsersList(Array.isArray(data) ? data : []);
         } catch (err) {
             console.error("Failed to fetch users", err);
         } finally {
@@ -770,14 +771,14 @@ const AdminDashboard = () => {
 
                         {!isEditing && !selectedCategory && !searchTerm && (
                             <div className="admin-category-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
-                                {categories.map(cat => (
-                                    <div key={cat.id} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'transform 0.2s', position: 'relative' }}
-                                        onClick={() => setSelectedCategory(cat.name)}
+                                {Array.isArray(categories) && categories.map(cat => (
+                                    <div key={cat?.id || Math.random()} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'transform 0.2s', position: 'relative' }}
+                                        onClick={() => setSelectedCategory(cat?.name || cat?.id)}
                                         onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
                                         onMouseOut={e => e.currentTarget.style.transform = 'none'}
                                     >
                                         <button
-                                            onClick={(e) => handleDeleteCategory(e, cat.id)}
+                                            onClick={(e) => handleDeleteCategory(e, cat?.id)}
                                             style={{ position: 'absolute', top: '10px', right: '10px', background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1.2rem' }}
                                             title="Delete Category"
                                         >
@@ -988,12 +989,13 @@ const AdminDashboard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {products
+                                        {Array.isArray(products) && products
                                             .filter(p => {
+                                                if (!p) return false;
                                                 if (searchTerm && !selectedCategory) return true; // Show all for global search
                                                 return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
-                                            .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                                            .filter(p => p?.name?.toLowerCase()?.includes(searchTerm.toLowerCase()))
                                             .map(p => (
                                             <tr key={p.id}>
                                                 {selectedCategory === 'SOLD_OUT' && (

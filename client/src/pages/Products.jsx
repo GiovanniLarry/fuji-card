@@ -113,6 +113,16 @@ const Products = () => {
     setSearchParams(newParams);
   };
 
+  const handlePriceRangeChange = (range) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (range.min > 0) newParams.set('minPrice', range.min.toString());
+    else newParams.delete('minPrice');
+    if (range.max < 2000) newParams.set('maxPrice', range.max.toString());
+    else newParams.delete('maxPrice');
+    newParams.set('page', '1');
+    setSearchParams(newParams);
+  };
+
   const clearFilters = () => {
     setSearchParams({});
   };
