@@ -188,8 +188,18 @@ router.post('/products', async (req, res) => {
 
         // Ensure you use the right category_id - for now assume client sends it or map name -> id
         if (newProduct.category_name) {
-            const { data: catData } = await supabase.from('categories').select('id').eq('name', newProduct.category_name).single();
-            if (catData) newProduct.category_id = catData.id;
+            const { data: catData } = await supabase
+                .from('categories')
+                .select('id')
+                .ilike('name', newProduct.category_name.trim())
+                .single();
+                
+            if (catData) {
+                console.log(`[Admin] Map category '${newProduct.category_name}' to ID: ${catData.id}`);
+                newProduct.category_id = catData.id;
+            } else {
+                console.warn(`[Admin] Category '${newProduct.category_name}' NOT FOUND in DB! Product might not appear.`);
+            }
             delete newProduct.category_name;
         }
 
@@ -271,8 +281,17 @@ router.put('/products/:id', async (req, res) => {
         const updateData = req.body;
 
         if (updateData.category_name) {
-            const { data: catData } = await supabase.from('categories').select('id').eq('name', updateData.category_name).single();
-            if (catData) updateData.category_id = catData.id;
+            const { data: catData } = await supabase
+                .from('categories')
+                .select('id')
+                .ilike('name', updateData.category_name.trim())
+                .single();
+            if (catData) {
+                console.log(`[Admin] Map category '${updateData.category_name}' to ID: ${catData.id}`);
+                updateData.category_id = catData.id;
+            } else {
+                console.warn(`[Admin] Category '${updateData.category_name}' NOT FOUND in DB! Product might not appear.`);
+            }
             delete updateData.category_name;
         }
 
