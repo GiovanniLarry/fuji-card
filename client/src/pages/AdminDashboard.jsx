@@ -170,7 +170,7 @@ const AdminDashboard = () => {
             const { data } = await axios.get(`${API_URL}/admin/paystack-config`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setPaystackConfig(data || { publicKey: '', secretKey: '' });
+            setPaystackConfig(data || { publicKey: '', secretKey: '', currency: 'USD' });
         } catch (err) {
             console.error("Failed to fetch Paystack config", err);
         } finally {
@@ -1184,9 +1184,9 @@ const AdminDashboard = () => {
                         {/* ── Paystack Config ─────────────────────────────── */}
                         <div className="glass-panel" style={{ marginTop: '2rem', padding: '1.5rem', borderRadius: '14px' }}>
                             <h2 style={{ margin: '0 0 1.25rem', color: '#00bbff', fontSize: '1.15rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Paystack_Logo.png" alt="Paystack" style={{ height: '20px' }} /> Paystack Gateway (ZAR)
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Paystack_Logo.png" alt="Paystack" style={{ height: '20px' }} /> Paystack Gateway ({paystackConfig.currency || 'USD'})
                             </h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
                                 <div>
                                     <label style={{ color: '#94a3b8', fontSize: '0.85rem', display: 'block', marginBottom: '0.5rem' }}>Public Key (Live)</label>
                                     <input
@@ -1204,6 +1204,19 @@ const AdminDashboard = () => {
                                         onChange={e => setPaystackConfig(prev => ({ ...prev, secretKey: e.target.value }))}
                                         style={{ width: '100%', padding: '0.75rem', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', fontFamily: 'monospace' }}
                                     />
+                                </div>
+                                <div>
+                                    <label style={{ color: '#94a3b8', fontSize: '0.85rem', display: 'block', marginBottom: '0.5rem' }}>Paystack Currency</label>
+                                    <select
+                                        value={paystackConfig.currency || 'USD'}
+                                        onChange={e => setPaystackConfig(prev => ({ ...prev, currency: e.target.value }))}
+                                        style={{ width: '100%', padding: '0.75rem', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', fontSize: '0.9rem' }}
+                                    >
+                                        <option value="USD">USD - International</option>
+                                        <option value="ZAR">ZAR - South Africa</option>
+                                        <option value="NGN">NGN - Nigeria</option>
+                                        <option value="GHS">GHS - Ghana</option>
+                                    </select>
                                 </div>
                             </div>
                             <button

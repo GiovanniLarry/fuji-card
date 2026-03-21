@@ -59,8 +59,8 @@ const uploadQR = multer({ storage: qrStorage, limits: { fileSize: 5 * 1024 * 102
 
 // Publicly available Paystack Key (needed for checkout)
 router.get('/paystack-key', async (req, res) => {
-    const paystack = await getSetting('paystack', { publicKey: '' });
-    res.json({ publicKey: paystack.publicKey });
+    const paystack = await getSetting('paystack', { publicKey: '', currency: 'USD' });
+    res.json({ publicKey: paystack.publicKey, currency: paystack.currency });
 });
 const JWT_SECRET = process.env.JWT_SECRET || 'fujicard-secret-key-2024';
 

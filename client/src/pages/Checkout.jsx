@@ -30,6 +30,7 @@ const Checkout = () => {
     cvv: ''
   });
   const [paystackKey, setPaystackKey] = useState(PAYSTACK_PUBLIC_KEY || '');
+  const [paystackCurrency, setPaystackCurrency] = useState('USD');
 
   useEffect(() => {
     const fetchPaystackKey = async () => {
@@ -38,8 +39,11 @@ const Checkout = () => {
         if (response.data.publicKey) {
           setPaystackKey(response.data.publicKey);
         }
+        if (response.data.currency) {
+          setPaystackCurrency(response.data.currency);
+        }
       } catch (err) {
-        console.error('Failed to fetch Paystack key', err);
+        console.error('Failed to fetch Paystack config', err);
       }
     };
     fetchPaystackKey();
@@ -300,16 +304,16 @@ const Checkout = () => {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
             
-            // Calculate correct amount in ZAR for Paystack
-            const amountZAR = convertPrice(total, 'ZAR');
+            // Calculate correct amount for Paystack based on their specific account currency
+            const amountConverted = convertPrice(total, paystackCurrency);
 
             // Initialize Paystack Redirect
             try {
               const res = await axios.post(`${API_URL}/orders/paystack/initialize`, {
                 orderId: order.id,
                 email: user?.email || 'customer@fuji-card.com',
-                amount: amountZAR,
-                currency: 'ZAR'
+                amount: amountConverted,
+                currency: paystackCurrency
               });
 
               if (res.data?.url) {

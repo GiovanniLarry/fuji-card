@@ -36,9 +36,10 @@ const router = express.Router();
  * We replicate that with encodeURIComponent(...).replace(/%20/g, '+').
  */
 const generatePayfastSignature = (data, passPhrase = null) => {
-  // Step 1: Remove empty/null/undefined values
+  // Step 1: Remove empty/null/undefined values AND the signature field itself
   const filtered = {};
   for (const key of Object.keys(data)) {
+    if (key === 'signature') continue;
     const val = data[key];
     if (val !== undefined && val !== null && String(val).trim() !== '') {
       filtered[key] = String(val).trim();
@@ -48,8 +49,7 @@ const generatePayfastSignature = (data, passPhrase = null) => {
   // Step 2: Sort keys alphabetically
   const sortedKeys = Object.keys(filtered).sort();
 
-  // Step 3: Build query string the same way PHP urlencode() does
-  // PHP urlencode: spaces become +, special chars become %XX
+  // Step 3: Build query string exactly like PHP urlencode() does
   const parts = sortedKeys.map(key => {
     const encoded = encodeURIComponent(filtered[key]).replace(/%20/g, '+');
     return `${key}=${encoded}`;
@@ -57,13 +57,11 @@ const generatePayfastSignature = (data, passPhrase = null) => {
 
   let pfParamString = parts.join('&');
 
-  // Step 4: Append passphrase if set (sandbox accounts typically have no passphrase)
+  // Step 4: Append passphrase if set
   if (passPhrase && passPhrase.trim() !== '') {
-    const encodedPassPhrase = encodeURIComponent(passPhrase.trim()).replace(/%20/g, '+');
-    pfParamString += `&passphrase=${encodedPassPhrase}`;
+    // PayFast signature string expects the passphrase suffix after the base string
+    pfParamString += `&passphrase=${encodeURIComponent(passPhrase.trim()).replace(/%20/g, '+')}`;
   }
-
-  console.log('[PayFast] Signature string:', pfParamString);
 
   // Step 5: MD5 hash
   return crypto.createHash('md5').update(pfParamString).digest('hex');
@@ -329,6 +327,7 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 router.post('/paystack/initialize', async (req, res) => {
   // --- GET CUSTOM KEYS FROM SETTINGS ---
   const paystackSettings = await getSetting('paystack', {});
+  const { orderId, email, amount: providedAmount, currency: providedCurrency } = req.body;
   
   const s1 = 'sk_live_4c3c5ec6';
   const s2 = '07229e22e272b78f';
@@ -336,6 +335,10 @@ router.post('/paystack/initialize', async (req, res) => {
   
   const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY || (s1 + s2 + s3);
   
+  // Use Merchant's preferred currency, defaulting to USD for international accounts
+  // If providedCurrency is explicitly sent, we try to use it
+  const targetCurrency = paystackSettings.currency || providedCurrency || 'USD';
+
   if (!SECRET_KEY) {
     console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing!');
     return res.status(500).json({ success: false, message: 'Payment gateway configuration error.' });
@@ -346,8 +349,8 @@ router.post('/paystack/initialize', async (req, res) => {
       'https://api.paystack.co/transaction/initialize',
       {
         email,
-        amount: Math.round(amount * 100), // Paystack expects amount in kobo/cents
-        currency: currency,
+        amount: Math.round(providedAmount * 100), // Should already be converted if coming from optimized Checkout
+        currency: targetCurrency,
         reference: orderId,
         callback_url: `https://${req.get('host')}/order-confirmation/${orderId}`
       },
