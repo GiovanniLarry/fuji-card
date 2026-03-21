@@ -87,7 +87,7 @@ const Header = () => {
               <a href="https://facebook.com" target="_blank" rel="noreferrer" className="node">
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="node">
+              <a href="https://www.instagram.com/fuji_cards?igsh=MXZybHY2anNwenJrZw%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="node">
                 <i className="fa-brands fa-instagram"></i>
               </a>
             </div>
