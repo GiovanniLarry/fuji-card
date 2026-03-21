@@ -309,6 +309,7 @@ const AdminDashboard = () => {
                 await axios.put(`${API_URL}/admin/products/${isEditing}`, editForm, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
+            }
             setIsEditing(null);
             await fetchProducts(); // Refresh list
             alert(`Card "${editForm.name}" ${isEditing === 'new' ? 'created' : 'updated'} successfully! Changes are now live on the database.`);
