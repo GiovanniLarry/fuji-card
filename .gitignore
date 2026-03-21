@@ -43,3 +43,4 @@ test-register.js
 seed-database.js
 setup-auth-tables.js
 update-orders-schema.js
+tmp/

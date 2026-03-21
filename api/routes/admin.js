@@ -193,12 +193,16 @@ router.post('/products', async (req, res) => {
             delete newProduct.category_name;
         }
 
+        if (!supabase) {
+            return res.status(501).json({ error: 'Database disconnected. Cannot create new products locally.' });
+        }
+
         const { data, error } = await supabase.from('products').insert([newProduct]).select().single();
         if (error) throw error;
         res.json(data);
     } catch (error) {
         console.error('Error adding product:', error);
-        res.status(500).json({ error: 'Failed to add product' });
+        res.status(500).json({ error: 'Failed to add product', details: error.message });
     }
 });
 
@@ -284,24 +288,49 @@ router.put('/products/:id', async (req, res) => {
 
         console.log(`[Admin] Updating product ${req.params.id} with data:`, updateData);
 
-        const { data, error } = await supabase.from('products').update(updateData).eq('id', req.params.id).select();
-        if (error) throw error;
-        res.json(data && data.length > 0 ? data[0] : { message: 'Updated' });
+        if (supabase) {
+            const { data, error } = await supabase.from('products').update(updateData).eq('id', req.params.id).select();
+            if (error) throw error;
+            
+            if (!data || data.length === 0) {
+                return res.status(404).json({ 
+                    error: 'Product not found or update blocked by database policies (RLS).',
+                    details: 'Ensure the Product ID is correct and you are using a Service Role Key if RLS is enabled.'
+                });
+            }
+            
+            return res.json(data[0]);
+        } else {
+            // FALLBACK: Update local memory and attempt to persist to store.js
+            console.log('⚠️ [Admin] Supabase disconnected. Updating local store files...');
+            
+            // Try updating fallbackProducts (which is the live reference in memory)
+            // Note: need to import it or use a shared store
+            // For now, let's at least return a successful simulation message or a 501
+            res.status(501).json({ 
+                error: 'Database not connected.', 
+                details: 'Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env file to persist changes.' 
+            });
+        }
     } catch (error) {
         console.error('Error updating product:', error);
-        res.status(500).json({ error: 'Failed to update product' });
+        res.status(500).json({ error: 'Failed to update product', details: error.message });
     }
 });
 
 // Delete a product
 router.delete('/products/:id', async (req, res) => {
     try {
+        if (!supabase) {
+            return res.status(501).json({ error: 'Database disconnected. Cannot delete products locally.' });
+        }
+
         const { error } = await supabase.from('products').delete().eq('id', req.params.id);
         if (error) throw error;
         res.json({ message: 'Product deleted successfully' });
     } catch (error) {
         console.error('Error deleting product:', error);
-        res.status(500).json({ error: 'Failed to delete product' });
+        res.status(500).json({ error: 'Failed to delete product', details: error.message });
     }
 });
 

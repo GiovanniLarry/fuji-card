@@ -35,7 +35,7 @@ const Products = () => {
         // Combine and De-duplicate by ID
         const combined = [...apiProducts];
         localItems.forEach(localItem => {
-          if (!combined.find(p => p.id === localItem.id)) {
+          if (!combined.find(p => p.id === localItem.id || p.name === localItem.name)) {
             combined.push(localItem);
           }
         });
@@ -45,8 +45,9 @@ const Products = () => {
         
         if (category) {
           filtered = filtered.filter(p => {
-            const pCat = (p.categories?.name || p.category?.name || p.category || 'other').toLowerCase();
-            return pCat === category.toLowerCase();
+            const pCat = (p.categories?.name || p.category?.name || p.category || 'other').toString().toLowerCase().replace(/[^a-z]/g, '');
+            const targetCat = category.toLowerCase().replace(/[^a-z]/g, '');
+            return pCat === targetCat;
           });
         }
         
