@@ -23,63 +23,64 @@ const Products = () => {
     try {
       setLoading(true);
       const params = Object.fromEntries(searchParams.entries());
-      
+      let combined = [];
+
       try {
         const response = await axios.get(`${API_URL}/products`, { params });
-        let apiProducts = response.data?.products || [];
-        
-        // --- DUAL SOURCE MERGE (API + LOCAL) ---
-        // This ensures the 100+ items I added locally show up even if not in DB yet
-        const localItems = [...localProductStore];
-        
-        // Combine and De-duplicate by ID
-        const combined = [...apiProducts];
-        localItems.forEach(localItem => {
-          if (!combined.find(p => p.id === localItem.id || p.name === localItem.name)) {
-            combined.push(localItem);
-          }
-        });
-        
-        // Manual Filtering for combined list (to handle search/category on local items)
-        let filtered = combined;
-        
-        if (category) {
-          filtered = filtered.filter(p => {
-            const pCat = (p.categories?.name || p.category?.name || p.category || 'other').toString().toLowerCase().replace(/[^a-z]/g, '');
-            const targetCat = category.toLowerCase().replace(/[^a-z]/g, '');
-            return pCat === targetCat;
-          });
-        }
-        
-        if (search) {
-          const s = search.toLowerCase();
-          filtered = filtered.filter(p => 
-            p.name.toLowerCase().includes(s) || 
-            p.description?.toLowerCase().includes(s) ||
-            p.set?.toLowerCase().includes(s)
-          );
-        }
-        
-        const minPrice = parseFloat(searchParams.get('minPrice')) || 0;
-        const maxPrice = parseFloat(searchParams.get('maxPrice')) || 1000000;
-        filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
-        
-        const sort = searchParams.get('sort');
-        if (sort === 'price_asc') filtered.sort((a,b) => a.price - b.price);
-        if (sort === 'price_desc') filtered.sort((a,b) => b.price - a.price);
-        if (sort === 'name_asc') filtered.sort((a,b) => a.name.localeCompare(b.name));
-        if (sort === 'name_desc') filtered.sort((a,b) => b.name.localeCompare(a.name));
-        
-        setProducts(filtered);
-        setPagination({
-          totalProducts: filtered.length,
-          totalPages: 1,
-          currentPage: 1
-        });
+        combined = response.data?.products || [];
       } catch (apiError) {
-        console.warn('API fetch failed, falling back to local only');
-        // ... fallback logic already handles this
+        console.warn('API fetch failed, using local fallback only');
       }
+      
+      // --- DUAL SOURCE MERGE (API + LOCAL) ---
+      const localItems = [...localProductStore];
+      
+      // Combine and De-duplicate by ID or Name
+      localItems.forEach(localItem => {
+        if (!combined.find(p => p.id === localItem.id || p.name === localItem.name)) {
+          combined.push(localItem);
+        }
+      });
+      
+      // Manual Filtering across everything
+      let filtered = combined;
+      
+      if (category) {
+        filtered = filtered.filter(p => {
+          const pCat = (p.categories?.name || p.category?.name || p.category || 'other').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+          const targetCat = category.toLowerCase().replace(/[^a-z0-9]/g, '');
+          return pCat === targetCat;
+        });
+      }
+      
+      if (search) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(p => 
+          p.name.toLowerCase().includes(s) || 
+          p.description?.toLowerCase().includes(s) ||
+          p.set?.toLowerCase().includes(s) ||
+          p.set_name?.toLowerCase().includes(s)
+        );
+      }
+      
+      const minPrice = parseFloat(searchParams.get('minPrice')) || 0;
+      const maxPrice = parseFloat(searchParams.get('maxPrice')) || 1000000;
+      filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
+      
+      const sort = searchParams.get('sort');
+      if (sort === 'price_asc') filtered.sort((a,b) => a.price - b.price);
+      else if (sort === 'price_desc') filtered.sort((a,b) => b.price - a.price);
+      else if (sort === 'name_asc') filtered.sort((a,b) => a.name.localeCompare(b.name));
+      else {
+        // Default sort (newest or featured)
+      }
+      
+      setProducts(filtered);
+      setPagination({
+        totalProducts: filtered.length,
+        totalPages: 1,
+        currentPage: 1
+      });
     } catch (error) {
       console.error('Final product load failure:', error);
       setProducts([]);
@@ -93,7 +94,6 @@ const Products = () => {
       const response = await axios.get(`${API_URL}/products/filters/options`, { params: { category } });
       setFilterOptions(response.data);
     } catch (error) {
-      // Provide robust local filter options
       const cats = Array.from(new Set(localProductStore.map(p => p.category)));
       const rarities = Array.from(new Set(localProductStore.map(p => p.rarity).filter(Boolean)));
       setFilterOptions({ categories: cats, rarities });
@@ -113,28 +113,8 @@ const Products = () => {
     setSearchParams(newParams);
   };
 
-  const handlePriceRangeChange = (range) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (range.min > 0) newParams.set('minPrice', range.min.toString());
-    else newParams.delete('minPrice');
-    if (range.max < 1000000) newParams.set('maxPrice', range.max.toString());
-    else newParams.delete('maxPrice');
-    newParams.set('page', '1');
-    setSearchParams(newParams);
-  };
-
-  const handlePageChange = (page) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('page', page.toString());
-    setSearchParams(newParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const clearFilters = () => {
-    const newParams = new URLSearchParams();
-    if (category) newParams.set('category', category);
-    if (search) newParams.set('search', search);
-    setSearchParams(newParams);
+    setSearchParams({});
   };
 
   const getCategoryTitle = () => {
@@ -205,7 +185,7 @@ const Products = () => {
                 <p>Curating your collection...</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="no- результати">
+              <div className="no-results">
                 <h3>No items match your criteria</h3>
                 <p>Try resetting the filters to explore our full inventory.</p>
                 <button onClick={clearFilters} className="btn btn-primary">Reset Filters</button>
