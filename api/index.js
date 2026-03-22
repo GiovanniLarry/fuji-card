@@ -9,6 +9,7 @@ import cartRoutes from './routes/cart.js';
 import orderRoutes from './routes/orders.js';
 import categoryRoutes from './routes/categories.js';
 import adminRoutes from './routes/admin.js';
+import scrapeRoutes from './routes/scrape.js';
 
 console.log('Backend starting up...');
 process.on('uncaughtException', (err) => {
@@ -38,6 +39,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/scrape', scrapeRoutes);
 
 // Currency rates (simplified)
 app.get('/api/currencies', (req, res) => {

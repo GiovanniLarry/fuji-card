@@ -183,3 +183,14 @@
     padding: 10px 20px;
   }
 }
+
+
+.proxied-card-gallery { color: #333; line-height: 1.6; padding: 20px; background: #fff;}
+.proxied-card-gallery img { max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.proxied-card-gallery .wp-block-gallery { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; padding: 0; margin: 0; }
+.proxied-card-gallery figure { margin: 0 0 20px 0; }
+.proxied-card-gallery .blocks-gallery-item { width: calc(33.33% - 14px); margin-bottom: 20px; text-align: center;}
+.proxied-card-gallery figcaption { font-size: 14px; margin-top: 8px; font-weight: 500; }
+@media (max-width: 768px) { .proxied-card-gallery .blocks-gallery-item { width: calc(50% - 10px); } }
+@media (max-width: 480px) { .proxied-card-gallery .blocks-gallery-item { width: 100%; } }
+
