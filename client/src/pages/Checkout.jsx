@@ -492,8 +492,8 @@ const Checkout = () => {
                 const handler = window.PaystackPop.setup({
                   key: paystackKey,
                   email: user?.email || 'customer@fuji-card.com',
-                  amount: Math.round(total * 100),
-                  currency: 'GHS',
+                  amount: Math.round(amountConverted * 100),
+                  currency: paystackCurrency || 'ZAR',
                   ref: order.id,
                   callback: function (response) {
                     navigate(`/order-confirmation/${order.id}`, { state: { order } });

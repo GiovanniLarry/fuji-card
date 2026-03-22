@@ -279,7 +279,7 @@ router.post('/checkout', optionalAuth, async (req, res) => {
         const currentProduct = freshProduct || product;
 
         if (!currentProduct || currentProduct.stock < cartItem.quantity) {
-          return res.status(400).json({ error: `Insufficient stock for ${currentProduct?.name || 'product'}. Please verify available options.` });
+          console.warn(`[Checkout] Processing order despite low stock for ${currentProduct?.name || 'product'}`);
         }
 
         orderItems.push({
@@ -306,7 +306,7 @@ router.post('/checkout', optionalAuth, async (req, res) => {
         }
 
         if (!product || (product.stock !== undefined && product.stock < mItem.quantity)) {
-          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}. Please verify available options.` });
+          console.warn(`[Checkout] Processing manual order despite low stock for ${product?.name || 'product'}`);
         }
         orderItems.push({
           product_id: product.id,
