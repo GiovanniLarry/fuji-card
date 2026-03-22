@@ -505,6 +505,26 @@ body {
   color: #888;
 }
 
+.mobile-sub-category-dropdown {
+  list-style: none;
+  padding: 0 0 10px 20px;
+  background: #fdfdfd;
+  border-left: 2px solid #eee;
+}
+
+.mobile-sub-category-dropdown li {
+  border-bottom: none !important;
+}
+
+.mobile-sub-category-dropdown li a {
+  padding: 10px 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #666 !important;
+  display: block !important;
+  text-transform: none !important;
+}
+
 .mobile-search-slot {
   padding: 25px 15px;
   border-bottom: 1px solid #f0f0f0;

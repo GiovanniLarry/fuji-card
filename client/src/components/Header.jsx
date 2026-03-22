@@ -189,9 +189,34 @@ const Header = () => {
                   <li><Link to="/products?category=pokemon&type=promo">Promo Cards Pokemon</Link></li>
                 </ul>
               </li>
-              <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
-              <li><Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link></li>
-              <li><Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/products?category=onepiece&type=booster">Booster Boxes One Piece</Link></li>
+                  <li><Link to="/products?category=onepiece&type=sealed">Sealed Case One Piece</Link></li>
+                  <li><Link to="/products?category=onepiece&type=special">Special Set ONE PIECE</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                   <li><Link to="/products?category=other&type=weiss">Weiss Schwarz</Link></li>
+                   <li><Link to="/products?category=other&type=union">UNION ARENA</Link></li>
+                   <li><Link to="/products?category=other&type=hololive">hololive OFFICIAL CG</Link></li>
+                   <li><Link to="/products?category=other&type=lycee">Lycee Overture</Link></li>
+                   <li><Link to="/products?category=other&type=gundam">Gundam Card Game</Link></li>
+                   <li><Link to="/products?category=other&type=dragonball">Dragon Ball Fusion World</Link></li>
+                   <li><Link to="/products?category=other&type=disney">Disney Lorcana Japanese</Link></li>
+                   <li><Link to="/products?category=other&type=mtg">Magic the Gathering</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item-dropdown">
+                <Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/info?tab=news">Latest News</Link></li>
+                  <li><Link to="/info?tab=lists">Card Lists</Link></li>
+                </ul>
+              </li>
             </ul>
           </nav>
         </div>
