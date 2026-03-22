@@ -271,7 +271,7 @@ router.post('/admin-login', async (req, res) => {
 
     // 1. Check Database for Custom Credentials
     const { data: dbCreds } = await supabase
-      .from('settings')
+      .from('admin_settings')
       .select('value')
       .eq('key', 'admin_credentials')
       .single();
@@ -312,7 +312,7 @@ router.post('/admin-change-password', async (req, res) => {
     let authenticated = false;
     
     // Check DB first
-    const { data: dbCreds } = await supabase.from('settings').select('value').eq('key', 'admin_credentials').single();
+    const { data: dbCreds } = await supabase.from('admin_settings').select('value').eq('key', 'admin_credentials').single();
     if (dbCreds && dbCreds.value) {
       if (username === dbCreds.value.username) {
         authenticated = await bcrypt.compare(oldPassword, dbCreds.value.passwordHash);
@@ -330,7 +330,7 @@ router.post('/admin-change-password', async (req, res) => {
 
     // 2. Hash and save new credentials
     const passwordHash = await bcrypt.hash(newPassword, 10);
-    const { error: upsertError } = await supabase.from('settings').upsert({
+    const { error: upsertError } = await supabase.from('admin_settings').upsert({
       key: 'admin_credentials',
       value: { username, passwordHash },
       updated_at: new Date().toISOString()

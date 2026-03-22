@@ -14,6 +14,8 @@ const Header = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [categories, setCategories] = useState([]);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const { user, isAuthenticated } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
@@ -55,9 +57,10 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
       setMobileMenuOpen(false); // CLOSE MENU AFTER SEARCH
+      setIsMobileSearchOpen(false); // Close mobile search if open
     }
   };
 
@@ -150,7 +153,7 @@ const Header = () => {
 
             <div className="divider-desktop"></div>
 
-            <button className="mobile-search-toggle" onClick={() => navigate('/products')}>
+            <button className="mobile-search-toggle" onClick={() => setIsMobileSearchOpen(true)}>
                <i className="fa-solid fa-magnifying-glass"></i>
             </button>
 
@@ -181,6 +184,44 @@ const Header = () => {
           </nav>
         </div>
       </div>
+
+      {/* Mobile Search Overlay */}
+      {isMobileSearchOpen && (
+        <div className="mobile-search-overlay-v2">
+          <div className="search-overlay-container">
+            <button className="close-search-overlay" onClick={() => setIsMobileSearchOpen(false)}>
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+            <div className="search-overlay-content">
+              <form onSubmit={handleSearch} className="mobile-search-integrated-v2">
+                <div className="mobile-search-all-v2" onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}>
+                   All <i className={`fa-solid fa-chevron-down ${isCategoryDropdownOpen ? 'rotated' : ''}`}></i>
+                   {isCategoryDropdownOpen && (
+                     <ul className="mobile-category-mini-dropdown">
+                        <li><Link to="/products" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>All Categories</Link></li>
+                        <li><Link to="/products?category=pokemon" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>Pokemon</Link></li>
+                        <li><Link to="/products?category=onepiece" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>One Piece</Link></li>
+                        <li><Link to="/products?category=other" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>Other TCG</Link></li>
+                     </ul>
+                   )}
+                </div>
+                <div className="mobile-input-wrapper-v2">
+                  <input 
+                    type="text" 
+                    placeholder="Which item are you looking for.." 
+                    value={searchQuery}
+                    autoFocus
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button type="submit">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
