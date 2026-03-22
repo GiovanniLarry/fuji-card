@@ -102,6 +102,12 @@ router.get('/paystack-key', async (req, res) => {
     const paystack = await getSetting('paystack', { publicKey: '', currency: 'USD' });
     res.json({ publicKey: paystack.publicKey, currency: paystack.currency });
 });
+
+// Get current crypto wallet config (public for checkout)
+router.get('/crypto-wallets', async (req, res) => {
+    const wallets = await getSetting('wallets', {});
+    res.json(wallets);
+});
 const JWT_SECRET = process.env.JWT_SECRET || 'fujicard-secret-key-2024';
 
 // Admin authentication middleware
@@ -542,12 +548,6 @@ router.get('/notifications', async (req, res) => {
         console.error('Error fetching notifications:', error);
         res.status(500).json({ error: 'Failed' });
     }
-});
-
-// Get current crypto wallet config (public)
-router.get('/crypto-wallets', async (req, res) => {
-    const wallets = await getSetting('wallets', {});
-    res.json(wallets);
 });
 
 // Update a single coin's wallet address and trust link
