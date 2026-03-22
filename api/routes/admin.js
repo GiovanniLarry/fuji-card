@@ -61,7 +61,7 @@ const getSetting = async (key, defaultValue) => {
             .eq('key', key)
             .order('updated_at', { ascending: false })
             .limit(1);
-            
+
         if (error || !data || data.length === 0) return defaultValue;
         return data[0].value;
     } catch (e) {
@@ -160,7 +160,7 @@ router.get('/debug-env', (req, res) => {
 router.post('/sync-flagship', async (req, res) => {
     try {
         console.log('[Admin] Starting flagship inventory sync...');
-        
+
         // 1. Fetch categories for mapping
         const { data: catData, error: catError } = await supabase.from('categories').select('id, name');
         if (catError) throw catError;
@@ -174,46 +174,46 @@ router.post('/sync-flagship', async (req, res) => {
         // 2. Clear old products to avoid duplicates during mass-seed
         await supabase.from('products').delete().neq('name', '___SYSTEM_RESERVED___');
 
-            // 3. Prepare products
-            const productsToInsert = localProductStore.map(p => {
-                const slug = (p.category || 'other').toLowerCase().replace(/[^a-z]/g, '');
-                const categoryId = catMap[slug] || null;
+        // 3. Prepare products
+        const productsToInsert = localProductStore.map(p => {
+            const slug = (p.category || 'other').toLowerCase().replace(/[^a-z]/g, '');
+            const categoryId = catMap[slug] || null;
 
-                // Map condition to Database ENUM values ('Mint', 'Near Mint', 'Excellent', 'Good', 'Fair', 'Poor', 'Sealed')
-                let dbCondition = 'Mint'; 
-                const rawCon = (p.condition || 'Mint').trim();
-                
-                if (rawCon.includes('Sealed')) dbCondition = 'Sealed';
-                else if (rawCon === 'NM' || rawCon === 'Near Mint') dbCondition = 'Near Mint';
-                else if (rawCon === 'M' || rawCon === 'Mint') dbCondition = 'Mint';
-                else if (rawCon === 'Excellent' || rawCon === 'EX') dbCondition = 'Excellent';
-                else if (rawCon === 'Good') dbCondition = 'Good';
-                else if (rawCon === 'Fair') dbCondition = 'Fair';
-                else if (rawCon === 'Poor') dbCondition = 'Poor';
+            // Map condition to Database ENUM values ('Mint', 'Near Mint', 'Excellent', 'Good', 'Fair', 'Poor', 'Sealed')
+            let dbCondition = 'Mint';
+            const rawCon = (p.condition || 'Mint').trim();
 
-                return {
-                    name: p.name,
-                    description: p.description || '',
-                    price: parseFloat(p.price) || 0,
-                    image_url: p.image,
-                    category_id: categoryId,
-                    card_type: p.cardType || 'Character',
-                    set_name: p.set || 'N/A',
-                    rarity: p.rarity || 'N/A',
-                    condition: dbCondition,
-                    language: p.language || 'Japanese',
-                    stock: parseInt(p.stock) || 0,
-                    featured: p.featured || false
-                };
-            });
+            if (rawCon.includes('Sealed')) dbCondition = 'Sealed';
+            else if (rawCon === 'NM' || rawCon === 'Near Mint') dbCondition = 'Near Mint';
+            else if (rawCon === 'M' || rawCon === 'Mint') dbCondition = 'Mint';
+            else if (rawCon === 'Excellent' || rawCon === 'EX') dbCondition = 'Excellent';
+            else if (rawCon === 'Good') dbCondition = 'Good';
+            else if (rawCon === 'Fair') dbCondition = 'Fair';
+            else if (rawCon === 'Poor') dbCondition = 'Poor';
+
+            return {
+                name: p.name,
+                description: p.description || '',
+                price: parseFloat(p.price) || 0,
+                image_url: p.image,
+                category_id: categoryId,
+                card_type: p.cardType || 'Character',
+                set_name: p.set || 'N/A',
+                rarity: p.rarity || 'N/A',
+                condition: dbCondition,
+                language: p.language || 'Japanese',
+                stock: parseInt(p.stock) || 0,
+                featured: p.featured || false
+            };
+        });
 
         // 4. Batch Insert
         const { error: insertError } = await supabase.from('products').insert(productsToInsert);
         if (insertError) throw insertError;
 
-        res.json({ 
-            message: 'Flagship inventory synchronized successfully!', 
-            count: productsToInsert.length 
+        res.json({
+            message: 'Flagship inventory synchronized successfully!',
+            count: productsToInsert.length
         });
     } catch (error) {
         console.error('Sync error:', error);
@@ -233,7 +233,7 @@ router.post('/products', async (req, res) => {
                 .select('id')
                 .ilike('name', newProduct.category_name.trim())
                 .single();
-                
+
             if (catData) {
                 console.log(`[Admin] Map category '${newProduct.category_name}' to ID: ${catData.id}`);
                 newProduct.category_id = catData.id;
@@ -288,7 +288,7 @@ router.put('/products/bulk-stock', async (req, res) => {
 
             const currentStock = Number(product.stock) || 0;
             const newStock = currentStock + addedStock;
-            
+
             console.log(`[Admin] Updating stock for ${pid}: ${currentStock} -> ${newStock}`);
 
             const { data: updatedData, error: updateErr } = await supabase
@@ -346,10 +346,7 @@ router.put('/products/:id', async (req, res) => {
         if (updateData.featured !== undefined) updateData.featured = updateData.featured === 'true' || updateData.featured === true;
         if (updateData.promo !== undefined) updateData.promo = updateData.promo === 'true' || updateData.promo === true;
 
-        // Handle base64 image update
-        if (updateData.image_url && updateData.image_url.startsWith('data:')) {
-            updateData.image_url = await uploadBase64Image(updateData.image_url, updateData.name || 'Edited Product');
-        }
+        console.log(`[Admin] UPSERTING product ${req.params.id} with data:`, updateData);
 
         if (supabase) {
             const { data, error } = await supabase.from('products').upsert({
@@ -357,25 +354,25 @@ router.put('/products/:id', async (req, res) => {
                 id: req.params.id
             }).select();
             if (error) throw error;
-            
+
             if (!data || data.length === 0) {
-                return res.status(404).json({ 
+                return res.status(404).json({
                     error: 'Product not found or update blocked by database policies (RLS).',
                     details: 'Ensure the Product ID is correct and you are using a Service Role Key if RLS is enabled.'
                 });
             }
-            
+
             return res.json(data[0]);
         } else {
             // FALLBACK: Update local memory and attempt to persist to store.js
             console.log('⚠️ [Admin] Supabase disconnected. Updating local store files...');
-            
+
             // Try updating fallbackProducts (which is the live reference in memory)
             // Note: need to import it or use a shared store
             // For now, let's at least return a successful simulation message or a 501
-            res.status(501).json({ 
-                error: 'Database not connected.', 
-                details: 'Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env file to persist changes.' 
+            res.status(501).json({
+                error: 'Database not connected.',
+                details: 'Please configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env file to persist changes.'
             });
         }
     } catch (error) {

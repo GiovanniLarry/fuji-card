@@ -181,9 +181,30 @@ const Header = () => {
         <div className="container">
           <nav className="centered-navigation">
             <ul className="nav-links-mockup">
-              <li><Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link></li>
-              <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
-              <li><Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/products?category=pokemon&series=mega">MEGA SERIES</Link></li>
+                  <li><Link to="/products?category=pokemon&series=scarlet-violet">SCARLET & VIOLET</Link></li>
+                  <li><Link to="/products?category=pokemon&series=sword-shield">SWORD & SHIELD</Link></li>
+                  <li><Link to="/products?category=pokemon&series=sun-moon">SUN & MOON</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/products?category=onepiece&series=main">MAIN SETS</Link></li>
+                  <li><Link to="/products?category=onepiece&series=special">SPECIAL SETS</Link></li>
+                  <li><Link to="/products?category=onepiece&series=decks">DECKS</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/products?category=other&subcategory=yu-gi-oh">YU-GI-OH</Link></li>
+                  <li><Link to="/products?category=other&subcategory=dragon-ball">DRAGON BALL</Link></li>
+                </ul>
+              </li>
               <li><Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link></li>
             </ul>
           </nav>
@@ -241,12 +262,21 @@ const Header = () => {
             
             <nav className="mobile-drawer-nav">
               <ul className="mobile-main-links">
-                <li>
+                <li className="mobile-nav-item-dropdown">
                   <Link to="/products?category=pokemon" onClick={() => setMobileMenuOpen(false)}>
                     POKEMON <i className="fa-solid fa-chevron-down"></i>
                   </Link>
+                  <ul className="mobile-sub-category-dropdown">
+                    <li><Link to="/products?category=pokemon&series=mega" onClick={() => setMobileMenuOpen(false)}>MEGA SERIES</Link></li>
+                    <li><Link to="/products?category=pokemon&series=scarlet-violet" onClick={() => setMobileMenuOpen(false)}>SCARLET & VIOLET</Link></li>
+                    <li><Link to="/products?category=pokemon&series=sword-shield" onClick={() => setMobileMenuOpen(false)}>SWORD & SHIELD</Link></li>
+                    <li><Link to="/products?category=pokemon&series=sun-moon" onClick={() => setMobileMenuOpen(false)}>SUN & MOON</Link></li>
+                    <li><Link to="/products?category=pokemon&series=vstar-universe" onClick={() => setMobileMenuOpen(false)}>VSTAR UNIVERSE</Link></li>
+                    <li><Link to="/products?category=pokemon&series=tag-team-gx" onClick={() => setMobileMenuOpen(false)}>TAG TEAM GX</Link></li>
+                    <li><Link to="/products?category=pokemon&series=high-class-packs" onClick={() => setMobileMenuOpen(false)}>HIGH CLASS PACKS</Link></li>
+                  </ul>
                 </li>
-                <li>
+                <li className="mobile-nav-item-dropdown">
                   <Link to="/products?category=onepiece" onClick={() => setMobileMenuOpen(false)}>
                     ONE PIECE <i className="fa-solid fa-chevron-down"></i>
                   </Link>
