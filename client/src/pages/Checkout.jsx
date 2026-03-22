@@ -333,20 +333,33 @@ const Checkout = () => {
 
   // Notify admin via WhatsApp after a crypto payment is initiated
   const sendCryptoWhatsApp = (orderId, coin, address) => {
-    const waNumber = '818023903373';
-    let message = `Hi! I just made a *Crypto Payment* on Fuji Card Market.\n\n`;
-    message += `🪙 *Coin:* ${coin}\n`;
-    message += `📬 *Sent to:* ${address}\n`;
-    message += `📦 *Order ID:* ${orderId}\n`;
-    message += `👤 *Name:* ${user.firstName} ${user.lastName}\n`;
-    message += `📧 *Email:* ${user.email}\n\n`;
-    message += `*Items:*\n`;
-    cart.items.forEach(item => {
-      message += `• ${item.product.name} x${item.quantity}\n`;
-    });
-    message += `\n💰 *Total:* R${total.toFixed(2)}\n\n`;
-    message += `Please confirm receipt. TX Hash (if available): _______________`;
-    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    try {
+      const waNumber = '818023903373';
+      let message = `Hi! I just made a *Crypto Payment* on Fuji Card Market.\n\n`;
+      message += `🪙 *Coin:* ${coin}\n`;
+      message += `📬 *Sent to:* ${address}\n`;
+      message += `📦 *Order ID:* ${orderId || 'NEW'}\n`;
+      message += `👤 *Name:* ${user?.firstName || 'Customer'} ${user?.lastName || ''}\n`;
+      message += `📧 *Email:* ${user?.email || 'N/A'}\n\n`;
+      message += `*Items:*\n`;
+      
+      if (cart?.items && Array.isArray(cart.items)) {
+        cart.items.forEach(item => {
+          const itemName = item.product?.name || item.name || 'Fuji Product';
+          message += `• ${itemName} x${item.quantity}\n`;
+        });
+      }
+      
+      const displayTotal = typeof total === 'number' ? total.toFixed(2) : total;
+      message += `\n💰 *Total:* ${getSymbol()}${displayTotal}\n\n`;
+      message += `Please confirm receipt. TX Hash (if available): _______________`;
+      
+      const encodedMsg = encodeURIComponent(message);
+      window.open(`https://wa.me/${waNumber.replace(/\D/g, '')}?text=${encodedMsg}`, '_blank');
+    } catch (waErr) {
+      console.error('WhatsApp Error:', waErr);
+      // Don't crash checkout if WhatsApp fails
+    }
   };
 
   const handleSubmit = async (e) => {
