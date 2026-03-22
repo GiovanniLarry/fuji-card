@@ -75,27 +75,16 @@ const generatePayfastSignature = (data, passPhrase = null) => {
 
   // Step 3: Build query string
   const parts = sortedKeys.map(key => `${key}=${phpUrlEncode(filtered[key])}`);
-  let pfParamString = parts.join('&');
+  let finalString = parts.join('&');
 
   // Step 4: Append passphrase (RAW, NOT urlencoded)
-  if (passPhrase && passPhrase.trim() !== '') {
-    pfParamString += `&passphrase=${phpUrlEncode(passPhrase.trim())}`;
-    // Wait! Check PayFast docs again. Some sources say passphrase SHOULD be encoded if it has special chars.
-    // However, usually it's used as query param suffix.
-    // Let's use the most reliable pattern: &passphrase=...
-    // Actually, update: The correct pattern is to only use phpUrlEncode on the key=value pairs, 
-    // and then &passphrase=RAW_VALUE.
+  if (passPhrase && String(passPhrase).trim() !== '') {
+     finalString += `&passphrase=${String(passPhrase).trim()}`;
   }
 
-  // RE-APPLYING PASSPHRASE FIX:
-  let finalString = parts.join('&');
-  if (passPhrase && passPhrase.trim() !== '') {
-     finalString += `&passphrase=${passPhrase.trim()}`;
-  }
-
-  console.log('[PayFast Signature Debug] Base String:', finalString);
+  console.log('[PayFast MD5 Debug] String for hashing:', finalString);
   const signature = crypto.createHash('md5').update(finalString).digest('hex');
-  console.log('[PayFast Signature Debug] Result:', signature);
+  console.log('[PayFast MD5 Debug] Generated Signature:', signature);
   return signature;
 };
 
@@ -443,12 +432,11 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     let protocol = req.protocol === 'https' || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
     let baseUrl = `${protocol}://${host}`;
 
-    // Many times, frontend origin is needed to redirect back. Let's rely on the referer or hardcode typical dev port
-    let originUrl = req.get('origin') || 'http://localhost:5173';
-
+    // Many times, frontend origin is needed to redirect back.
+    let originUrl = (req.get('origin') || 'http://localhost:5173').replace(/\/$/, ""); // REMOVE TRAILING SLASH
+    
     // We only spoof the notify_url so the sandbox hash verification doesn't restrict the ping.
-    // The user's browser URLs MUST remain original (localhost) to prevent cross-domain logout!
-    let spoofedBaseUrl = baseUrl;
+    let spoofedBaseUrl = baseUrl.replace(/\/$/, "");
     const isLocal = originUrl.includes('localhost') || originUrl.includes('127.0.0.1');
     if (isLocal) {
       spoofedBaseUrl = 'https://fuji-card.com';
@@ -499,7 +487,8 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     const finalZAR = providedZAR || (parseFloat(order.total) * 24.5).toFixed(2);
     payloadData.amount = parseFloat(finalZAR).toFixed(2);
     
-    payloadData.item_name = `Order ${order.order_number}`;
+    // Use a simple item name to minimize encoding errors
+    payloadData.item_name = `Order_${order.order_number}`.replace(/\s+/g, "_");
 
     // --- Generate signature AFTER all fields are set ---
     const signature = generatePayfastSignature(payloadData, PASSPHRASE || null);
