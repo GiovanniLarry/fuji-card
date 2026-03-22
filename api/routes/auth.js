@@ -269,20 +269,22 @@ router.post('/admin-login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // 1. Check Database for Custom Credentials
-    const { data: dbCreds } = await supabase
-      .from('admin_settings')
-      .select('value')
-      .eq('key', 'admin_credentials')
-      .single();
+    // 1. Check Database for Custom Credentials (If connectivity is available)
+    if (supabase) {
+      const { data: dbCreds } = await supabase
+        .from('admin_settings')
+        .select('value')
+        .eq('key', 'admin_credentials')
+        .maybeSingle();
 
-    if (dbCreds && dbCreds.value) {
-      const { username: dbUser, passwordHash } = dbCreds.value;
-      if (username === dbUser) {
-        const isValid = await bcrypt.compare(password, passwordHash);
-        if (isValid) {
-          const token = jwt.sign({ id: 'fuji-admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
-          return res.json({ message: 'Admin authenticated', token });
+      if (dbCreds && dbCreds.value) {
+        const { username: dbUser, passwordHash } = dbCreds.value;
+        if (username === dbUser) {
+          const isValid = await bcrypt.compare(password, passwordHash);
+          if (isValid) {
+            const token = jwt.sign({ id: 'fuji-admin', role: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
+            return res.json({ message: 'Admin authenticated', token });
+          }
         }
       }
     }
@@ -311,14 +313,21 @@ router.post('/admin-change-password', async (req, res) => {
     // 1. Verify current credentials (ENV or DB)
     let authenticated = false;
     
-    // Check DB first
-    const { data: dbCreds } = await supabase.from('admin_settings').select('value').eq('key', 'admin_credentials').single();
-    if (dbCreds && dbCreds.value) {
-      if (username === dbCreds.value.username) {
-        authenticated = await bcrypt.compare(oldPassword, dbCreds.value.passwordHash);
+    // Check DB first (If connectivity is available)
+    if (supabase) {
+      const { data: dbCreds } = await supabase.from('admin_settings').select('value').eq('key', 'admin_credentials').maybeSingle();
+      if (dbCreds && dbCreds.value) {
+        if (username === dbCreds.value.username) {
+          authenticated = await bcrypt.compare(oldPassword, dbCreds.value.passwordHash);
+        }
+      } else {
+        // Fallback to ENV if DB is empty but connected
+        const adminUser = process.env.ADMIN_USERNAME || 'fujiadmin';
+        const adminPass = process.env.ADMIN_PASSWORD || 'fujisecret';
+        authenticated = (username === adminUser && oldPassword === adminPass);
       }
     } else {
-      // Fallback to ENV for initial change
+      // Offline fallback: use ENV credentials
       const adminUser = process.env.ADMIN_USERNAME || 'fujiadmin';
       const adminPass = process.env.ADMIN_PASSWORD || 'fujisecret';
       authenticated = (username === adminUser && oldPassword === adminPass);
@@ -328,15 +337,19 @@ router.post('/admin-change-password', async (req, res) => {
       return res.status(401).json({ error: 'Authentication failed: current credentials incorrect.' });
     }
 
-    // 2. Hash and save new credentials
-    const passwordHash = await bcrypt.hash(newPassword, 10);
-    const { error: upsertError } = await supabase.from('admin_settings').upsert({
-      key: 'admin_credentials',
-      value: { username, passwordHash },
-      updated_at: new Date().toISOString()
-    }, { onConflict: 'key' });
+    // 2. Hash and save new credentials (If connectivity is available)
+    if (supabase) {
+      const passwordHash = await bcrypt.hash(newPassword, 10);
+      const { error: upsertError } = await supabase.from('admin_settings').upsert({
+        key: 'admin_credentials',
+        value: { username, passwordHash },
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'key' });
 
-    if (upsertError) throw upsertError;
+      if (upsertError) throw upsertError;
+    } else {
+      return res.status(503).json({ error: 'Database offline: Cannot update credentials permanently in this environment.' });
+    }
 
     res.json({ message: 'Administrative passcode updated successfully.' });
   } catch (error) {

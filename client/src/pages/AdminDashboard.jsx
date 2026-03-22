@@ -56,6 +56,13 @@ const AdminDashboard = () => {
 
     // Search filtering state
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+
+    const subCategoriesList = [
+      'Weiss Schwarz', 'UNION ARENA', 'hololive OFFICIAL CG', 'Lycee Overture',
+      'Gundam Card Game', 'Dragon Ball Fusion World', 'Disney Lorcana Japanese',
+      'Magic the Gathering'
+    ];
 
     // File Input Ref for click-to-upload
     const fileInputRef = useRef(null);
@@ -542,6 +549,7 @@ const AdminDashboard = () => {
                     <li className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>Cards Management</li>
                     <li className={activeTab === 'users' ? 'active' : ''} onClick={() => setActiveTab('users')}>Users Management</li>
                     <li className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>Orders Tracking</li>
+                    <li className={activeTab === 'subcategories' ? 'active' : ''} onClick={() => setActiveTab('subcategories')}>Subcategories Engine</li>
                     <li className={activeTab === 'settings' ? 'active' : ''} onClick={() => setActiveTab('settings')}>Payment Settings</li>
                 </ul>
                 <div className="sidebar-bottom">
@@ -875,6 +883,15 @@ const AdminDashboard = () => {
                                         <div className="form-group-admin">
                                             <label>Stock Count</label>
                                             <input type="number" name="stock" value={editForm.stock || 0} onChange={handleFormChange} required />
+                                        </div>
+                                        <div className="form-group-admin">
+                                            <label>Subcategory (Card Type)</label>
+                                            <select name="cardType" value={editForm.cardType || ''} onChange={handleFormChange}>
+                                                <option value="">Select Subcategory</option>
+                                                {subCategoriesList.map(sc => (
+                                                    <option key={sc} value={sc}>{sc}</option>
+                                                ))}
+                                            </select>
                                         </div>
                                         <div className="form-group-admin">
                                             <label>Condition</label>
@@ -1426,6 +1443,89 @@ const AdminDashboard = () => {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                )}
+
+                {!loading && activeTab === 'subcategories' && (
+                    <div className="subcat-engine-view">
+                        <header className="admin-dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div>
+                                <h1>Subcategories Engine {selectedSubCategory ? `| ${selectedSubCategory.toUpperCase()}` : ''}</h1>
+                                {selectedSubCategory && (
+                                    <button className="admin-btn-secondary" style={{ marginTop: '0.8rem', padding: '0.4rem 1rem' }} onClick={() => setSelectedSubCategory(null)}>
+                                        « ALL SUBCATEGORIES
+                                    </button>
+                                )}
+                            </div>
+                        </header>
+
+                        {!selectedSubCategory ? (
+                            <div className="admin-category-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+                                {subCategoriesList.map(sc => (
+                                    <div key={sc} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}
+                                        onClick={() => setSelectedSubCategory(sc)}
+                                        onMouseOver={e => {
+                                            e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+                                            e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.5)';
+                                            e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(59, 130, 246, 0.1)';
+                                        }}
+                                        onMouseOut={e => {
+                                            e.currentTarget.style.transform = 'none';
+                                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+                                            e.currentTarget.style.boxShadow = 'none';
+                                        }}
+                                    >
+                                        <div style={{ padding: '2rem' }}>
+                                            <div style={{ fontSize: '3rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 10px rgba(96, 165, 250, 0.3))' }}>💠</div>
+                                            <h3 style={{ color: '#60a5fa', margin: 0, fontSize: '1.25rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>{sc}</h3>
+                                            <div style={{ marginTop: '1rem', padding: '0.4rem', background: 'rgba(96, 165, 250, 0.1)', borderRadius: '6px', fontSize: '0.85rem', color: '#93c5fd', fontWeight: 600 }}>
+                                                {products.filter(p => p.cardType === sc).length} ACTIVE ASSETS
+                                            </div>
+                                        </div>
+                                        <div style={{ background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent)', height: '2px' }}></div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="admin-table-container glass-panel" style={{ marginTop: '2rem', border: '1px solid rgba(59, 130, 246, 0.3)' }}>
+                                <div style={{ padding: '1.5rem', background: 'rgba(59, 130, 246, 0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <h3 style={{ margin: 0, color: '#fff' }}>Asset Manifest: {selectedSubCategory}</h3>
+                                    <button className="admin-btn-primary" style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }} onClick={() => {
+                                        setEditForm({ name: '', description: '', price: 0, category_name: 'other', cardType: selectedSubCategory, image_url: '', stock: 10, condition: 'Mint' });
+                                        setIsEditing('new');
+                                        setActiveTab('products');
+                                    }}>+ SEED NEW ASSET</button>
+                                </div>
+                                <table className="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Card Resource</th>
+                                            <th>Property Value</th>
+                                            <th>Inventory</th>
+                                            <th>Rarity Status</th>
+                                            <th>Commands</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {products.filter(p => p.cardType === selectedSubCategory).map(p => (
+                                            <tr key={p.id}>
+                                                <td style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                    {p.image_url && <img src={p.image_url} alt="" style={{ width: '40px', height: '40px', borderRadius: '4px', objectFit: 'cover' }} />}
+                                                    <span style={{ fontWeight: 700 }}>{p.name}</span>
+                                                </td>
+                                                <td>£{Number(p.price).toFixed(2)}</td>
+                                                <td style={{ color: Number(p.stock) < 5 ? '#ef4444' : '#10b981', fontWeight: 800 }}>{p.stock}</td>
+                                                <td><span style={{ padding: '0.2rem 0.5rem', background: 'rgba(167, 139, 250, 0.2)', color: '#a78bfa', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 900 }}>{p.rarity || 'RARE'}</span></td>
+                                                <td className="admin-table-actions">
+                                                    <button onClick={() => { handleEditClick(p); setActiveTab('products'); }}>EDIT</button>
+                                                    <button className="danger" onClick={() => handleDeleteProduct(p.id)}>WIPE</button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

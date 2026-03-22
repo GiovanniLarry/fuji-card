@@ -17,6 +17,7 @@ const Header = () => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({ id: '', name: 'All' });
+  const [expandedMobileTab, setExpandedMobileTab] = useState(null);
   const { user, isAuthenticated } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
@@ -76,6 +77,10 @@ const Header = () => {
     } else {
       setCatDropdownOpen(!catDropdownOpen);
     }
+  };
+
+  const toggleMobileTab = (tab) => {
+    setExpandedMobileTab(expandedMobileTab === tab ? null : tab);
   };
 
   return (
@@ -273,29 +278,65 @@ const Header = () => {
             
             <nav className="mobile-drawer-nav">
               <ul className="mobile-main-links">
-                <li>
-                  <Link to="/products?category=pokemon" onClick={() => setMobileMenuOpen(false)}>
-                    POKEMON <i className="fa-solid fa-chevron-down"></i>
-                  </Link>
+                <li className={expandedMobileTab === 'pokemon' ? 'active' : ''}>
+                  <div className="mobile-nav-toggle" onClick={() => toggleMobileTab('pokemon')}>
+                    POKEMON <i className={`fa-solid fa-chevron-down ${expandedMobileTab === 'pokemon' ? 'rotated' : ''}`}></i>
+                  </div>
+                  {expandedMobileTab === 'pokemon' && (
+                    <ul className="mobile-sub-category-dropdown">
+                      <li><Link to="/products?category=pokemon" onClick={() => setMobileMenuOpen(false)}>All Pokemon</Link></li>
+                      <li><Link to="/products?category=pokemon&type=booster" onClick={() => setMobileMenuOpen(false)}>Booster Boxes</Link></li>
+                      <li><Link to="/products?category=pokemon&type=special" onClick={() => setMobileMenuOpen(false)}>Special Sets</Link></li>
+                      <li><Link to="/products?category=pokemon&type=promo" onClick={() => setMobileMenuOpen(false)}>Promo Cards</Link></li>
+                    </ul>
+                  )}
+                </li>
+                <li className={expandedMobileTab === 'onepiece' ? 'active' : ''}>
+                  <div className="mobile-nav-toggle" onClick={() => toggleMobileTab('onepiece')}>
+                    ONE PIECE <i className={`fa-solid fa-chevron-down ${expandedMobileTab === 'onepiece' ? 'rotated' : ''}`}></i>
+                  </div>
+                  {expandedMobileTab === 'onepiece' && (
+                    <ul className="mobile-sub-category-dropdown">
+                      <li><Link to="/products?category=onepiece" onClick={() => setMobileMenuOpen(false)}>All One Piece</Link></li>
+                      <li><Link to="/products?category=onepiece&type=booster" onClick={() => setMobileMenuOpen(false)}>Booster Boxes</Link></li>
+                      <li><Link to="/products?category=onepiece&type=sealed" onClick={() => setMobileMenuOpen(false)}>Sealed Cases</Link></li>
+                      <li><Link to="/products?category=onepiece&type=special" onClick={() => setMobileMenuOpen(false)}>Special Sets</Link></li>
+                    </ul>
+                  )}
+                </li>
+                <li className={expandedMobileTab === 'other' ? 'active' : ''}>
+                  <div className="mobile-nav-toggle" onClick={() => toggleMobileTab('other')}>
+                    OTHER TCG <i className={`fa-solid fa-chevron-down ${expandedMobileTab === 'other' ? 'rotated' : ''}`}></i>
+                  </div>
+                  {expandedMobileTab === 'other' && (
+                    <ul className="mobile-sub-category-dropdown">
+                      <li><Link to="/products?category=other" onClick={() => setMobileMenuOpen(false)}>All Other TCG</Link></li>
+                      <li><Link to="/products?category=other&type=weiss" onClick={() => setMobileMenuOpen(false)}>Weiss Schwarz</Link></li>
+                      <li><Link to="/products?category=other&type=union" onClick={() => setMobileMenuOpen(false)}>UNION ARENA</Link></li>
+                      <li><Link to="/products?category=other&type=hololive" onClick={() => setMobileMenuOpen(false)}>hololive OFFICIAL</Link></li>
+                      <li><Link to="/products?category=other&type=lycee" onClick={() => setMobileMenuOpen(false)}>Lycee Overture</Link></li>
+                      <li><Link to="/products?category=other&type=gundam" onClick={() => setMobileMenuOpen(false)}>Gundam Card Game</Link></li>
+                      <li><Link to="/products?category=other&type=dragonball" onClick={() => setMobileMenuOpen(false)}>Dragon Ball Fusion</Link></li>
+                      <li><Link to="/products?category=other&type=disney" onClick={() => setMobileMenuOpen(false)}>Disney Lorcana</Link></li>
+                      <li><Link to="/products?category=other&type=mtg" onClick={() => setMobileMenuOpen(false)}>Magic The Gathering</Link></li>
+                    </ul>
+                  )}
+                </li>
+                <li className={expandedMobileTab === 'info' ? 'active' : ''}>
+                  <div className="mobile-nav-toggle" onClick={() => toggleMobileTab('info')}>
+                    INFO <i className={`fa-solid fa-chevron-down ${expandedMobileTab === 'info' ? 'rotated' : ''}`}></i>
+                  </div>
+                  {expandedMobileTab === 'info' && (
+                    <ul className="mobile-sub-category-dropdown">
+                      <li><Link to="/info" onClick={() => setMobileMenuOpen(false)}>General Info</Link></li>
+                      <li><Link to="/info?tab=news" onClick={() => setMobileMenuOpen(false)}>Latest News</Link></li>
+                      <li><Link to="/info?tab=lists" onClick={() => setMobileMenuOpen(false)}>Card Lists</Link></li>
+                    </ul>
+                  )}
                 </li>
                 <li>
-                  <Link to="/products?category=onepiece" onClick={() => setMobileMenuOpen(false)}>
-                    ONE PIECE <i className="fa-solid fa-chevron-down"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/products?category=other" onClick={() => setMobileMenuOpen(false)}>
-                    OTHER TCG <i className="fa-solid fa-chevron-down"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/cardlists" onClick={() => setMobileMenuOpen(false)}>
-                    CARD LISTS <i className="fa-solid fa-chevron-down"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/info" onClick={() => setMobileMenuOpen(false)}>
-                    INFO <i className="fa-solid fa-chevron-down"></i>
+                  <Link to="/info?tab=lists" className="mobile-nav-toggle no-chevron" onClick={() => setMobileMenuOpen(false)}>
+                    CARD LISTS
                   </Link>
                 </li>
               </ul>
