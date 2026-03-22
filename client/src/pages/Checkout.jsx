@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
@@ -31,80 +31,94 @@ const Checkout = () => {
   const [paystackCurrency, setPaystackCurrency] = useState('ZAR');
   const [dynamicWallets, setDynamicWallets] = useState({});
 
-  // Move coin data to top-level so it's available for both UI and submission logic
-  const coinsConfig = {
-    BTC: {
-      label: 'Bitcoin',
-      symbol: 'BTC',
-      color: '#f7931a',
-      address: 'bc1qhupxlhjaddepp62pdrlj682yhlt203qzu5spap',
-      qr: '/btc-qr.png',
-      trustLink: 'https://link.trustwallet.com/send?address=bc1qhupxlhjaddepp62pdrlj682yhlt203qzu5spap&asset=c0',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="#f7931a" />
-          <path d="M22.1 14.3c.3-2-1.2-3.1-3.3-3.8l.7-2.7-1.6-.4-.6 2.6-1.3-.3.6-2.6-1.6-.4-.7 2.7-1-.3-2.2-.5-.4 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.3c0 .1.1.1.1.2l-1 3.8c-.1.2-.3.5-.8.4 0 0-1.2-.3-1.2-.3l-.8 1.8 2.1.5 1.1.3-.7 2.7 1.6.4.7-2.7 1.3.3-.7 2.7 1.6.4.7-2.7c2.9.5 5-.2 5.9-2.7.7-2-.03-3.2-1.5-3.9.9-.3 1.6-.9 1.8-2.3zm-3.2 4.5c-.5 2-3.8.9-4.9.7l.9-3.4c1.1.3 4.5.8 4 2.7zm.5-4.5c-.4 1.9-3.3.9-4.2.7l.8-3.1c.9.2 3.8.7 3.4 2.4z" fill="white" />
-        </svg>
-      )
-    },
-    ETH: {
-      label: 'Ethereum',
-      symbol: 'ETH',
-      color: '#627eea',
-      address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
-      qr: '/eth-qr.png',
-      trustLink: 'https://link.trustwallet.com/send?address=0x8101625364B48146ea92E1FEeB48fd90c852a215&asset=c60',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="#627eea" />
-          <path d="M16 6l-6.5 10.2L16 19.6l6.5-3.4L16 6z" fill="white" opacity="0.8" />
-          <path d="M9.5 17.4L16 21l6.5-3.6-6.5 8.6-6.5-8.6z" fill="white" />
-        </svg>
-      )
-    },
-    USDT: {
-      label: 'Tether (USDT)',
-      symbol: 'USDT',
-      color: '#26a17b',
-      address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
-      qr: '/usdt-qr.png',
-      trustLink: 'https://link.trustwallet.com/send?asset=c60_t0xdAC17F958D2ee523a2206206994597C13D831ec7&address=0x8101625364B48146ea92E1FEeB48fd90c852a215',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="#26a17b" />
-          <text x="16" y="21" textAnchor="middle" fontSize="12" fontWeight="bold" fill="white">₮</text>
-        </svg>
-      )
-    },
-    USDC: {
-      label: 'USD Coin (USDC)',
-      symbol: 'USDC',
-      color: '#2775ca',
-      address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
-      qr: '/usdc-qr.png',
-      trustLink: 'https://link.trustwallet.com/send?address=0x8101625364B48146ea92E1FEeB48fd90c852a215&asset=c60_t0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="#2775ca" />
-          <text x="16" y="21" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">$</text>
-        </svg>
-      )
-    },
-    LTC: {
-      label: 'Litecoin',
-      symbol: 'LTC',
-      color: '#bfbbbb',
-      address: 'ltc1qhncs35rmy3kdcnj62vxnswa9ajgnk8f6yksn66',
-      qr: '/ltc-qr.png',
-      trustLink: 'https://link.trustwallet.com/send?asset=c2&address=ltc1qhncs35rmy3kdcnj62vxnswa9ajgnk8f6yksn66',
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="#bfbbbb" />
-          <text x="16" y="21" textAnchor="middle" fontSize="12" fontWeight="bold" fill="white">Ł</text>
-        </svg>
-      )
-    }
-  };
+  // Memoize the merged coins configuration for stability and performance
+  const coins = useMemo(() => {
+    // Base configuration with icons and defaults
+    const config = {
+      BTC: {
+        label: 'Bitcoin',
+        symbol: 'BTC',
+        color: '#f7931a',
+        address: 'bc1qhupxlhjaddepp62pdrlj682yhlt203qzu5spap',
+        qr: '/btc-qr.png',
+        trustLink: 'https://link.trustwallet.com/send?address=bc1qhupxlhjaddepp62pdrlj682yhlt203qzu5spap&asset=c0',
+        icon: (
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#f7931a" />
+            <path d="M22.1 14.3c.3-2-1.2-3.1-3.3-3.8l.7-2.7-1.6-.4-.6 2.6-1.3-.3.6-2.6-1.6-.4-.7 2.7-1-.3-2.2-.5-.4 1.7s1.2.3 1.2.3c.7.2.8.6.8 1l-.8 3.3c0 .1.1.1.1.2l-1 3.8c-.1.2-.3.5-.8.4 0 0-1.2-.3-1.2-.3l-.8 1.8 2.1.5 1.1.3-.7 2.7 1.6.4.7-2.7 1.3.3-.7 2.7 1.6.4.7-2.7c2.9.5 5-.2 5.9-2.7.7-2-.03-3.2-1.5-3.9.9-.3 1.6-.9 1.8-2.3zm-3.2 4.5c-.5 2-3.8.9-4.9.7l.9-3.4c1.1.3 4.5.8 4 2.7zm.5-4.5c-.4 1.9-3.3.9-4.2.7l.8-3.1c.9.2 3.8.7 3.4 2.4z" fill="white" />
+          </svg>
+        )
+      },
+      ETH: {
+        label: 'Ethereum',
+        symbol: 'ETH',
+        color: '#627eea',
+        address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
+        qr: '/eth-qr.png',
+        trustLink: 'https://link.trustwallet.com/send?address=0x8101625364B48146ea92E1FEeB48fd90c852a215&asset=c60',
+        icon: (
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#627eea" />
+            <path d="M16 6l-6.5 10.2L16 19.6l6.5-3.4L16 6z" fill="white" opacity="0.8" />
+            <path d="M9.5 17.4L16 21l6.5-3.6-6.5 8.6-6.5-8.6z" fill="white" />
+          </svg>
+        )
+      },
+      USDT: {
+        label: 'Tether (USDT)',
+        symbol: 'USDT',
+        color: '#26a17b',
+        address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
+        qr: '/usdt-qr.png',
+        trustLink: 'https://link.trustwallet.com/send?asset=c60_t0xdAC17F958D2ee523a2206206994597C13D831ec7&address=0x8101625364B48146ea92E1FEeB48fd90c852a215',
+        icon: (
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#26a17b" />
+            <text x="16" y="21" textAnchor="middle" fontSize="12" fontWeight="bold" fill="white">₮</text>
+          </svg>
+        )
+      },
+      USDC: {
+        label: 'USD Coin (USDC)',
+        symbol: 'USDC',
+        color: '#2775ca',
+        address: '0x8101625364B48146ea92E1FEeB48fd90c852a215',
+        qr: '/usdc-qr.png',
+        trustLink: 'https://link.trustwallet.com/send?address=0x8101625364B48146ea92E1FEeB48fd90c852a215&asset=c60_t0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+        icon: (
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#2775ca" />
+            <text x="16" y="21" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white">$</text>
+          </svg>
+        )
+      },
+      LTC: {
+        label: 'Litecoin',
+        symbol: 'LTC',
+        color: '#bfbbbb',
+        address: 'ltc1qhncs35rmy3kdcnj62vxnswa9ajgnk8f6yksn66',
+        qr: '/ltc-qr.png',
+        trustLink: 'https://link.trustwallet.com/send?asset=c2&address=ltc1qhncs35rmy3kdcnj62vxnswa9ajgnk8f6yksn66',
+        icon: (
+          <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#bfbbbb" />
+            <text x="16" y="21" textAnchor="middle" fontSize="12" fontWeight="bold" fill="white">Ł</text>
+          </svg>
+        )
+      }
+    };
+
+    // Override with dynamic values from backend if present
+    Object.keys(config).forEach(symbol => {
+      const dynamic = dynamicWallets[symbol] || dynamicWallets[symbol.toLowerCase()];
+      if (dynamic) {
+        if (dynamic.address) config[symbol].address = dynamic.address;
+        if (dynamic.trustLink) config[symbol].trustLink = dynamic.trustLink;
+      }
+    });
+
+    return config;
+  }, [dynamicWallets]);
 
   useEffect(() => {
     const fetchPaystackKey = async () => {
@@ -376,10 +390,12 @@ const Checkout = () => {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
             
-            const coinDetails = coinsConfig[selectedCoin];
+            const coinDetails = coins[selectedCoin];
             
             // Trigger specific crypto WhatsApp notification
-            sendCryptoWhatsApp(order.id, selectedCoin, coinDetails.address);
+            if (coinDetails) {
+              sendCryptoWhatsApp(order.id, selectedCoin, coinDetails.address);
+            }
             
             // Success navigation
             navigate(`/order-confirmation/${order.id}`, { state: { order } });
@@ -668,17 +684,9 @@ const Checkout = () => {
                 )}
 
                 {formData.paymentMethod === 'cryptomus' && (() => {
-                  // Merge dynamic wallets from backend with hardcoded UI assets (icons, colors)
-                  const coins = JSON.parse(JSON.stringify(coinsConfig));
-                  Object.keys(dynamicWallets).forEach(symbol => {
-                    const uprSymbol = symbol.toUpperCase();
-                    if (coins[uprSymbol]) {
-                      if (dynamicWallets[symbol].address) coins[uprSymbol].address = dynamicWallets[symbol].address;
-                      if (dynamicWallets[symbol].trustLink) coins[uprSymbol].trustLink = dynamicWallets[symbol].trustLink;
-                    }
-                  });
-
                   const coin = coins[selectedCoin];
+                  if (!coin) return null; // Safety guard to prevent blank page
+                  
                   const isReady = coin.address && !coin.address.startsWith('COMING_SOON');
 
                   return (

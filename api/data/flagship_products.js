@@ -154,10 +154,10 @@ export const localProductStore = [
   },
   {
     "id": "op09_box_v1",
-    "name": "OP-09 The New Emperor Booster Box Japanese ONE PIECE CARD",
+    "name": "OP-09 Emperors of the New World Booster Box NEW Japanese",
     "category": "onepiece",
-    "price": 85,
-    "image": "/onepiece/op09_booster_box_premium.png",
+    "price": 102.35,
+    "image": "https://i.ebayimg.com/images/g/nd0AAeSwlpdpofOW/s-l1600.jpg",
     "description": "Factory sealed booster box of the monumental OP-09 set featuring the new emperors.",
     "stock": 45,
     "set": "OP-09",
@@ -825,6 +825,21 @@ export const localProductStore = [
     "condition": "NM",
     "language": "Japanese",
     "cardType": "Monster",
+    "featured": true
+  },
+  {
+    "id": "mtg_duskmourn_box",
+    "name": "Magic the Gathering Duskmourn: House of Horror Japanese Display",
+    "category": "other",
+    "price": 155.25,
+    "image": "https://i.ebayimg.com/images/g/DcoAAOSwllFnV3ti/s-l1600.jpg",
+    "description": "The latest MTG horror-themed expansion. Factory sealed Japanese display box containing play boosters.",
+    "stock": 10,
+    "set": "Duskmourn: House of Horror",
+    "rarity": "Booster Box",
+    "condition": "Factory Sealed",
+    "language": "Japanese",
+    "cardType": "Sealed Product",
     "featured": true
   },
   {
