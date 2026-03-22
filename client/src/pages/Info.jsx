@@ -154,6 +154,66 @@ const Info = () => {
                     <span className="news-date">March 15, 2026</span>
                   </div>
                 </article>
+
+                <article className="news-item">
+                  <div className="news-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1642104704074-9355a993b452?auto=format&fit=crop&q=80&w=1000" alt="Card Grading" />
+                    <span className="news-tag">COLLECTING</span>
+                  </div>
+                  <div className="news-content">
+                    <h3>PSA Japan Operations Expand: Faster Turnaround Times for 2026</h3>
+                    <p>PSA has officially opened its new Tokyo verification center. Local Japanese card submissions are expected to see a 2x increase in speed, making it easier than ever to grade your high-end OP-09 pulls.</p>
+                    <span className="news-date">March 14, 2026</span>
+                  </div>
+                </article>
+
+                <article className="news-item">
+                  <div className="news-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="Weiss Schwarz" />
+                    <span className="news-tag">WEISS SCHWARZ</span>
+                  </div>
+                  <div className="news-content">
+                    <h3>Weiss Schwarz: Hololive Production Vol. 3 Rumors Swirl</h3>
+                    <p>Leaked internal schedules suggest a massive Hololive 3rd wave is coming late 2026. Fans are anticipating new SP signatures for the latest generation of talents.</p>
+                    <span className="news-date">March 12, 2026</span>
+                  </div>
+                </article>
+
+                <article className="news-item">
+                  <div className="news-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=1000" alt="Lycee Overture" />
+                    <span className="news-tag">LYCEE</span>
+                  </div>
+                  <div className="news-content">
+                    <h3>Lycee Overture: The Return of Classic Fate/Stay Night Art</h3>
+                    <p>A commemorative Fate/Stay Night crossover set has been announced for Lycee Overture. This set features reimagined art from the 2004 original, a must-have for legacy fans.</p>
+                    <span className="news-date">March 10, 2026</span>
+                  </div>
+                </article>
+
+                <article className="news-item">
+                  <div className="news-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=1000" alt="Yu-Gi-Oh" />
+                    <span className="news-tag">YU-GI-OH</span>
+                  </div>
+                  <div className="news-content">
+                    <h3>25th Century Rarity: The Next Evolution of Yu-Gi-Oh Foils?</h3>
+                    <p>Rumors of a new 'Prismatic Emperor' rarity for the Japanese OCG are circulating. This would mark the first major rarity innovation since the 25th anniversary Quarter Century Rares.</p>
+                    <span className="news-date">March 08, 2026</span>
+                  </div>
+                </article>
+
+                <article className="news-item">
+                  <div className="news-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="Dragon Ball" />
+                    <span className="news-tag">DRAGON BALL</span>
+                  </div>
+                  <div className="news-content">
+                    <h3>Fusion World: Super Saiyan Blue Vegito Leader Card Skyrockets</h3>
+                    <p>Market analysts report a 200% price jump for the SSGSS Vegito alt-art leader. Its dominance in the regional qualifiers has made it the most sought-after card in the current meta.</p>
+                    <span className="news-date">March 05, 2026</span>
+                  </div>
+                </article>
               </div>
             ) : (
               <>

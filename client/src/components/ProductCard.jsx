@@ -80,8 +80,7 @@ const ProductCard = ({ product }) => {
           </div>
         )}
         <div className="product-footer">
-          {/* Price hidden per request: "simple cards no price but should have description and name" */}
-          <div className="price-container" style={{ display: 'none' }}>
+          <div className="price-container">
             {product.promo && originalPrice && (
               <span className="original-price">{formatPrice(originalPrice)}</span>
             )}
