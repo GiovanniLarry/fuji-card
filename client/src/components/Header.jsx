@@ -16,6 +16,7 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState({ id: '', name: 'All' });
   const { user, isAuthenticated } = useAuth();
   const { cart } = useCart();
   const navigate = useNavigate();
@@ -57,7 +58,11 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      let url = `/products?search=${encodeURIComponent(searchQuery.trim())}`;
+      if (selectedCategory.id) {
+        url += `&category=${selectedCategory.id}`;
+      }
+      navigate(url);
       setSearchQuery('');
       setMobileMenuOpen(false); // CLOSE MENU AFTER SEARCH
       setIsMobileSearchOpen(false); // Close mobile search if open
@@ -195,13 +200,13 @@ const Header = () => {
             <div className="search-overlay-content">
               <form onSubmit={handleSearch} className="mobile-search-integrated-v2">
                 <div className="mobile-search-all-v2" onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}>
-                   All <i className={`fa-solid fa-chevron-down ${isCategoryDropdownOpen ? 'rotated' : ''}`}></i>
+                   {selectedCategory.name} <i className={`fa-solid fa-chevron-down ${isCategoryDropdownOpen ? 'rotated' : ''}`}></i>
                    {isCategoryDropdownOpen && (
                      <ul className="mobile-category-mini-dropdown">
-                        <li><Link to="/products" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>All Categories</Link></li>
-                        <li><Link to="/products?category=pokemon" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>Pokemon</Link></li>
-                        <li><Link to="/products?category=onepiece" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>One Piece</Link></li>
-                        <li><Link to="/products?category=other" onClick={() => {setIsMobileSearchOpen(false); setIsCategoryDropdownOpen(false);}}>Other TCG</Link></li>
+                        <li><Link to="#" onClick={(e) => {e.preventDefault(); setSelectedCategory({id: '', name: 'All'}); setIsCategoryDropdownOpen(false);}}>All Categories</Link></li>
+                        <li><Link to="#" onClick={(e) => {e.preventDefault(); setSelectedCategory({id: 'pokemon', name: 'Pokemon'}); setIsCategoryDropdownOpen(false);}}>Pokemon</Link></li>
+                        <li><Link to="#" onClick={(e) => {e.preventDefault(); setSelectedCategory({id: 'onepiece', name: 'One Piece'}); setIsCategoryDropdownOpen(false);}}>One Piece</Link></li>
+                        <li><Link to="#" onClick={(e) => {e.preventDefault(); setSelectedCategory({id: 'other', name: 'Other'}); setIsCategoryDropdownOpen(false);}}>Other TCG</Link></li>
                      </ul>
                    )}
                 </div>

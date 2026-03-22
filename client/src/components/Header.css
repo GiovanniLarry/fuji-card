@@ -371,9 +371,9 @@
     justify-content: center;
   }
 
-  /* RESET PADDING for relative header */
+  /* ENSURE CONTENT IS VISIBLE BELOW FIXED HEADER */
   body {
-    padding-top: 0;
+    padding-top: 135px !important;
   }
 }
 
@@ -534,11 +534,11 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
-  z-index: 10001;
+  z-index: 10010;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  align-items: flex-start; /* KEYBOARD PROTECTION: Align top */
+  padding: 80px 20px; /* Space from top */
 }
 
 .search-overlay-container {
