@@ -13,6 +13,11 @@ const __dirname = path.dirname(__filename);
 // --- SETTINGS MIGRATION (SUPABASE) ---
 const getSetting = async (key, defaultValue) => {
     try {
+        // If Supabase is not configured, return default immediately
+        if (!supabase) {
+            return defaultValue;
+        }
+        
         const { data, error } = await supabase
             .from('admin_settings')
             .select('value')
@@ -21,6 +26,7 @@ const getSetting = async (key, defaultValue) => {
         if (error || !data) return defaultValue;
         return data.value;
     } catch (e) {
+        console.error(`[getSetting] Error fetching ${key}:`, e.message);
         return defaultValue;
     }
 };
@@ -384,7 +390,6 @@ router.post('/checkout', optionalAuth, async (req, res) => {
         
         console.log(`[Checkout] Deducted ${item.quantity} units from product ${item.product_id}. New stock: ${newStock}`);
       }
-    }
     }
 
     if (paymentMethod !== 'payfast') {

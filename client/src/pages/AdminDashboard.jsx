@@ -127,7 +127,7 @@ const AdminDashboard = () => {
         setLoading(true);
         try {
             // Add cache busting to admin product list
-            const { data } = await axios.get(`${API_URL}/products?limit=150&_t=${Date.now()}`);
+            const { data } = await axios.get(`${API_URL}/products?limit=2000&_t=${Date.now()}`);
             
             // Normalize snake_case from DB to camelCase for component consistency
             const normalized = (data.products || data).map(p => ({
