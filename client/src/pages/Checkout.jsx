@@ -471,13 +471,13 @@ const Checkout = () => {
             // Calculate correct amount for Paystack based on their specific account currency
             const amountConverted = convertPrice(total, paystackCurrency);
 
-            // Initialize Paystack Redirect
+            // Initialize Paystack Redirect via the more robust API service
             try {
-              const res = await axios.post(`${API_URL}/orders/paystack/initialize`, {
+              const res = await ordersAPI.initializePaystack({
                 orderId: order.id,
                 email: user?.email || 'customer@fuji-card.com',
                 amount: amountConverted,
-                currency: paystackCurrency
+                currency: paystackCurrency || 'ZAR'
               });
 
               if (res.data?.url) {

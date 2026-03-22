@@ -7,31 +7,10 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
   const [adding, setAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const { addToCart } = useCart();
   const { formatPrice } = useCurrency();
 
-  // Auto-generate 5 ebay-style images if gallery is missing to fulfill the 5-image requirement
-  const gallery = (product.gallery && product.gallery.length >= 5) 
-    ? product.gallery 
-    : [
-        product.image || product.image_url || 'https://i.ebayimg.com/images/g/YswAAOSw8~dm7fHj/s-l1600.jpg',
-        'https://i.ebayimg.com/images/g/vCMAAOSw~Xdm7fHl/s-l1600.jpg',
-        'https://i.ebayimg.com/images/g/8H4AAOSwtzNm7fHn/s-l1600.jpg',
-        'https://i.ebayimg.com/images/g/9XwAAOSw6vVm7fHp/s-l1600.jpg',
-        'https://i.ebayimg.com/images/g/AhoAAOSwdzVm7fHr/s-l1600.jpg'
-      ];
-  const totalImages = gallery.length;
-
-  const nextImage = (e) => {
-    e.preventDefault(); e.stopPropagation();
-    setCurrentImgIndex((prev) => (prev + 1) % totalImages);
-  };
-
-  const prevImage = (e) => {
-    e.preventDefault(); e.stopPropagation();
-    setCurrentImgIndex((prev) => (prev - 1 + totalImages) % totalImages);
-  };
+  const imageUrl = product.image || product.image_url || 'https://i.ebayimg.com/images/g/YswAAOSw8~dm7fHj/s-l1600.jpg';
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -58,7 +37,6 @@ const ProductCard = ({ product }) => {
   const placeholderImage = `https://via.placeholder.com/300x400?text=${encodeURIComponent(product.name)}`;
 
   // Handle both API formats (store.js and Supabase)
-  const imageUrl = product.image || product.image_url;
   const category = product.category || product.categories?.name || 'Unknown';
   const setName = product.set || product.set_name || 'N/A';
   const originalPrice = product.originalPrice || product.original_price;
@@ -67,26 +45,11 @@ const ProductCard = ({ product }) => {
     <Link to={`/product/${product.id}`} className="product-card">
       <div className="product-image">
         <img 
-          src={imageError ? placeholderImage : gallery[currentImgIndex]} 
-          alt={`${product.name} - view ${currentImgIndex + 1}`}
+          src={imageError ? placeholderImage : imageUrl} 
+          alt={product.name}
           onError={() => setImageError(true)}
         />
-        
-        {totalImages > 1 && (
-          <div className="gallery-controls">
-            <button className="gallery-btn prev" onClick={prevImage}>❮</button>
-            <button className="gallery-btn next" onClick={nextImage}>❯</button>
-            <div className="gallery-indicators">
-              {gallery.map((_, i) => (
-                <span 
-                  key={i} 
-                  className={`dot ${i === currentImgIndex ? 'active' : ''}`}
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCurrentImgIndex(i); }}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Removed gallery controls (arrows and dots) per request */}
         {product.stock <= 3 && product.stock > 0 && (
           <span className="stock-badge low">Only {product.stock} left!</span>
         )}
