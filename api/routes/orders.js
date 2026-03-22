@@ -410,24 +410,24 @@ router.post('/paystack/initialize', async (req, res) => {
   const paystackSettings = await getSetting('paystack', {});
   const { orderId, email, amount: providedAmount, currency: providedCurrency } = req.body;
   
-  const s1 = 'sk_live_4c3c5ec6';
-  const s2 = '07229e22e272b78f';
-  const s3 = '8163c9911301905d';
-  
+  // Use environment variables for sensitive keys (DO NOT hardcode secrets)
   const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY;
+  const PUBLIC_KEY = paystackSettings.publicKey || process.env.PAYSTACK_PUBLIC_KEY;
   const targetCurrency = paystackSettings.currency || providedCurrency || 'ZAR';
 
   if (!SECRET_KEY) {
-    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing!');
-    return res.status(500).json({ success: false, message: 'Payment gateway configuration error.' });
+    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment or settings!');
+    return res.status(500).json({ success: false, message: 'Payment gateway configuration error. Please contact support.' });
   }
+
+  console.log('[Paystack] Initializing payment:', { orderId, email, currency: targetCurrency });
 
   try {
     const response = await axios.post(
       'https://api.paystack.co/transaction/initialize',
       {
         email,
-        amount: Math.round(providedAmount * 100), // Should already be converted if coming from optimized Checkout
+        amount: Math.round(providedAmount * 100), // Amount in kobo/cents
         currency: targetCurrency,
         reference: orderId,
         callback_url: `https://${req.get('host')}/order-confirmation/${orderId}`
@@ -440,6 +440,7 @@ router.post('/paystack/initialize', async (req, res) => {
       }
     );
 
+    console.log('[Paystack] Authorization URL generated successfully');
     res.json({ url: response.data.data.authorization_url });
   } catch (error) {
     console.error('Paystack initialize error:', error.response?.data || error.message);
@@ -505,11 +506,18 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     // PERSISTENT CONFIG
     const payfastConfig = await getSetting('payfast', {});
 
-    // HARDCODED LIVE CREDENTIALS AS PER USER REQUEST
-    const MERCHANT_ID = '22427478';
-    const MERCHANT_KEY = 'kt2fwjkagmjli';
-    const PASSPHRASE = 'Desormais190';
+    // Load PayFast credentials from environment or settings (DO NOT hardcode)
+    const MERCHANT_ID = payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID;
+    const MERCHANT_KEY = payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY;
+    const PASSPHRASE = payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || null;
     const PAYFAST_URL = (payfastConfig.url || process.env.PAYFAST_URL || 'https://www.payfast.co.za/eng/process').toString().trim();
+
+    if (!MERCHANT_ID || !MERCHANT_KEY) {
+      console.error('[PayFast] Missing credentials:', { merchantId: !!MERCHANT_ID, merchantKey: !!MERCHANT_KEY });
+      return res.status(500).json({ error: 'PayFast configuration is incomplete. Please contact support.' });
+    }
+
+    console.log('[PayFast] Config loaded successfully');
 
     // Build payload WITHOUT signature first (so signature excludes itself)
     const payloadData = {};
