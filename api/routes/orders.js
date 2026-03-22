@@ -5,6 +5,7 @@ import { authenticateToken, optionalAuth } from '../middleware/auth.js';
 import crypto from 'crypto';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { products as fallbackProducts } from '../data/store.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -279,16 +280,25 @@ router.post('/checkout', optionalAuth, async (req, res) => {
     } else {
       // High-resilience fallback to manualItems if DB cart is empty (local persistence fallback)
       for (const mItem of manualItems) {
-        const { data: product } = await supabase.from('products').select('*').eq('id', mItem.product_id).single();
-        if (!product || product.stock < mItem.quantity) {
-          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}` });
+        let product;
+        const { data: dbProduct } = await supabase.from('products').select('*').eq('id', mItem.product_id).single();
+        
+        if (dbProduct) {
+          product = dbProduct;
+        } else {
+          // If not in DB, fallback to store static products (support for frontend uncached string IDs)
+          product = fallbackProducts.find(p => p.id === mItem.product_id);
+        }
+
+        if (!product || (product.stock !== undefined && product.stock < mItem.quantity)) {
+          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}. Please verify available options.` });
         }
         orderItems.push({
           product_id: product.id,
           name: product.name,
           price: product.price, // Force server-side price to prevent manipulation
           quantity: mItem.quantity,
-          image_url: product.image_url
+          image_url: product.image_url || product.image
         });
         subtotal += product.price * mItem.quantity;
       }
