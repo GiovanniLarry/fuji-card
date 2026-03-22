@@ -7,8 +7,22 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
   const [adding, setAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const { addToCart } = useCart();
   const { formatPrice } = useCurrency();
+
+  const gallery = product.gallery || [product.image || product.image_url];
+  const totalImages = gallery.length;
+
+  const nextImage = (e) => {
+    e.preventDefault(); e.stopPropagation();
+    setCurrentImgIndex((prev) => (prev + 1) % totalImages);
+  };
+
+  const prevImage = (e) => {
+    e.preventDefault(); e.stopPropagation();
+    setCurrentImgIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -44,10 +58,26 @@ const ProductCard = ({ product }) => {
     <Link to={`/product/${product.id}`} className="product-card">
       <div className="product-image">
         <img 
-          src={imageError ? placeholderImage : imageUrl} 
-          alt={product.name}
+          src={imageError ? placeholderImage : gallery[currentImgIndex]} 
+          alt={`${product.name} - view ${currentImgIndex + 1}`}
           onError={() => setImageError(true)}
         />
+        
+        {totalImages > 1 && (
+          <div className="gallery-controls">
+            <button className="gallery-btn prev" onClick={prevImage}>❮</button>
+            <button className="gallery-btn next" onClick={nextImage}>❯</button>
+            <div className="gallery-indicators">
+              {gallery.map((_, i) => (
+                <span 
+                  key={i} 
+                  className={`dot ${i === currentImgIndex ? 'active' : ''}`}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCurrentImgIndex(i); }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
         {product.stock <= 3 && product.stock > 0 && (
           <span className="stock-badge low">Only {product.stock} left!</span>
         )}
@@ -68,13 +98,18 @@ const ProductCard = ({ product }) => {
           <span className="product-set">{setName}</span>
           <span className="product-condition">{product.condition}</span>
         </div>
+        
+        {/* NEW: Description display per request */}
+        <p className="product-card-description">{product.description}</p>
+
         {product.graded && (
           <div className="grading-info">
             <span className="grading-badge">{product.gradingCompany || product.grading_company} {product.grade}</span>
           </div>
         )}
         <div className="product-footer">
-          <div className="price-container">
+          {/* Price hidden per request: "simple cards no price but should have description and name" */}
+          <div className="price-container" style={{ display: 'none' }}>
             {product.promo && originalPrice && (
               <span className="original-price">{formatPrice(originalPrice)}</span>
             )}

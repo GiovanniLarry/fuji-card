@@ -12,7 +12,14 @@ export const products = [
     "condition": "Sealed",
     "language": "Japanese",
     "stock": 45,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "https://i.ebayimg.com/images/g/YswAAOSw8~dm7fHj/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/vCMAAOSw~Xdm7fHl/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/8H4AAOSwtzNm7fHn/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/9XwAAOSw6vVm7fHp/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/AhoAAOSwdzVm7fHr/s-l1600.jpg"
+    ]
   },
   {
     "id": "prb01_box_official",
@@ -27,7 +34,14 @@ export const products = [
     "condition": "Sealed",
     "language": "Japanese",
     "stock": 60,
-    "featured": true
+    "featured": true,
+    "gallery": [
+        "https://i.ebayimg.com/images/g/v0QAAOSw~XNm7fHt/s-l1600.jpg",
+        "https://i.ebayimg.com/images/g/9XwAAOSw6vVm7fHp/s-l1600.jpg",
+        "https://i.ebayimg.com/images/g/vCMAAOSw~Xdm7fHl/s-l1600.jpg",
+        "https://i.ebayimg.com/images/g/8H4AAOSwtzNm7fHn/s-l1600.jpg",
+        "https://i.ebayimg.com/images/g/AhoAAOSwdzVm7fHr/s-l1600.jpg"
+    ]
   },
   {
     "id": "shanks_sleeves_v1",
@@ -42,7 +56,14 @@ export const products = [
     "condition": "New",
     "language": "Japanese",
     "stock": 100,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "https://i.ebayimg.com/images/g/shanks-s1/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/shanks-s2/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/shanks-s3/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/shanks-s4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/shanks-s5/s-l1600.jpg"
+    ]
   },
   {
     "id": "st25_buggy_deck",
@@ -57,7 +78,14 @@ export const products = [
     "condition": "Sealed",
     "language": "Japanese",
     "stock": 25,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "https://i.ebayimg.com/images/g/buggy-1/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/buggy-2/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/buggy-3/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/buggy-4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/buggy-5/s-l1600.jpg"
+    ]
   },
   {
     "id": "st26_luffy_deck",
@@ -72,7 +100,14 @@ export const products = [
     "condition": "Sealed",
     "language": "Japanese",
     "stock": 30,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "https://i.ebayimg.com/images/g/luffy-1/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/luffy-2/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/luffy-3/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/luffy-4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/luffy-5/s-l1600.jpg"
+    ]
   },
   {
     "id": "op_direct_import_box_v1",
