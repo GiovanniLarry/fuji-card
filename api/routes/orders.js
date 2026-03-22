@@ -423,7 +423,7 @@ router.post('/paystack/initialize', async (req, res) => {
     // Use environment variables for sensitive keys (DO NOT hardcode secrets)
     const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY;
     const PUBLIC_KEY = paystackSettings.publicKey || process.env.PAYSTACK_PUBLIC_KEY;
-    const targetCurrency = paystackSettings.currency || providedCurrency || 'USD';
+    const targetCurrency = paystackSettings.currency || providedCurrency || 'ZAR';
 
     if (!SECRET_KEY) {
       console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment or settings!');
