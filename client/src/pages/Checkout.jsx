@@ -512,11 +512,11 @@ const Checkout = () => {
             const order = response.data.order;
             await refreshCart();
 
-            // Fetch PayFast payload (with ZAR conversion)
-            const amountZAR = convertPrice(total, 'ZAR');
+            // Fetch PayFast payload (with USD conversion)
+            const amountUSD = convertPrice(total, 'USD');
             const payfastRes = await ordersAPI.generatePayfastPayload({ 
               orderId: order.id, 
-              amountZAR: amountZAR 
+              amountUSD: amountUSD 
             });
             const { url, payload } = payfastRes.data;
 

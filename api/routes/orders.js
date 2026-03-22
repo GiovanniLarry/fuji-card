@@ -452,7 +452,7 @@ router.post('/paystack/initialize', async (req, res) => {
 // Generate PayFast payload
 router.post('/payfast/generate', optionalAuth, async (req, res) => {
   try {
-    const { orderId, amountZAR: providedZAR } = req.body;
+    const { orderId, amountUSD: providedUSD } = req.body;
 
     // --- FALLBACK IF SUPABASE IS NOT CONFIGURED ---
     let order = null;
@@ -543,9 +543,9 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     // --- Transaction info ---
     payloadData.m_payment_id = String(order.id);
     
-    // Priority: 1. Provided ZAR from frontend, 2. Order total * static ZAR rate
-    const finalZAR = providedZAR || (parseFloat(order.total) * 24.5).toFixed(2);
-    payloadData.amount = parseFloat(finalZAR).toFixed(2);
+    // Priority: 1. Provided USD from frontend, 2. Order total (assuming order.total is in USD)
+    const finalUSD = providedUSD || parseFloat(order.total).toFixed(2);
+    payloadData.amount = parseFloat(finalUSD).toFixed(2);
     
     // Use a simple item name to minimize encoding errors
     payloadData.item_name = `Order_${order.order_number}`.replace(/\s+/g, "_");
@@ -554,7 +554,7 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     const signature = generatePayfastSignature(payloadData, PASSPHRASE || null);
     payloadData.signature = signature;
 
-    console.log('[PayFast] Final payload:', payloadData);
+    console.log('[PayFast] Final payload (USD):', { ...payloadData, amount: payloadData.amount });
 
     res.json({
       url: PAYFAST_URL,
