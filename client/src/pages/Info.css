@@ -1,66 +1,54 @@
 .info-page {
-  padding-top: 60px;
-  padding-bottom: 100px;
+  padding-top: 40px;
+  padding-bottom: 80px;
   background-color: #ffffff;
-  font-family: 'Outfit', sans-serif;
+  color: #333;
 }
 
 .discovery-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 30px 0;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.discovery-header::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: #eee;
-  z-index: 0;
 }
 
 .discovery-header h1 {
   display: inline-block;
   border: 1px solid #ccc;
-  padding: 12px 35px;
-  font-size: 26px;
-  font-weight: 800;
+  padding: 15px 40px;
+  font-size: 28px;
+  font-weight: 900;
   letter-spacing: 1px;
-  color: #333;
+  color: #444;
   background: white;
-  z-index: 1;
-  text-transform: uppercase;
-  font-family: 'Outfit', sans-serif;
 }
 
 .card-section {
-  max-width: 900px;
-  margin: 0 auto 60px;
+  margin-bottom: 60px;
 }
 
 .card-section h2 {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 800;
-  color: #555;
-  margin-bottom: 12px;
+  color: #444;
+  margin-bottom: 15px;
 }
 
 .intro-text {
   font-size: 16px;
-  line-height: 1.5;
-  color: #444;
+  line-height: 1.6;
+  color: #666;
   margin-bottom: 40px;
+  max-width: 900px;
 }
 
 .series-divider {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 50px 0 30px;
+  margin: 40px 0 25px;
 }
 
 .series-divider::before,
@@ -71,73 +59,129 @@
 }
 
 .series-divider span {
-  padding: 0 15px;
+  padding: 0 20px;
   font-weight: 800;
   color: #555;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
-.info-list-item {
+.card-list {
   list-style: none;
-  margin-bottom: 12px;
+  padding: 0;
+  margin: 0;
 }
 
-.item-title-row {
+.card-list-item {
+  margin-bottom: 25px;
+  background: #fdfdfd;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-list-item.expanded {
+  border-color: #0088cc;
+  box-shadow: 0 10px 30px rgba(0, 136, 204, 0.1);
+}
+
+.list-item-header {
+  padding: 18px 25px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
   cursor: pointer;
-  padding: 4px 0;
+  background: white;
 }
 
-.bullet-dot {
-  font-size: 6px;
+.list-item-header:hover {
+  background: #f9f9f9;
+}
+
+.list-item-header span {
   color: #333;
-}
-
-.item-link-text {
-  color: #58a3d9;
+  font-weight: 700;
   font-size: 16px;
-  font-weight: 600;
   letter-spacing: 0.2px;
 }
 
-.item-link-text:hover {
-  text-decoration: underline;
+.toggle-icon {
+  font-size: 14px;
+  color: #888;
+  transition: transform 0.3s ease;
 }
 
-.info-card-gallery {
+.expanded .toggle-icon {
+  transform: rotate(180deg);
+  color: #0088cc;
+}
+
+.gallery-scroller {
+  padding: 0 25px 25px;
   display: flex;
-  gap: 12px;
+  gap: 15px;
   overflow-x: auto;
-  padding: 15px 0 15px 20px;
-  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #eee transparent;
+  animation: slideDown 0.4s ease-out;
 }
 
-.info-card-gallery::-webkit-scrollbar {
-  display: none;
+.gallery-scroller::-webkit-scrollbar {
+  height: 6px;
 }
 
-.small-gallery-card {
-  min-width: 100px;
-  height: 140px;
-  border-radius: 6px;
+.gallery-scroller::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 10px;
+}
+
+.gallery-card {
+  min-width: 140px;
+  max-width: 140px;
+  aspect-ratio: 5/7;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  background: #f5f5f5;
+  background: #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
 }
 
-.small-gallery-card img {
+.gallery-card:hover {
+  transform: scale(1.05);
+}
+
+.gallery-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px 30px;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
   .discovery-header h1 {
-    font-size: 18px;
-    padding: 10px 20px;
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+  
+  .grid-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-card {
+    min-width: 110px;
+    max-width: 110px;
   }
 }

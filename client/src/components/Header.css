@@ -278,110 +278,19 @@
   gap: 35px;
 }
 
-.nav-links-mockup li {
-  position: relative;
-}
-
 .nav-links-mockup li a {
+  color: white;
   text-decoration: none;
-  color: #333;
-  font-size: 13.5px;
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 15px;
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 10px 0;
-  transition: color 0.2s ease;
-}
-
-.nav-links-mockup li a:hover {
-  color: #e94560;
-}
-
-/* Base Dropdown Styling */
-.sub-category-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  min-width: 200px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  list-style: none;
-  padding: 10px 0;
-  border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  border: 1px solid #f0f0f0;
-}
-
-.nav-item-dropdown:hover .sub-category-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.sub-category-dropdown li {
-  width: 100%;
-}
-
-.sub-category-dropdown li a {
-  padding: 10px 20px !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  color: #555 !important;
+  gap: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: block !important;
-  white-space: nowrap;
-}
-
-.sub-category-dropdown li a:hover {
-  background: #f8f8f8;
-  color: #e94560 !important;
-}
-
-.centered-navigation {
-  display: flex;
-  justify-content: center;
 }
 
 /* Mobile Overrides */
 @media (max-width: 768px) {
-  .nav-links-mockup li {
-    position: static; /* Reset for mobile */
-  }
-
-  .nav-links-mockup li a {
-    padding: 10px 0; /* Adjust padding for mobile */
-  }
-
-  .sub-category-dropdown {
-    position: static; /* Reset for mobile */
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    display: none; /* Hidden by default, controlled by JS */
-  }
-
-  .nav-item-dropdown.open .sub-category-dropdown {
-    display: block; /* Show when parent is open */
-  }
-
-  .sub-category-dropdown li a {
-    padding: 8px 15px !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    color: #777 !important;
-    text-transform: none;
-    letter-spacing: normal;
-  }
   .top-bar-content {
     justify-content: space-between;
     padding: 0 10px;

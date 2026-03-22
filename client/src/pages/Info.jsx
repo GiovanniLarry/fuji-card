@@ -7,16 +7,16 @@ const SetItem = ({ name, id }) => {
   const cards = setShowcase[id] || getDefaultShowcase(name);
 
   return (
-    <li className="info-list-item">
-      <div className="item-title-row" onClick={() => setIsExpanded(!isExpanded)}>
-        <i className="fa-solid fa-circle bullet-dot"></i>
-        <span className="item-link-text">{name} {name.toLowerCase().includes('cardlist') ? '' : 'cardlist'}</span>
+    <li className={`card-list-item ${isExpanded ? 'expanded' : ''}`}>
+      <div className="list-item-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <span>{name}</span>
+        <i className={`fa-solid fa-chevron-down toggle-icon`}></i>
       </div>
       {isExpanded && (
-        <div className="info-card-gallery">
+        <div className="gallery-scroller">
           {cards.map((card, idx) => (
-            <div key={idx} className="small-gallery-card">
-              <img src={card.image} alt={card.name} />
+            <div key={idx} className="gallery-card">
+              <img src={card.image} alt={card.name} loading="lazy" />
             </div>
           ))}
         </div>
