@@ -65,13 +65,16 @@ const Info = () => {
 
             <article className="news-item">
               <div className="news-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1606733970811-da6170564584?auto=format&fit=crop&q=80&w=1000" alt="Lorcana Japan" />
-                <span className="news-tag">LORCANA</span>
+                <img src="https://images.unsplash.com/photo-1544256221-811eb918fbd8?auto=format&fit=crop&q=80&w=1000" alt="MTG Duskmourn" />
+                <span className="news-tag highlight">MARKET ALERT</span>
               </div>
               <div className="news-content">
-                <h3>Disney Lorcana Japan: Ursula's Return Set to Feature Exclusive Stamped Promos</h3>
-                <p>Disney Lorcana continues its Japanese expansion with Chapter 4. This set will feature first-edition Japanese stamped promos that are expected to be highly sought after by global crossover collectors.</p>
-                <span className="news-date">March 17, 2026</span>
+                <h3>Magic the Gathering: Duskmourn House of Horror Prerelease Hits Tokyo</h3>
+                <p>The latest MTG expansion 'Duskmourn' has officially launched its prerelease phase across Japan. Collectors are reporting a high hit rate for the exclusive Japanese alternate art foils, which are currently commanding a 40% premium on international exchange platforms.</p>
+                <div className="news-meta">
+                   <span className="news-date">March 22, 2026</span>
+                   <span className="status-live">LIVE UPDATES</span>
+                </div>
               </div>
             </article>
 
