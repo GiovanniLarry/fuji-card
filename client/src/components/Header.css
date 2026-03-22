@@ -425,10 +425,7 @@
   }
 }
 
-/* RESET PADDING for relative header */
-body {
-    padding-top: 0;
-}
+/* REMOVED OVERRIDING RESET: body { padding-top: 0; } */
 
 /* Drawer CSS (Optimized for Mockup) */
 .drawer-overlay {

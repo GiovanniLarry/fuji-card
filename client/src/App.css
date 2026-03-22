@@ -12,7 +12,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   line-height: 1.6;
   color: #1a1a2e;
-  padding-top: 160px; /* FIXED HEADER PADDING */
+  padding-top: 175px; /* FIXED HEADER PADDING - Increased for visibility */
 }
 
 body.auth-page {
@@ -137,7 +137,7 @@ img {
   
   body {
     font-size: 14px;
-    padding-top: 130px; /* Reduced mobile header padding */
+    padding-top: 145px; /* Adjusted mobile header padding */
   }
 }
 
@@ -147,6 +147,6 @@ img {
   }
   
   body {
-    padding-top: 130px;
+    padding-top: 145px;
   }
 }

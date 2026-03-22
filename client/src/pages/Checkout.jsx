@@ -122,7 +122,7 @@ const Checkout = () => {
 
   const paymentMethods = [
     { id: 'apple', name: 'Apple Pay', shortName: 'Apple Pay', icon: 'apple', description: 'Fast and secure one-click checkout' },
-    { id: 'payfast', name: 'PayFast Secure', shortName: 'PayFast', icon: 'payfast', description: 'Local Bank Transfer & EFT options' },
+    { id: 'payfast', name: 'PayFast Instructions', shortName: 'PayFast', icon: 'payfast', description: 'Secure Bank Transfer & EFT (WhatsApp)' },
     { id: 'paystack', name: 'Paystack Payment', shortName: '', icon: 'paystack', description: 'Cards · Bank · Transfer · USSD' },
     { id: 'cryptomus', name: 'Cryptocurrency', shortName: 'Crypto', icon: 'crypto', description: 'BTC · ETH · USDT · USDC · LTC' },
     { id: 'wise', name: 'Wise Transfer', shortName: 'Wise', icon: 'wise', description: 'Instant, low-fee international payments' },
@@ -252,7 +252,7 @@ const Checkout = () => {
 
     try {
       // Check if it's a WhatsApp payment method or if we are in fallback mode
-      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email'];
+      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email', 'payfast'];
 
       if (whatsappMethods.includes(formData.paymentMethod)) {
         // Send order via WhatsApp for new payment methods
