@@ -73,6 +73,7 @@ export const ordersAPI = {
   getAll: () => api.get('/orders'),
   getOne: (id) => api.get(`/orders/${id}`),
   checkout: (data) => api.post('/orders/checkout', data),
+  createCryptomusPayment: (data) => api.post('/orders/checkout', data), // Compatibility fallback for older cached versions
   generatePayfastPayload: (data) => api.post('/orders/payfast/generate', data),
   restoreCart: (orderId) => api.post(`/orders/${orderId}/restore-cart`)
 };
