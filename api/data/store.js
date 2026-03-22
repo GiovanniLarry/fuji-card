@@ -379,7 +379,7 @@ export const products = [
     "name": "Shanks Manga Alternative Art OP01-120",
     "description": "The Holy Grail of One Piece cards. Shanks Manga Art.",
     "price": 850,
-    "image": "https://m.media-amazon.com/images/I/61MvUInC06L._AC_SL1200_.jpg",
+    "image": "https://i.ebayimg.com/images/g/KpQAAeSwKhJpp37F/s-l1600.jpg",
     "category": "onepiece",
     "cardType": "Character",
     "set": "Romance Dawn",
