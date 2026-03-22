@@ -263,19 +263,28 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       for (const cartItem of cart.cart_items) {
         const product = cartItem.products;
 
-        if (!product || product.stock < cartItem.quantity) {
-          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}` });
+        // Fetch fresh stock data to avoid cache issues
+        const { data: freshProduct } = await supabase
+          .from('products')
+          .select('id, name, price, image_url, stock')
+          .eq('id', product.id)
+          .single();
+
+        const currentProduct = freshProduct || product;
+
+        if (!currentProduct || currentProduct.stock < cartItem.quantity) {
+          return res.status(400).json({ error: `Insufficient stock for ${currentProduct?.name || 'product'}. Please verify available options.` });
         }
 
         orderItems.push({
-          product_id: product.id,
-          name: product.name,
-          price: product.price,
+          product_id: currentProduct.id,
+          name: currentProduct.name,
+          price: currentProduct.price,
           quantity: cartItem.quantity,
-          image_url: product.image_url
+          image_url: currentProduct.image_url
         });
 
-        subtotal += product.price * cartItem.quantity;
+        subtotal += currentProduct.price * cartItem.quantity;
       }
     } else {
       // High-resilience fallback to manualItems if DB cart is empty (local persistence fallback)

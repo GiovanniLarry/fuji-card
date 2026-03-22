@@ -419,9 +419,12 @@ const Checkout = () => {
 
         try {
           if (formData.paymentMethod === 'cryptomus') {
+            console.log('[Crypto] Creating order...');
             const response = await ordersAPI.checkout(orderData);
+            console.log('[Crypto] Order created successfully:', response.data.order);
             
             // Create order to flag the admin dashboard notification bell, then route to WhatsApp
+            console.log('[Crypto] Redirecting to WhatsApp...');
             sendWhatsAppOrder();
             
             await refreshCart();
@@ -508,11 +511,12 @@ const Checkout = () => {
         } catch (apiError) {
           console.error('[Checkout] Direct payment API error:', apiError);
           const errorMsg = apiError.response?.data?.error || apiError.message || 'Payment processing failed';
+          console.error('[Checkout] Error details:', errorMsg);
           
-          // Only fallback to WhatsApp if the method is NOT intended for direct digital payment
-          const digitalMethods = ['paystack', 'payfast', 'cryptomus'];
+          // For crypto and non-digital methods, always fall back to WhatsApp
+          const digitalMethods = ['paystack', 'payfast'];
           if (!digitalMethods.includes(formData.paymentMethod)) {
-            console.warn('Falling back to WhatsApp concierge for non-digital method');
+            console.warn(`[Checkout] Falling back to WhatsApp concierge for ${formData.paymentMethod || 'manual'} payment`);
             sendWhatsAppOrder();
           } else {
             try {
