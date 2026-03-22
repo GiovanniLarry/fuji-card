@@ -527,7 +527,7 @@ const Checkout = () => {
               throw apiError; // Re-throw to be caught by the new catch block
             } catch (error) {
               console.error('PAYMENT_ERROR:', error);
-              const errorMessage = error.response?.data?.message || error.message || 'Advanced payment initialization failed. Please check your network or try again.';
+              const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Advanced payment initialization failed. Please check your network or try again.';
               alert(`Payment Error: ${errorMessage}\n\nPlease verify your selection or contact support if the issue persists.`);
             } finally {
               // This finally block ensures setLoading(false) is called even if an alert is shown
@@ -539,7 +539,8 @@ const Checkout = () => {
     } catch (error) {
       console.error('Checkout error details:', error);
       console.error('Error Response:', error.response?.data);
-      alert(error.response?.data?.error || error.message || 'Checkout failed');
+      const generalErrorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Checkout failed';
+      alert(`Checkout Error: ${generalErrorMessage}`);
     } finally {
       setLoading(false);
     }

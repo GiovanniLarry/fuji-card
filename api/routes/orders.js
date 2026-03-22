@@ -243,10 +243,6 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       .eq('session_id', cartKey)
       .single();
 
-    if (!cart || !cart.cart_items || cart.cart_items.length === 0) {
-      return res.status(400).json({ error: 'Cart is empty' });
-    }
-
     if (!shippingAddress) {
       return res.status(400).json({ error: 'Shipping address required' });
     }
@@ -255,22 +251,47 @@ router.post('/checkout', optionalAuth, async (req, res) => {
     const orderItems = [];
     let subtotal = 0;
 
-    for (const cartItem of cart.cart_items) {
-      const product = cartItem.products;
+    const hasDBCart = cart && cart.cart_items && cart.cart_items.length > 0;
+    const hasManualItems = manualItems && manualItems.length > 0;
 
-      if (!product || product.stock < cartItem.quantity) {
-        return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}` });
+    if (!hasDBCart && !hasManualItems) {
+      return res.status(400).json({ error: 'Cart is empty' });
+    }
+
+    if (hasDBCart) {
+      for (const cartItem of cart.cart_items) {
+        const product = cartItem.products;
+
+        if (!product || product.stock < cartItem.quantity) {
+          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}` });
+        }
+
+        orderItems.push({
+          product_id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: cartItem.quantity,
+          image_url: product.image_url
+        });
+
+        subtotal += product.price * cartItem.quantity;
       }
-
-      orderItems.push({
-        product_id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: cartItem.quantity,
-        image_url: product.image_url
-      });
-
-      subtotal += product.price * cartItem.quantity;
+    } else {
+      // High-resilience fallback to manualItems if DB cart is empty (local persistence fallback)
+      for (const mItem of manualItems) {
+        const { data: product } = await supabase.from('products').select('*').eq('id', mItem.product_id).single();
+        if (!product || product.stock < mItem.quantity) {
+          return res.status(400).json({ error: `Insufficient stock for ${product?.name || 'product'}` });
+        }
+        orderItems.push({
+          product_id: product.id,
+          name: product.name,
+          price: product.price, // Force server-side price to prevent manipulation
+          quantity: mItem.quantity,
+          image_url: product.image_url
+        });
+        subtotal += product.price * mItem.quantity;
+      }
     }
 
     const shipping = subtotal >= 50 ? 0 : 4.99;
