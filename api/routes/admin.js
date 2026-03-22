@@ -100,7 +100,10 @@ const uploadQR = multer({ storage: qrStorage, limits: { fileSize: 5 * 1024 * 102
 // Publicly available Paystack Key (needed for checkout)
 router.get('/paystack-key', async (req, res) => {
     const paystack = await getSetting('paystack', { publicKey: '', currency: 'USD' });
-    res.json({ publicKey: paystack.publicKey, currency: paystack.currency });
+    // Fall back to environment variables if not set in settings
+    const publicKey = paystack.publicKey || process.env.PAYSTACK_PUBLIC_KEY || '';
+    const currency = paystack.currency || process.env.PAYSTACK_CURRENCY || 'ZAR';
+    res.json({ publicKey, currency });
 });
 
 // Get current crypto wallet config (public for checkout)

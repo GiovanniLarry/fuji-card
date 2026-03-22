@@ -12,14 +12,14 @@ export const AuthProvider = ({ children }) => {
   const MOCK_USER = {
     id: 'mock_user_id',
     username: 'DemoUser',
-    firstName: 'Giovanni',
-    lastName: 'Larry',
-    email: 'demo@fuji-card.com',
-    address: 'Tokyo Chiyoda-ku 1-1',
-    city: 'Tokyo',
-    postcode: '100-0001',
-    country: 'Japan',
-    phone: '+81 90-7609-8954'
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    city: '',
+    postcode: '',
+    country: 'United Kingdom',
+    phone: ''
   };
 
   useEffect(() => {

@@ -384,6 +384,41 @@ const Checkout = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // VALIDATE shipping address fields
+    if (!user?.firstName || !user?.firstName.trim()) {
+      alert('Please enter your first name');
+      return;
+    }
+    if (!user?.lastName || !user?.lastName.trim()) {
+      alert('Please enter your last name');
+      return;
+    }
+    if (!user?.address || !user?.address.trim()) {
+      alert('Please enter your address');
+      return;
+    }
+    if (!user?.city || !user?.city.trim()) {
+      alert('Please enter your city');
+      return;
+    }
+    if (!user?.postcode || !user?.postcode.trim()) {
+      alert('Please enter your postcode');
+      return;
+    }
+    if (!user?.country || !user?.country.trim()) {
+      alert('Please select your country');
+      return;
+    }
+    if (!user?.phone || !user?.phone.trim()) {
+      alert('Please enter your phone number');
+      return;
+    }
+    if (!user?.email || !user?.email.trim()) {
+      alert('Please enter your email address');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -402,13 +437,13 @@ const Checkout = () => {
             price: item.price || item.product?.price
           })),
           shipping_address: {
-            firstName: user?.firstName || 'Demo',
-            lastName: user?.lastName || 'Collector',
-            address: user?.address || 'Tokyo Chiyoda-ku 1-1',
-            city: user?.city || 'Tokyo',
-            postcode: user?.postcode || '100-0001',
-            country: user?.country || 'Japan',
-            phone: user?.phone || '+81 90-7609-8954',
+            firstName: user?.firstName || '',
+            lastName: user?.lastName || '',
+            address: user?.address || '',
+            city: user?.city || '',
+            postcode: user?.postcode || '',
+            country: user?.country || '',
+            phone: user?.phone || '',
             email: user?.email
           },
           payment_method: formData.paymentMethod,
