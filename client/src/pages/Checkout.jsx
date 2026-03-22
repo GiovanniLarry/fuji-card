@@ -423,12 +423,7 @@ const Checkout = () => {
             const response = await ordersAPI.checkout(orderData);
             const order = response.data.order;
             
-            const coinDetails = coins[selectedCoin];
-            
-            // Trigger specific crypto WhatsApp notification
-            if (coinDetails) {
-              sendCryptoWhatsApp(order.id, selectedCoin, coinDetails.address);
-            }
+            // Bypass external WhatsApp routing per request; Admin receives real-time UI notification
             
             // Success navigation
             navigate(`/order-confirmation/${order.id}`, { state: { order } });
@@ -867,8 +862,8 @@ const Checkout = () => {
                   {loading ? 'Processing...' : 
                     formData.paymentMethod === 'card' ? 'Place Order' : 
                     ['payfast', 'paystack'].includes(formData.paymentMethod) ? 'Proceed to Payment' : 
-                    formData.paymentMethod === 'cryptomus' ? 'Send Payment via WhatsApp' :
-                    'Send Order via WhatsApp'
+                    formData.paymentMethod === 'cryptomus' ? 'Confirm Crypto Payment' :
+                    'Complete Order'
                   }
                 </button>
                 <button

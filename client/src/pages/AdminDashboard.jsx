@@ -607,7 +607,7 @@ const AdminDashboard = () => {
                                         </div>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0.2rem 0' }}>
                                             <span style={{ fontSize: '0.9rem', color: '#e2e8f0' }}>Paid: <strong style={{ color: '#fff' }}>{notif.currency} {notif.amount}</strong></span>
-                                            <span style={{ textTransform: 'uppercase', fontSize: '0.75rem', fontWeight: 'bold', padding: '0.2rem 0.5rem', borderRadius: '4px', background: notif.method === 'crypto' || notif.method === 'cryptocurrency' ? 'rgba(251, 191, 36, 0.2)' : 'rgba(167, 139, 250, 0.2)', color: notif.method === 'crypto' || notif.method === 'cryptocurrency' ? '#fbbf24' : '#a78bfa' }}>
+                                            <span style={{ textTransform: 'uppercase', fontSize: '0.75rem', fontWeight: 'bold', padding: '0.2rem 0.5rem', borderRadius: '4px', background: ['crypto', 'cryptocurrency', 'cryptomus'].includes(notif.method) ? 'rgba(251, 191, 36, 0.2)' : 'rgba(167, 139, 250, 0.2)', color: ['crypto', 'cryptocurrency', 'cryptomus'].includes(notif.method) ? '#fbbf24' : '#a78bfa' }}>
                                                 {notif.method}
                                             </span>
                                         </div>
