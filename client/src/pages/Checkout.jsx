@@ -335,30 +335,39 @@ const Checkout = () => {
   const sendCryptoWhatsApp = (orderId, coin, address) => {
     try {
       const waNumber = '818023903373';
-      let message = `Hi! I just made a *Crypto Payment* on Fuji Card Market.\n\n`;
-      message += `🪙 *Coin:* ${coin}\n`;
-      message += `📬 *Sent to:* ${address}\n`;
-      message += `📦 *Order ID:* ${orderId || 'NEW'}\n`;
-      message += `👤 *Name:* ${user?.firstName || 'Customer'} ${user?.lastName || ''}\n`;
-      message += `📧 *Email:* ${user?.email || 'N/A'}\n\n`;
-      message += `*Items:*\n`;
+      let message = `🚀 *NEW CRYPTO ORDER - FUJI CARD MARKET*\n\n`;
+      message += `Greetings! I have just initiated a cryptocurrency payment.\n\n`;
+      
+      message += `💳 *PAYMENT DETAILS*\n`;
+      message += `• Coin: *${coin}*\n`;
+      message += `• Address: \`${address}\`\n`;
+      message += `• Status: *Awaiting Confirmation*\n\n`;
+      
+      message += `👤 *CLIENT INFORMATION*\n`;
+      message += `• Name: ${user?.firstName || 'Customer'} ${user?.lastName || ''}\n`;
+      message += `• Email: ${user?.email || 'N/A'}\n\n`;
+
+      message += `📦 *ORDER SUMMARY*\n`;
+      message += `• Order ID: #${orderId || 'NEW'}\n`;
       
       if (cart?.items && Array.isArray(cart.items)) {
         cart.items.forEach(item => {
           const itemName = item.product?.name || item.name || 'Fuji Product';
-          message += `• ${itemName} x${item.quantity}\n`;
+          message += `   - ${itemName} (x${item.quantity})\n`;
         });
       }
       
       const displayTotal = typeof total === 'number' ? total.toFixed(2) : total;
-      message += `\n💰 *Total:* ${getSymbol()}${displayTotal}\n\n`;
-      message += `Please confirm receipt. TX Hash (if available): _______________`;
+      message += `\n💰 *TOTAL AMOUNT:* ${getSymbol()}${displayTotal}\n`;
+      message += `──────────────\n\n`;
+      message += `I will share the transaction hash/screenshot shortly. Please confirm once the assets are received.\n`;
+      message += `Thank you!`;
       
       const encodedMsg = encodeURIComponent(message);
-      window.open(`https://wa.me/${waNumber.replace(/\D/g, '')}?text=${encodedMsg}`, '_blank');
+      const whatsappUrl = `https://wa.me/${waNumber.replace(/\D/g, '')}?text=${encodedMsg}`;
+      window.open(whatsappUrl, '_blank');
     } catch (waErr) {
       console.error('WhatsApp Error:', waErr);
-      // Don't crash checkout if WhatsApp fails
     }
   };
 
