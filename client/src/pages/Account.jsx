@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { ordersAPI } from '../services/api';
@@ -9,8 +9,9 @@ import './AccountTransactions.css';
 const Account = () => {
   const { user, isAuthenticated, loading: authLoading, logout, updateProfile } = useAuth();
   const { formatPrice } = useCurrency();
+  const [searchParams] = useSearchParams();
   const [orders, setOrders] = useState([]);
-  const [activeTab, setActiveTab] = useState('orders');
+  const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'orders');
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -28,6 +29,15 @@ const Account = () => {
   const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    // Update activeTab if query param changes
+    const tab = searchParams.get('tab');
+    if (tab) {
+      setActiveTab(tab);
+      setEditing(tab === 'profile'); // Auto-enable editing for profile tab
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (user) {

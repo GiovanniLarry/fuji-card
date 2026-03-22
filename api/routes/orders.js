@@ -400,29 +400,33 @@ router.post('/checkout', optionalAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Checkout error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Checkout error stack:', error.stack);
+    
+    // Return user-friendly error message
+    const errorMessage = error.message || 'Checkout failed. Please try again.';
+    res.status(500).json({ error: errorMessage });
   }
 });
 
 // Initialize Paystack payment (Standard Redirect)
 router.post('/paystack/initialize', async (req, res) => {
-  // --- GET CUSTOM KEYS FROM SETTINGS ---
-  const paystackSettings = await getSetting('paystack', {});
-  const { orderId, email, amount: providedAmount, currency: providedCurrency } = req.body;
-  
-  // Use environment variables for sensitive keys (DO NOT hardcode secrets)
-  const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY;
-  const PUBLIC_KEY = paystackSettings.publicKey || process.env.PAYSTACK_PUBLIC_KEY;
-  const targetCurrency = paystackSettings.currency || providedCurrency || 'ZAR';
-
-  if (!SECRET_KEY) {
-    console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment or settings!');
-    return res.status(500).json({ success: false, message: 'Payment gateway configuration error. Please contact support.' });
-  }
-
-  console.log('[Paystack] Initializing payment:', { orderId, email, currency: targetCurrency });
-
   try {
+    // --- GET CUSTOM KEYS FROM SETTINGS ---
+    const paystackSettings = await getSetting('paystack', {});
+    const { orderId, email, amount: providedAmount, currency: providedCurrency } = req.body;
+    
+    // Use environment variables for sensitive keys (DO NOT hardcode secrets)
+    const SECRET_KEY = paystackSettings.secretKey || process.env.PAYSTACK_SECRET_KEY;
+    const PUBLIC_KEY = paystackSettings.publicKey || process.env.PAYSTACK_PUBLIC_KEY;
+    const targetCurrency = paystackSettings.currency || providedCurrency || 'ZAR';
+
+    if (!SECRET_KEY) {
+      console.error('CRITICAL: PAYSTACK_SECRET_KEY is missing from environment or settings!');
+      return res.status(500).json({ success: false, message: 'Payment gateway configuration error. Please contact support.' });
+    }
+
+    console.log('[Paystack] Initializing payment:', { orderId, email, currency: targetCurrency });
+
     const response = await axios.post(
       'https://api.paystack.co/transaction/initialize',
       {

@@ -99,17 +99,37 @@ const uploadQR = multer({ storage: qrStorage, limits: { fileSize: 5 * 1024 * 102
 
 // Publicly available Paystack Key (needed for checkout)
 router.get('/paystack-key', async (req, res) => {
-    const paystack = await getSetting('paystack', { publicKey: '', currency: 'USD' });
-    // Fall back to environment variables if not set in settings
-    const publicKey = paystack.publicKey || process.env.PAYSTACK_PUBLIC_KEY || '';
-    const currency = paystack.currency || process.env.PAYSTACK_CURRENCY || 'ZAR';
-    res.json({ publicKey, currency });
+    try {
+        const paystack = await getSetting('paystack', { publicKey: '', currency: 'USD' });
+        // Fall back to environment variables if not set in settings
+        const publicKey = paystack.publicKey || process.env.PAYSTACK_PUBLIC_KEY || '';
+        const currency = paystack.currency || process.env.PAYSTACK_CURRENCY || 'ZAR';
+        
+        if (!publicKey) {
+            console.warn('Paystack public key not configured');
+            return res.json({ publicKey: '', currency, warning: 'Paystack not configured' });
+        }
+        
+        res.json({ publicKey, currency });
+    } catch (error) {
+        console.error('Error fetching Paystack key:', error);
+        // Return empty config but with 200 status to avoid breaking frontend
+        const publicKey = process.env.PAYSTACK_PUBLIC_KEY || '';
+        const currency = process.env.PAYSTACK_CURRENCY || 'ZAR';
+        res.json({ publicKey, currency, fallback: true });
+    }
 });
 
 // Get current crypto wallet config (public for checkout)
 router.get('/crypto-wallets', async (req, res) => {
-    const wallets = await getSetting('wallets', {});
-    res.json(wallets);
+    try {
+        const wallets = await getSetting('wallets', {});
+        res.json(wallets || {});
+    } catch (error) {
+        console.error('Error fetching crypto wallets:', error);
+        // Return empty wallets but with 200 status
+        res.json({});
+    }
 });
 const JWT_SECRET = process.env.JWT_SECRET || 'fujicard-secret-key-2024';
 
