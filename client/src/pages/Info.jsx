@@ -109,109 +109,61 @@ const Info = () => {
               <div className="news-section">
                 <article className="news-item">
                   <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=1000" alt="Pokemon Crimson Haze" />
-                    <span className="news-tag">POKEMON</span>
-                  </div>
-                  <div className="news-content">
-                    <h3>The Crimson Haze Returns: A Deep Dive into the Newest Japanese Set</h3>
-                    <p>Japanese collectors are bracing for the latest high-class release. Crimson Haze promises massive hitters with unique Art Rare prints that have already seen a 30% surge in pre-order volume.</p>
-                    <span className="news-date">March 21, 2026</span>
-                  </div>
-                </article>
-
-                <article className="news-item">
-                  <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="One Piece OP-09" />
+                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="One Piece Ban List" />
                     <span className="news-tag">ONE PIECE</span>
                   </div>
                   <div className="news-content">
-                    <h3>Four Emperors Expansion: OP-09 Meta Shift Predictions</h3>
-                    <p>With the announcement of OP-09 'Four Emperors', the competition is heating up. Early leaks suggest a powerful new Manga Rare Shanks that is expected to break records in the collectors market.</p>
-                    <span className="news-date">March 19, 2026</span>
+                    <h3>Bandai Announces Major Update to One Piece Ban List (March 2026)</h3>
+                    <p>Charlotte Pudding (OP06-047) has been officially banned due to its disruptive hand-resetting ability. Simultaneously, six older cards have been unbanned to prepare for the Block 2 competitive era.</p>
+                    <span className="news-date">March 16, 2026</span>
                   </div>
                 </article>
 
                 <article className="news-item">
                   <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=1000" alt="Gundam News" />
-                    <span className="news-tag">BUNDAI</span>
+                    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=1000" alt="Set Rotation" />
+                    <span className="news-tag">SYSTEM CHANGE</span>
                   </div>
                   <div className="news-content">
-                    <h3>Gundam Emerge Vol. 1: Supply Shortages Hit Japanese Retailers</h3>
-                    <p>The first wave of the new Gundam TCG has sold out across major Tokyo districts. Secondary market prices for 'Emerge' boxes are already seeing a 50% premium as the game gains sudden traction with veteran collectors.</p>
-                    <span className="news-date">March 18, 2026</span>
+                    <h3>Historic Shift: Block Rotation Introduced for One Piece TCG</h3>
+                    <p>Starting April 1, 2026, Bandai is implementing the first-ever Standard format rotation. Block 1 (OP01-04) will move to the Eternal format, keeping the Standard meta fresh and focused on newer releases.</p>
+                    <span className="news-date">March 16, 2026</span>
                   </div>
                 </article>
 
                 <article className="news-item">
                   <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=1000" alt="Union Arena" />
-                    <span className="news-tag">UNION ARENA</span>
+                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="OP-15 Two Legends" />
+                    <span className="news-tag">SET RELEASE</span>
                   </div>
                   <div className="news-content">
-                    <h3>Union Arena Championship: Tokyo Masters Highlights</h3>
-                    <p>The latest Union Arena masters saw a surprise victory for the Gundam deck archetypes. We take a look at the top 8 lists and the secret tech cards that made it happen.</p>
-                    <span className="news-date">March 15, 2026</span>
+                    <h3>OP-15 'Two Legends' Global Launch: Gear 5 Luffy Takes Over</h3>
+                    <p>The 15th expansion has arrived. Featuring revolutionary cards for Imu and the Five Elders, OP-15 is set to be the most impactful set of 2026 for both players and investors.</p>
+                    <span className="news-date">March 07, 2026</span>
                   </div>
                 </article>
 
                 <article className="news-item">
                   <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1642104704074-9355a993b452?auto=format&fit=crop&q=80&w=1000" alt="Card Grading" />
-                    <span className="news-tag">COLLECTING</span>
+                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=1000" alt="Treasure Cup" />
+                    <span className="news-tag">TOURNAMENT</span>
                   </div>
                   <div className="news-content">
-                    <h3>PSA Japan Operations Expand: Faster Turnaround Times for 2026</h3>
-                    <p>PSA has officially opened its new Tokyo verification center. Local Japanese card submissions are expected to see a 2x increase in speed, making it easier than ever to grade your high-end OP-09 pulls.</p>
-                    <span className="news-date">March 14, 2026</span>
+                    <h3>One Piece Card Game: Rules Update for Treasure Cup 2025/2026</h3>
+                    <p>Bandai has issued a comprehensive rules patch targeting interaction timing for 'On Play' effects. This change aims to clarify complex board states during the upcoming Treasure Cup circuit.</p>
+                    <span className="news-date">March 02, 2026</span>
                   </div>
                 </article>
 
                 <article className="news-item">
                   <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="Weiss Schwarz" />
-                    <span className="news-tag">WEISS SCHWARZ</span>
+                    <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=1000" alt="OP-16 Leaks" />
+                    <span className="news-tag">LEAKS</span>
                   </div>
                   <div className="news-content">
-                    <h3>Weiss Schwarz: Hololive Production Vol. 3 Rumors Swirl</h3>
-                    <p>Leaked internal schedules suggest a massive Hololive 3rd wave is coming late 2026. Fans are anticipating new SP signatures for the latest generation of talents.</p>
-                    <span className="news-date">March 12, 2026</span>
-                  </div>
-                </article>
-
-                <article className="news-item">
-                  <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=1000" alt="Lycee Overture" />
-                    <span className="news-tag">LYCEE</span>
-                  </div>
-                  <div className="news-content">
-                    <h3>Lycee Overture: The Return of Classic Fate/Stay Night Art</h3>
-                    <p>A commemorative Fate/Stay Night crossover set has been announced for Lycee Overture. This set features reimagined art from the 2004 original, a must-have for legacy fans.</p>
-                    <span className="news-date">March 10, 2026</span>
-                  </div>
-                </article>
-
-                <article className="news-item">
-                  <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=1000" alt="Yu-Gi-Oh" />
-                    <span className="news-tag">YU-GI-OH</span>
-                  </div>
-                  <div className="news-content">
-                    <h3>25th Century Rarity: The Next Evolution of Yu-Gi-Oh Foils?</h3>
-                    <p>Rumors of a new 'Prismatic Emperor' rarity for the Japanese OCG are circulating. This would mark the first major rarity innovation since the 25th anniversary Quarter Century Rares.</p>
-                    <span className="news-date">March 08, 2026</span>
-                  </div>
-                </article>
-
-                <article className="news-item">
-                  <div className="news-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&q=80&w=1000" alt="Dragon Ball" />
-                    <span className="news-tag">DRAGON BALL</span>
-                  </div>
-                  <div className="news-content">
-                    <h3>Fusion World: Super Saiyan Blue Vegito Leader Card Skyrockets</h3>
-                    <p>Market analysts report a 200% price jump for the SSGSS Vegito alt-art leader. Its dominance in the regional qualifiers has made it the most sought-after card in the current meta.</p>
-                    <span className="news-date">March 05, 2026</span>
+                    <h3>OP-16 Rumors: Three Manga Rares Confirmed for Next Expansion</h3>
+                    <p>Early distributor leaks suggest OP-16 will feature an unprecedented three Manga Art secret rares. This marks a significant increase in chase card density for non-anniversary sets.</p>
+                    <span className="news-date">February 28, 2026</span>
                   </div>
                 </article>
               </div>
