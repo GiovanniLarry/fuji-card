@@ -278,6 +278,54 @@
   gap: 35px;
 }
 
+.nav-links-mockup li {
+  position: relative;
+}
+
+.nav-item-dropdown:nth-last-child(-n+2) .sub-category-dropdown {
+  left: auto;
+  right: 0;
+}
+
+.nav-item-dropdown:hover .sub-category-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sub-category-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 240px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+}
+
+.sub-category-dropdown li a {
+  padding: 12px 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #555 !important;
+  display: block !important;
+  white-space: nowrap;
+  background: none !important;
+}
+
+.sub-category-dropdown li a:hover {
+  background: #f8f8f8 !important;
+  color: #e94560 !important;
+}
+
 .nav-links-mockup li a {
   color: white;
   text-decoration: none;
@@ -446,20 +494,68 @@ body {
   border-bottom: 1px solid #f0f0f0;
 }
 
-.mobile-main-links li a {
+.mobile-main-links li .mobile-nav-toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
   color: #333;
-  text-decoration: none;
+  cursor: pointer;
   font-weight: 800;
   font-size: 14px;
+  background: white;
+  transition: background 0.2s;
+  text-decoration: none;
 }
 
-.mobile-main-links li a i {
+.mobile-main-links li .mobile-nav-toggle.no-chevron {
+  justify-content: flex-start;
+}
+
+.mobile-main-links li .mobile-nav-toggle:hover {
+  background: #f9f9f9;
+}
+
+.mobile-main-links li .mobile-nav-toggle i {
   font-size: 10px;
   color: #888;
+  transition: transform 0.3s;
+}
+
+.mobile-main-links li .mobile-nav-toggle i.rotated {
+  transform: rotate(180deg);
+}
+
+.mobile-main-links li.active {
+  background-color: #fcfcfc;
+}
+
+.mobile-sub-category-dropdown {
+  list-style: none;
+  padding: 5px 0 15px 15px;
+  background: #fdfdfd;
+  border-left: 3px solid #e13e3e;
+  margin-left: 10px;
+}
+
+.mobile-sub-category-dropdown li {
+  border-bottom: none !important;
+}
+
+.mobile-sub-category-dropdown li a {
+  padding: 12px 20px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #555 !important;
+  display: flex !important;
+  align-items: center;
+  text-decoration: none;
+  text-transform: none !important;
+  transition: color 0.2s;
+}
+
+.mobile-sub-category-dropdown li a:hover {
+  color: #e13e3e !important;
 }
 
 .mobile-search-slot {

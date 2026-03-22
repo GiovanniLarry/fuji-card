@@ -56,6 +56,17 @@ const AdminDashboard = () => {
 
     // Search filtering state
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+
+    const subCatsMap = {
+        'pokemon': ['Booster Boxes Pokemon', 'Special Set Pokemon', 'Promo Cards Pokemon'],
+        'onepiece': ['Booster Boxes One Piece', 'Sealed Case One Piece', 'Special Set ONE PIECE'],
+        'other': [
+            'Weiss Schwarz', 'UNION ARENA', 'hololive OFFICIAL CG', 'Lycee Overture',
+            'Gundam Card Game', 'Dragon Ball Fusion World', 'Disney Lorcana Japanese',
+            'Magic the Gathering'
+        ]
+    };
 
     // File Input Ref for click-to-upload
     const fileInputRef = useRef(null);
@@ -117,7 +128,14 @@ const AdminDashboard = () => {
         try {
             // Add cache busting to admin product list
             const { data } = await axios.get(`${API_URL}/products?limit=150&_t=${Date.now()}`);
-            setProducts(data.products || data);
+            
+            // Normalize snake_case from DB to camelCase for component consistency
+            const normalized = (data.products || data).map(p => ({
+                ...p,
+                cardType: p.card_type || p.cardType || 'Character',
+                image_url: p.image_url || p.image // Handle both just in case
+            }));
+            setProducts(normalized);
         } catch (err) {
             console.error("Failed to fetch products", err);
         } finally {
@@ -605,8 +623,7 @@ const AdminDashboard = () => {
                 </div>
 
                 {loading && <div className="admin-loading">Processing...</div>}
-
-                {!loading && activeTab === 'dashboard' && (
+                {!loading && !isEditing && activeTab === 'dashboard' && (
                     <div>
                         <header className="admin-dashboard-header">
                             <h1>System Overview</h1>
@@ -748,19 +765,170 @@ const AdminDashboard = () => {
                     </div>
                 )}
 
-                {!loading && activeTab === 'products' && (
+                {!loading && isEditing && (
+                    <div className="admin-edit-container" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap', marginTop: '1rem' }}>
+                        <div className="admin-edit-form glass-panel" style={{ flex: 1, minWidth: '400px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                <h3 style={{ margin: 0 }}>{isEditing === 'new' ? 'Initialize New Card Asset' : 'Modify Asset Properties'}</h3>
+                                <button className="admin-btn-secondary" style={{ padding: '0.3rem 0.6rem', fontSize: '0.9rem' }} onClick={() => setIsEditing(null)}>
+                                    Abort
+                                </button>
+                            </div>
+                            <form onSubmit={handleSaveProduct} className="admin-form">
+                                <div className="form-group-admin">
+                                    <label>Card Name</label>
+                                    <input name="name" value={editForm.name || ''} onChange={handleFormChange} required />
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Price (£)</label>
+                                    <input type="number" step="0.01" name="price" value={editForm.price || ''} onChange={handleFormChange} required />
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Category Code</label>
+                                    <select name="category_name" value={editForm.category_name || (editForm.categories?.name) || ''} onChange={handleFormChange}>
+                                        <option value="" disabled>Select Category</option>
+                                        {categories.map(cat => (
+                                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Stock Count</label>
+                                    <input type="number" name="stock" value={editForm.stock || 0} onChange={handleFormChange} required />
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Classification (Subcategory/Type)</label>
+                                    <select name="cardType" value={editForm.cardType || ''} onChange={handleFormChange}>
+                                        <option value="">Select Classification</option>
+                                        {Object.values(subCatsMap).flat().map(sc => (
+                                            <option key={sc} value={sc}>{sc}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="form-group-admin">
+                                    <label>Condition</label>
+                                    <select name="condition" value={editForm.condition || 'Mint'} onChange={handleFormChange}>
+                                        <option value="Mint">Mint</option>
+                                        <option value="Near Mint">Near Mint</option>
+                                        <option value="Excellent">Excellent</option>
+                                        <option value="Good">Good</option>
+                                        <option value="Fair">Fair</option>
+                                        <option value="Poor">Poor</option>
+                                        <option value="Sealed">Sealed</option>
+                                    </select>
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Set Name</label>
+                                    <input name="set_name" value={editForm.set_name || ''} onChange={handleFormChange} placeholder="e.g. Vivid Voltage" />
+                                </div>
+                                <div className="form-group-admin">
+                                    <label>Image Resource</label>
+                                    <div
+                                        className={`admin-image-dropzone ${isDragging ? 'dragging' : ''}`}
+                                        onDragOver={handleDragOver}
+                                        onDragLeave={handleDragLeave}
+                                        onDrop={handleDrop}
+                                        onClick={handleDropzoneClick}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <input
+                                            type="file"
+                                            ref={fileInputRef}
+                                            style={{ display: 'none' }}
+                                            accept="image/*"
+                                            onChange={handleFileInputChange}
+                                        />
+                                        <div className="dropzone-placeholder">
+                                            <div className="upload-icon">📸</div>
+                                            <p>{editForm.image_url ? 'Asset imported. Drag or click here to replace.' : 'Drag & Drop an image here or click to browse'}</p>
+                                            <p className="small-text">or paste an image URL below</p>
+                                        </div>
+                                    </div>
+                                    <input
+                                        name="image_url"
+                                        value={editForm.image_url || ''}
+                                        onChange={handleFormChange}
+                                        placeholder="https://... or base64 format..."
+                                        style={{ marginTop: '0.5rem', width: '100%', padding: '0.75rem', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff' }}
+                                    />
+                                </div>
+
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                                    <button
+                                        type="submit"
+                                        className="admin-btn-primary"
+                                        disabled={isSaving}
+                                        style={{ flex: 2, background: isSaving ? '#64748b' : 'linear-gradient(135deg, #3b82f6, #2563eb)' }}
+                                    >
+                                        {isSaving ? (
+                                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                                <div className="spinner-mini"></div> Processing...
+                                            </span>
+                                        ) : 'Commit Changes'}
+                                    </button>
+                                    <button type="button" className="admin-btn-secondary" style={{ flex: 1 }} onClick={() => setIsEditing(null)}>Abort</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* LIVE PREVIEW PANEL */}
+                        <div className="admin-preview-panel glass-panel" style={{ width: '320px', padding: '1.5rem', borderRadius: '16px' }}>
+                            <h3 style={{ color: '#fff', marginTop: 0, marginBottom: '1.5rem', fontFamily: "'Space Grotesk', sans-serif" }}>Storefront Simulator</h3>
+
+                            <div className="product-card" style={{ pointerEvents: 'none', margin: '0 auto', background: '#fff' }}>
+                                <div className="product-image">
+                                    <img
+                                        src={editForm.image_url || `https://via.placeholder.com/300x400?text=${encodeURIComponent(editForm.name || 'New Card')}`}
+                                        alt={editForm.name || 'Preview'}
+                                    />
+                                    {editForm.stock <= 3 && editForm.stock > 0 && (
+                                        <span className="stock-badge low">Only {editForm.stock} left!</span>
+                                    )}
+                                    {editForm.stock == 0 && (
+                                        <span className="stock-badge out">Sold Out</span>
+                                    )}
+                                </div>
+                                <div className="product-info">
+                                    <span className="product-category">{editForm.category_name || editForm.categories?.name || 'pokemon'}</span>
+                                    <h3 className="product-name">{editForm.name || 'Card Name'}</h3>
+                                    <div className="product-meta">
+                                        <span className="product-set">{editForm.set_name || 'N/A'}</span>
+                                        <span className="product-condition">{editForm.condition || 'Mint'}</span>
+                                    </div>
+                                    <div className="product-footer">
+                                        <div className="price-container">
+                                            <span className="product-price">£{Number(editForm.price || 0).toFixed(2)}</span>
+                                        </div>
+                                        <button className="add-to-cart-btn" disabled>Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {editForm.image_url && (
+                                <button
+                                    type="button"
+                                    className="admin-btn-secondary"
+                                    style={{ width: '100%', marginTop: '1rem', borderColor: 'rgba(239, 68, 68, 0.4)', color: '#f87171' }}
+                                    onClick={() => setEditForm(prev => ({ ...prev, image_url: '' }))}
+                                >
+                                    Remove Current Image
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {!loading && activeTab === 'products' && !isEditing && (
                     <div>
                         <header className="admin-dashboard-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div>
-                                <h1>Cards Management {selectedCategory ? `- ${selectedCategory.toUpperCase()}` : ''}</h1>
-                                {selectedCategory && !isEditing && (
-                                    <button className="admin-btn-secondary" style={{ marginTop: '0.5rem', padding: '0.3rem 0.6rem', fontSize: '0.9rem' }} onClick={() => setSelectedCategory(null)}>
-                                        ← Back to Categories
-                                    </button>
-                                )}
-                                {isEditing && (
-                                    <button className="admin-btn-secondary" style={{ marginTop: '0.5rem', padding: '0.3rem 0.6rem', fontSize: '0.9rem' }} onClick={() => setIsEditing(null)}>
-                                        ← Abort Editing
+                                <h1>Cards Management {selectedCategory ? `- ${selectedCategory.toUpperCase()}` : ''} {selectedSubCategory ? `| ${selectedSubCategory}` : ''}</h1>
+                                {(selectedCategory || selectedSubCategory) && (
+                                    <button className="admin-btn-secondary" style={{ marginTop: '0.5rem', padding: '0.3rem 1.2rem', fontSize: '0.9rem', fontWeight: 800 }} onClick={() => {
+                                        if (selectedSubCategory) setSelectedSubCategory(null);
+                                        else setSelectedCategory(null);
+                                    }}>
+                                        « BACK {selectedSubCategory ? 'TO CATEGORY' : 'TO ALL'}
                                     </button>
                                 )}
                             </div>
@@ -847,146 +1015,31 @@ const AdminDashboard = () => {
                                     <div style={{ fontSize: '2.5rem', color: '#94a3b8', marginBottom: '0.5rem' }}>+</div>
                                     <h3 style={{ color: '#94a3b8' }}>Add Category</h3>
                                 </div>
+                                {/* NEW SUBCATEGORY PICKER */}
+                                {selectedCategory && subCatsMap[selectedCategory.toLowerCase()] && !selectedSubCategory && !searchTerm && (
+                                    <div className="admin-subcategory-navigator" style={{ gridColumn: '1 / -1', marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
+                                        <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>Choose classification within {selectedCategory}</h2>
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                            {subCatsMap[selectedCategory.toLowerCase()].map(sc => (
+                                                <div key={sc} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'all 0.3s', border: '1px solid rgba(59, 130, 246, 0.2)' }}
+                                                    onClick={() => setSelectedSubCategory(sc)}
+                                                    onMouseOver={e => e.currentTarget.style.borderColor = '#3b82f6'}
+                                                    onMouseOut={e => e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)'}
+                                                >
+                                                    <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📦</div>
+                                                    <h3 style={{ fontSize: '1.1rem', color: '#fff' }}>{sc}</h3>
+                                                    <div style={{ padding: '0.3rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '4px', fontSize: '0.75rem', color: '#60a5fa', marginTop: '1rem' }}>
+                                                        {products.filter(p => p.cardType === sc).length} ASSETS
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         )}
 
-                        {isEditing ? (
-                            <div className="admin-edit-container" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                                <div className="admin-edit-form glass-panel" style={{ flex: 1, minWidth: '400px' }}>
-                                    <h3>{isEditing === 'new' ? 'Initialize New Card Asset' : 'Modify Asset Properties'}</h3>
-                                    <form onSubmit={handleSaveProduct} className="admin-form">
-                                        <div className="form-group-admin">
-                                            <label>Card Name</label>
-                                            <input name="name" value={editForm.name || ''} onChange={handleFormChange} required />
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Price (£)</label>
-                                            <input type="number" step="0.01" name="price" value={editForm.price || ''} onChange={handleFormChange} required />
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Category Code</label>
-                                            <select name="category_name" value={editForm.category_name || (editForm.categories?.name) || ''} onChange={handleFormChange}>
-                                                <option value="" disabled>Select Category</option>
-                                                {categories.map(cat => (
-                                                    <option key={cat.id} value={cat.name}>{cat.name}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Stock Count</label>
-                                            <input type="number" name="stock" value={editForm.stock || 0} onChange={handleFormChange} required />
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Condition</label>
-                                            <select name="condition" value={editForm.condition || 'Mint'} onChange={handleFormChange}>
-                                                <option value="Mint">Mint</option>
-                                                <option value="Near Mint">Near Mint</option>
-                                                <option value="Excellent">Excellent</option>
-                                                <option value="Good">Good</option>
-                                                <option value="Fair">Fair</option>
-                                                <option value="Poor">Poor</option>
-                                                <option value="Sealed">Sealed</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Set Name</label>
-                                            <input name="set_name" value={editForm.set_name || ''} onChange={handleFormChange} placeholder="e.g. Vivid Voltage" />
-                                        </div>
-                                        <div className="form-group-admin">
-                                            <label>Image Resource</label>
-                                            <div
-                                                className={`admin-image-dropzone ${isDragging ? 'dragging' : ''}`}
-                                                onDragOver={handleDragOver}
-                                                onDragLeave={handleDragLeave}
-                                                onDrop={handleDrop}
-                                                onClick={handleDropzoneClick}
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                <input
-                                                    type="file"
-                                                    ref={fileInputRef}
-                                                    style={{ display: 'none' }}
-                                                    accept="image/*"
-                                                    onChange={handleFileInputChange}
-                                                />
-                                                <div className="dropzone-placeholder">
-                                                    <div className="upload-icon">📸</div>
-                                                    <p>{editForm.image_url ? 'Asset imported. Drag or click here to replace.' : 'Drag & Drop an image here or click to browse'}</p>
-                                                    <p className="small-text">or paste an image URL below</p>
-                                                </div>
-                                            </div>
-                                            <input
-                                                name="image_url"
-                                                value={editForm.image_url || ''}
-                                                onChange={handleFormChange}
-                                                placeholder="https://... or base64 format..."
-                                                style={{ marginTop: '0.5rem' }}
-                                            />
-                                        </div>
-
-                                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                            <button
-                                                type="submit"
-                                                className="admin-btn-primary"
-                                                disabled={isSaving}
-                                                style={{ width: '100%', marginTop: 'auto', background: isSaving ? '#64748b' : 'linear-gradient(135deg, #3b82f6, #2563eb)' }}
-                                            >
-                                                {isSaving ? (
-                                                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                                                        <div className="spinner-mini"></div> Commit In Progress...
-                                                    </span>
-                                                ) : 'Commit Changes'}
-                                            </button>
-                                            <button type="button" className="admin-btn-secondary" style={{ flex: 1, marginTop: '1rem' }} onClick={() => setIsEditing(null)}>Abort</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                {/* LIVE PREVIEW PANEL */}
-                                <div className="admin-preview-panel glass-panel" style={{ width: '320px', padding: '1.5rem', borderRadius: '16px' }}>
-                                    <h3 style={{ color: '#fff', marginTop: 0, marginBottom: '1.5rem', fontFamily: "'Space Grotesk', sans-serif" }}>Storefront Simulator</h3>
-
-                                    <div className="product-card" style={{ pointerEvents: 'none', margin: '0 auto', background: '#fff' }}>
-                                        <div className="product-image">
-                                            <img
-                                                src={editForm.image_url || `https://via.placeholder.com/300x400?text=${encodeURIComponent(editForm.name || 'New Card')}`}
-                                                alt={editForm.name || 'Preview'}
-                                            />
-                                            {editForm.stock <= 3 && editForm.stock > 0 && (
-                                                <span className="stock-badge low">Only {editForm.stock} left!</span>
-                                            )}
-                                            {editForm.stock == 0 && (
-                                                <span className="stock-badge out">Sold Out</span>
-                                            )}
-                                        </div>
-                                        <div className="product-info">
-                                            <span className="product-category">{editForm.category_name || editForm.categories?.name || 'pokemon'}</span>
-                                            <h3 className="product-name">{editForm.name || 'Card Name'}</h3>
-                                            <div className="product-meta">
-                                                <span className="product-set">{editForm.set_name || 'N/A'}</span>
-                                                <span className="product-condition">{editForm.condition || 'Mint'}</span>
-                                            </div>
-                                            <div className="product-footer">
-                                                <div className="price-container">
-                                                    <span className="product-price">£{Number(editForm.price || 0).toFixed(2)}</span>
-                                                </div>
-                                                <button className="add-to-cart-btn" disabled>Add to Cart</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {editForm.image_url && (
-                                        <button
-                                            type="button"
-                                            className="admin-btn-secondary"
-                                            style={{ width: '100%', marginTop: '1rem', borderColor: 'rgba(239, 68, 68, 0.4)', color: '#f87171' }}
-                                            onClick={() => setEditForm(prev => ({ ...prev, image_url: '' }))}
-                                        >
-                                            Remove Current Image
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        ) : !isEditing && (selectedCategory || searchTerm) ? (
+                        {(selectedSubCategory || (selectedCategory && !subCatsMap[selectedCategory.toLowerCase()]) || searchTerm) && !isEditing && (
                             <div className="admin-table-container glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
                                 {searchTerm && !selectedCategory && <h3 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#60a5fa' }}>Global Search Results</h3>}
 
@@ -1042,6 +1095,10 @@ const AdminDashboard = () => {
                                                 if (searchTerm && !selectedCategory) return true; // Show all for global search
                                                 return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
+                                            .filter(p => {
+                                                if (!selectedSubCategory) return true;
+                                                return p.cardType === selectedSubCategory;
+                                            })
                                             .filter(p => p?.name?.toLowerCase()?.includes(searchTerm.toLowerCase()))
                                             .map(p => (
                                                 <tr key={p.id}>
@@ -1074,6 +1131,10 @@ const AdminDashboard = () => {
                                                 if (searchTerm && !selectedCategory) return true;
                                                 return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
+                                            .filter(p => {
+                                                if (!selectedSubCategory) return true;
+                                                return p.cardType === selectedSubCategory;
+                                            })
                                             .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).length === 0 && (
                                                 <tr>
                                                     <td colSpan={selectedCategory === 'SOLD_OUT' ? 6 : 5} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No items found in this section.</td>
@@ -1082,7 +1143,7 @@ const AdminDashboard = () => {
                                     </tbody>
                                 </table>
                             </div>
-                        ) : null}
+                        )}
                     </div>
                 )}
 
@@ -1428,6 +1489,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                 )}
+
             </div>
         </div>
     );
