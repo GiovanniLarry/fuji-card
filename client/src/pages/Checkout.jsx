@@ -274,7 +274,14 @@ const Checkout = () => {
     message += `Thank you!`;
 
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    
+    // Popup blocker defensive navigation
+    const pendingWin = window.open(whatsappUrl, '_blank');
+    if (!pendingWin || pendingWin.closed || typeof pendingWin.closed === 'undefined') {
+      // Fallback to direct redirect if popup is suppressed
+      window.location.href = whatsappUrl;
+      return;
+    }
 
     // Navigate to order confirmation
     navigate('/order-confirmation/whatsapp');
@@ -365,7 +372,11 @@ const Checkout = () => {
       
       const encodedMsg = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/${waNumber.replace(/\D/g, '')}?text=${encodedMsg}`;
-      window.open(whatsappUrl, '_blank');
+      
+      const cryptoWin = window.open(whatsappUrl, '_blank');
+      if (!cryptoWin || cryptoWin.closed || typeof cryptoWin.closed === 'undefined') {
+        window.location.href = whatsappUrl;
+      }
     } catch (waErr) {
       console.error('WhatsApp Error:', waErr);
     }
