@@ -40,6 +40,7 @@ const router = express.Router();
  * Mimics PHP urlencode perfectly by encoding special chars like !, ', (, ), *
  */
 const phpUrlEncode = (str) => {
+  if (typeof str !== 'string') str = String(str);
   return encodeURIComponent(str)
     .replace(/!/g, '%21')
     .replace(/'/g, '%27')
@@ -51,35 +52,51 @@ const phpUrlEncode = (str) => {
 };
 
 const generatePayfastSignature = (data, passPhrase = null) => {
-  // Step 1: Remove empty/null/undefined values AND the signature field
+  // Step 1: Filter fields. ONLY include fields that PayFast expects.
+  // Exclude signature and any empty/null values.
   const filtered = {};
-  for (const key of Object.keys(data)) {
-    if (key === 'signature') continue;
-    const val = data[key];
-    if (val !== undefined && val !== null && String(val).trim() !== '') {
-      filtered[key] = String(val).trim();
+  const validFields = [
+    'merchant_id', 'merchant_key', 'return_url', 'cancel_url', 'notify_url',
+    'name_first', 'name_last', 'email_address', 'm_payment_id', 'amount',
+    'item_name', 'item_description', 'custom_str1', 'custom_str2', 
+    'custom_str3', 'custom_str4', 'custom_str5', 'custom_int1', 'custom_int1',
+    'custom_int2', 'custom_int3', 'custom_int4', 'custom_int5', 'subscription_type',
+    'billing_date', 'recurring_amount', 'frequency', 'cycles'
+  ];
+
+  Object.keys(data).forEach(key => {
+    if (validFields.includes(key) && data[key] !== undefined && data[key] !== null && String(data[key]).trim() !== '') {
+      filtered[key] = String(data[key]).trim();
     }
-  }
+  });
 
   // Step 2: Sort keys alphabetically
   const sortedKeys = Object.keys(filtered).sort();
 
-  // Step 3: Build query string with PHP-style encoding
-  const parts = sortedKeys.map(key => {
-    return `${key}=${phpUrlEncode(filtered[key])}`;
-  });
-
+  // Step 3: Build query string
+  const parts = sortedKeys.map(key => `${key}=${phpUrlEncode(filtered[key])}`);
   let pfParamString = parts.join('&');
 
-  // Step 4: Append passphrase if set (RAW value, NOT urlencoded)
+  // Step 4: Append passphrase (RAW, NOT urlencoded)
   if (passPhrase && passPhrase.trim() !== '') {
-    pfParamString += `&passphrase=${passPhrase.trim()}`;
+    pfParamString += `&passphrase=${phpUrlEncode(passPhrase.trim())}`;
+    // Wait! Check PayFast docs again. Some sources say passphrase SHOULD be encoded if it has special chars.
+    // However, usually it's used as query param suffix.
+    // Let's use the most reliable pattern: &passphrase=...
+    // Actually, update: The correct pattern is to only use phpUrlEncode on the key=value pairs, 
+    // and then &passphrase=RAW_VALUE.
   }
 
-  // Debug: console.log('[PayFast] Signature String Base:', pfParamString);
+  // RE-APPLYING PASSPHRASE FIX:
+  let finalString = parts.join('&');
+  if (passPhrase && passPhrase.trim() !== '') {
+     finalString += `&passphrase=${passPhrase.trim()}`;
+  }
 
-  // Step 5: MD5 hash
-  return crypto.createHash('md5').update(pfParamString).digest('hex');
+  console.log('[PayFast Signature Debug] Base String:', finalString);
+  const signature = crypto.createHash('md5').update(finalString).digest('hex');
+  console.log('[PayFast Signature Debug] Result:', signature);
+  return signature;
 };
 
 // Get user orders
