@@ -282,6 +282,11 @@
   position: relative;
 }
 
+.nav-item-dropdown:nth-last-child(-n+2) .sub-category-dropdown {
+  left: auto;
+  right: 0;
+}
+
 .nav-item-dropdown:hover .sub-category-dropdown {
   opacity: 1;
   visibility: visible;

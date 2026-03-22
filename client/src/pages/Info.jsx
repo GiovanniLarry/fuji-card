@@ -53,6 +53,30 @@ const Info = () => {
 
             <article className="news-item">
               <div className="news-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=1000" alt="Gundam News" />
+                <span className="news-tag">BUNDAI</span>
+              </div>
+              <div className="news-content">
+                <h3>Gundam Emerge Vol. 1: Supply Shortages Hit Japanese Retailers</h3>
+                <p>The first wave of the new Gundam TCG has sold out across major Tokyo districts. Secondary market prices for 'Emerge' boxes are already seeing a 50% premium as the game gains sudden traction with veteran collectors.</p>
+                <span className="news-date">March 18, 2026</span>
+              </div>
+            </article>
+
+            <article className="news-item">
+              <div className="news-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1606733970811-da6170564584?auto=format&fit=crop&q=80&w=1000" alt="Lorcana Japan" />
+                <span className="news-tag">LORCANA</span>
+              </div>
+              <div className="news-content">
+                <h3>Disney Lorcana Japan: Ursula's Return Set to Feature Exclusive Stamped Promos</h3>
+                <p>Disney Lorcana continues its Japanese expansion with Chapter 4. This set will feature first-edition Japanese stamped promos that are expected to be highly sought after by global crossover collectors.</p>
+                <span className="news-date">March 17, 2026</span>
+              </div>
+            </article>
+
+            <article className="news-item">
+              <div className="news-image-wrapper">
                 <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=1000" alt="Union Arena" />
                 <span className="news-tag">UNION ARENA</span>
               </div>
