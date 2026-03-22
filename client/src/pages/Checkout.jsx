@@ -419,14 +419,11 @@ const Checkout = () => {
 
         try {
           if (formData.paymentMethod === 'cryptomus') {
-            // High-resilience manual crypto flow: Create DB order first, then notify via WhatsApp
             const response = await ordersAPI.checkout(orderData);
-            const order = response.data.order;
             
-            // Bypass external WhatsApp routing per request; Admin receives real-time UI notification
+            // Create order to flag the admin dashboard notification bell, then route to WhatsApp
+            sendWhatsAppOrder();
             
-            // Success navigation
-            navigate(`/order-confirmation/${order.id}`, { state: { order } });
             await refreshCart();
             return;
           } else if (formData.paymentMethod === 'paystack') {
@@ -712,137 +709,6 @@ const Checkout = () => {
                   </div>
                 )}
 
-                {formData.paymentMethod === 'cryptomus' && (() => {
-                  const coin = coins[selectedCoin];
-                  if (!coin) return null; // Safety guard to prevent blank page
-                  
-                  const isReady = coin.address && !coin.address.startsWith('COMING_SOON');
-
-                  return (
-                    <div style={{
-                      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-                      border: `1px solid ${coin.color}44`,
-                      borderRadius: '14px',
-                      padding: '1.5rem',
-                      marginTop: '1rem'
-                    }}>
-                      {/* Coin Selector */}
-                      <div style={{ marginBottom: '1.25rem' }}>
-                        <label style={{ color: '#94a3b8', fontSize: '0.8rem', display: 'block', marginBottom: '0.5rem' }}>Select Cryptocurrency</label>
-                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                          {Object.entries(coins).map(([key, c]) => (
-                            <button
-                              key={key}
-                              type="button"
-                              onClick={() => setSelectedCoin(key)}
-                              style={{
-                                display: 'flex', alignItems: 'center', gap: '6px',
-                                padding: '0.45rem 0.85rem',
-                                borderRadius: '8px',
-                                border: selectedCoin === key ? `2px solid ${c.color}` : '1px solid rgba(255,255,255,0.12)',
-                                background: selectedCoin === key ? `${c.color}22` : 'rgba(255,255,255,0.04)',
-                                color: selectedCoin === key ? c.color : '#94a3b8',
-                                fontWeight: selectedCoin === key ? 700 : 500,
-                                fontSize: '0.82rem',
-                                cursor: 'pointer',
-                                transition: 'all 0.18s'
-                              }}
-                            >
-                              {c.icon}
-                              {c.symbol}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Header */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.15rem' }}>
-                        {coin.icon}
-                        <div>
-                          <div style={{ color: coin.color, fontWeight: 700, fontSize: '1.05rem' }}>{coin.label} Payment</div>
-                          <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
-                            {isReady ? `Send ${coin.symbol} to the address below` : 'Address coming soon — check back shortly'}
-                          </div>
-                        </div>
-                      </div>
-
-                      {isReady ? (
-                        <>
-                          {/* QR Code */}
-                          {coin.qr && (
-                            <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-                              <img src={coin.qr} alt={`${coin.symbol} QR`}
-                                style={{ width: '170px', height: '170px', borderRadius: '10px', border: `3px solid ${coin.color}66` }} />
-                              <div style={{ color: '#94a3b8', fontSize: '0.78rem', marginTop: '0.4rem' }}>Scan with Trust Wallet or any compatible wallet</div>
-                            </div>
-                          )}
-
-                          {/* Address */}
-                          <div style={{ marginBottom: '1rem' }}>
-                            <div style={{ color: '#94a3b8', fontSize: '0.8rem', marginBottom: '0.35rem' }}>{coin.symbol} Address — <span style={{ color: '#64748b' }}>click to copy</span></div>
-                            <div
-                              onClick={() => { navigator.clipboard.writeText(coin.address); alert('Address copied!'); }}
-                              style={{
-                                background: 'rgba(255,255,255,0.06)',
-                                border: `1px solid ${coin.color}33`,
-                                borderRadius: '8px', padding: '0.65rem 0.9rem',
-                                fontFamily: 'monospace', fontSize: '0.78rem',
-                                color: '#f1f5f9', wordBreak: 'break-all',
-                                cursor: 'pointer', userSelect: 'all'
-                              }}
-                              title="Click to copy"
-                            >
-                              {coin.address}
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => { navigator.clipboard.writeText(coin.address); alert('Address copied!'); }}
-                              style={{
-                                marginTop: '0.5rem', width: '100%', padding: '0.55rem',
-                                background: `${coin.color}22`, border: `1px solid ${coin.color}55`,
-                                borderRadius: '8px', color: coin.color, fontWeight: 700,
-                                fontSize: '0.85rem', cursor: 'pointer'
-                              }}
-                            >
-                              📋 Copy {coin.symbol} Address
-                            </button>
-                          </div>
-
-                          {/* Trust Wallet — mobile only notice */}
-                          {coin.trustLink && (
-                            <div style={{ marginBottom: '0.85rem' }}>
-                              <a href={coin.trustLink} target="_blank" rel="noopener noreferrer"
-                                style={{
-                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                  gap: '0.5rem', width: '100%', padding: '0.65rem',
-                                  background: 'linear-gradient(135deg, #3375bb, #1d4ed8)',
-                                  borderRadius: '10px', color: '#fff', fontWeight: 700,
-                                  textDecoration: 'none', fontSize: '0.88rem'
-                                }}>
-                                📱 Open in Trust Wallet App (Mobile Only)
-                              </a>
-                              <div style={{ color: '#64748b', fontSize: '0.73rem', textAlign: 'center', marginTop: '0.3rem' }}>
-                                ⚠️ This button only works on a phone with the Trust Wallet app installed
-                              </div>
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <div style={{
-                          textAlign: 'center', padding: '1.5rem',
-                          background: 'rgba(255,255,255,0.03)',
-                          borderRadius: '10px', color: '#64748b', fontSize: '0.9rem'
-                        }}>
-                          ⏳ {coin.symbol} address will be available soon. Please use Bitcoin (BTC) or another available method.
-                        </div>
-                      )}
-
-                      <p style={{ color: '#64748b', fontSize: '0.78rem', textAlign: 'center', margin: '0.75rem 0 0' }}>
-                        After sending, place your order and share payment proof via WhatsApp.
-                      </p>
-                    </div>
-                  );
-                })()}
 
                 {formData.paymentMethod === 'payfast' && (
                   <div className="payfast-payment-form">
@@ -862,8 +728,7 @@ const Checkout = () => {
                   {loading ? 'Processing...' : 
                     formData.paymentMethod === 'card' ? 'Place Order' : 
                     ['payfast', 'paystack'].includes(formData.paymentMethod) ? 'Proceed to Payment' : 
-                    formData.paymentMethod === 'cryptomus' ? 'Confirm Crypto Payment' :
-                    'Complete Order'
+                    'Send Order via WhatsApp'
                   }
                 </button>
                 <button

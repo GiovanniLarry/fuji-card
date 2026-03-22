@@ -177,8 +177,8 @@ router.post('/sync-flagship', async (req, res) => {
             catMap[slug] = c.id;
         });
 
-        // 2. Clear old products to avoid duplicates during mass-seed
-        await supabase.from('products').delete().neq('name', '___SYSTEM_RESERVED___');
+        // Note: Avoiding delete() to prevent foreign key constraint violations on existing orders.
+        // We will utilize an intelligent upsert algorithm matching the unique 'name' index.
 
         // 3. Prepare products
         const productsToInsert = localProductStore.map(p => {
@@ -213,8 +213,8 @@ router.post('/sync-flagship', async (req, res) => {
             };
         });
 
-        // 4. Batch Insert
-        const { error: insertError } = await supabase.from('products').insert(productsToInsert);
+        // 4. Batch Upsert to safely override duplicates without mutating historical IDs
+        const { error: insertError } = await supabase.from('products').upsert(productsToInsert, { onConflict: 'name' });
         if (insertError) throw insertError;
 
         res.json({
