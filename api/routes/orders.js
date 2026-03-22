@@ -73,8 +73,10 @@ const generatePayfastSignature = (data, passPhrase = null) => {
   // Step 2: Sort keys alphabetically
   const sortedKeys = Object.keys(filtered).sort();
 
-  // Step 3: Build query string
-  const parts = sortedKeys.map(key => `${key}=${phpUrlEncode(filtered[key])}`);
+  // Step 3: Build query string (RAW VALUES - No per-field URL encoding)
+  // According to many implementations and recent PayFast docs, signature strings 
+  // should use original values, while the SUBMITTED form uses url-encoded values.
+  const parts = sortedKeys.map(key => `${key}=${filtered[key]}`);
   let finalString = parts.join('&');
 
   // Step 4: Append passphrase (RAW, NOT urlencoded)
