@@ -852,7 +852,12 @@ const Checkout = () => {
                   className="btn btn-primary"
                   disabled={loading}
                 >
-                  {loading ? 'Processing...' : formData.paymentMethod === 'card' ? 'Place Order' : ['cryptomus', 'payfast', 'paystack'].includes(formData.paymentMethod) ? 'Proceed to Payment' : 'Send Order via WhatsApp'}
+                  {loading ? 'Processing...' : 
+                    formData.paymentMethod === 'card' ? 'Place Order' : 
+                    ['payfast', 'paystack'].includes(formData.paymentMethod) ? 'Proceed to Payment' : 
+                    formData.paymentMethod === 'cryptomus' ? 'Send Payment via WhatsApp' :
+                    'Send Order via WhatsApp'
+                  }
                 </button>
                 <button
                   type="button"
