@@ -3,24 +3,12 @@ import { setShowcase, getDefaultShowcase } from '../data/setCards';
 import './Info.css';
 
 const SetItem = ({ name, id }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const cards = setShowcase[id] || getDefaultShowcase(name);
-
   return (
-    <li className={`card-list-item ${isExpanded ? 'expanded' : ''}`}>
-      <div className="list-item-header" onClick={() => setIsExpanded(!isExpanded)}>
-        <span>{name}</span>
-        <i className={`fa-solid fa-chevron-down toggle-icon`}></i>
-      </div>
-      {isExpanded && (
-        <div className="gallery-scroller">
-          {cards.map((card, idx) => (
-            <div key={idx} className="gallery-card">
-              <img src={card.image} alt={card.name} loading="lazy" />
-            </div>
-          ))}
-        </div>
-      )}
+    <li className="info-list-item">
+      <i className="fa-solid fa-circle bullet-dot"></i>
+      <a href={`/info?set=${id}`} className="item-link-text">
+        {name} {name.toLowerCase().includes('cardlist') ? '' : 'cardlist'}
+      </a>
     </li>
   );
 };

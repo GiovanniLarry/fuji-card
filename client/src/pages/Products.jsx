@@ -63,6 +63,19 @@ const Products = () => {
           p.set_name?.toLowerCase().includes(s)
         );
       }
+
+      const type = searchParams.get('type');
+      if (type) {
+        const t = type.toLowerCase();
+        filtered = filtered.filter(p => {
+          const name = p.name.toLowerCase();
+          const desc = (p.description || '').toLowerCase();
+          if (t === 'booster') return name.includes('booster') || desc.includes('booster');
+          if (t === 'special') return name.includes('special') || name.includes('high class') || desc.includes('special');
+          if (t === 'promo') return name.includes('promo') || desc.includes('promo');
+          return true;
+        });
+      }
       
       const minPrice = parseFloat(searchParams.get('minPrice')) || 0;
       const maxPrice = parseFloat(searchParams.get('maxPrice')) || 1000000;

@@ -181,7 +181,14 @@ const Header = () => {
         <div className="container">
           <nav className="centered-navigation">
             <ul className="nav-links-mockup">
-              <li><Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link></li>
+              <li className="nav-item-dropdown">
+                <Link to="/products?category=pokemon">POKEMON <i className="fa-solid fa-chevron-down"></i></Link>
+                <ul className="sub-category-dropdown">
+                  <li><Link to="/products?category=pokemon&type=booster">Booster Boxes Pokemon</Link></li>
+                  <li><Link to="/products?category=pokemon&type=special">Special Set Pokemon</Link></li>
+                  <li><Link to="/products?category=pokemon&type=promo">Promo Cards Pokemon</Link></li>
+                </ul>
+              </li>
               <li><Link to="/products?category=onepiece">ONE PIECE <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/products?category=other">OTHER TCG <i className="fa-solid fa-chevron-down"></i></Link></li>
               <li><Link to="/info">INFO <i className="fa-solid fa-chevron-down"></i></Link></li>
