@@ -80,7 +80,7 @@ router.get('/', async (req, res) => {
       .from('products')
       .select(`
         *,
-        categories!inner(
+        categories(
           id,
           name
         )

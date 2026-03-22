@@ -118,7 +118,7 @@ router.get('/paystack-key', async (req, res) => {
         
         // Fall back to environment variables if not set in settings
         const publicKey = paystack.publicKey || process.env.PAYSTACK_PUBLIC_KEY || '';
-        const currency = paystack.currency || process.env.PAYSTACK_CURRENCY || 'ZAR';
+        const currency = paystack.currency || process.env.PAYSTACK_CURRENCY || 'USD';
         
         console.log('[Paystack Key] Final values:', { publicKey: publicKey ? 'set' : 'empty', currency });
         
@@ -134,7 +134,7 @@ router.get('/paystack-key', async (req, res) => {
         console.error('[Paystack Key] Stack:', error.stack);
         // Return fallback with 200 status to avoid breaking frontend
         const publicKey = process.env.PAYSTACK_PUBLIC_KEY || '';
-        const currency = process.env.PAYSTACK_CURRENCY || 'ZAR';
+        const currency = process.env.PAYSTACK_CURRENCY || 'USD';
         res.status(200).json({ publicKey, currency, fallback: true });
     }
 });
