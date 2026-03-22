@@ -351,13 +351,31 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 
     if (orderError) throw orderError;
 
-    // Create order items
+    // Create order items and deduct stock
     for (const item of orderItems) {
       await supabase.from('order_items').insert({
         order_id: newOrder.id,
         product_id: item.product_id,
         quantity: item.quantity
       });
+
+      // Deduct stock from product inventory
+      const { data: product } = await supabase
+        .from('products')
+        .select('stock')
+        .eq('id', item.product_id)
+        .single();
+
+      if (product) {
+        const newStock = Math.max(0, product.stock - item.quantity); // Prevent stock from going below 0
+        await supabase
+          .from('products')
+          .update({ stock: newStock, updated_at: new Date().toISOString() })
+          .eq('id', item.product_id);
+        
+        console.log(`[Checkout] Deducted ${item.quantity} units from product ${item.product_id}. New stock: ${newStock}`);
+      }
+    }
     }
 
     if (paymentMethod !== 'payfast') {

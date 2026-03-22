@@ -232,6 +232,21 @@ router.post('/products', async (req, res) => {
     try {
         const newProduct = req.body;
 
+        // Prevent stock from being set to 0 or below - minimum is 1 unit
+        if (newProduct.stock !== undefined) {
+            const stockValue = parseInt(newProduct.stock, 10);
+            if (isNaN(stockValue) || stockValue < 1) {
+                return res.status(400).json({ 
+                    error: 'Invalid stock value. Stock must be at least 1 unit.',
+                    details: 'All new products must have at least 1 unit in inventory.'
+                });
+            }
+            newProduct.stock = stockValue;
+        } else {
+            // Default to 1 if not specified
+            newProduct.stock = 1;
+        }
+
         // Ensure you use the right category_id - for now assume client sends it or map name -> id
         if (newProduct.category_name) {
             const { data: catData } = await supabase
@@ -326,6 +341,18 @@ router.put('/products/bulk-stock', async (req, res) => {
 router.put('/products/:id', async (req, res) => {
     try {
         const updateData = req.body;
+
+        // Prevent stock from being set to 0 or below - minimum is 1 unit to keep card available
+        if (updateData.stock !== undefined) {
+            const stockValue = parseInt(updateData.stock, 10);
+            if (isNaN(stockValue) || stockValue < 1) {
+                return res.status(400).json({ 
+                    error: 'Invalid stock value. Stock must be at least 1 unit to keep the card available in the inventory.',
+                    details: 'Cards cannot be completely sold out. Use "Low Stock" section in dashboard to manage items with limited inventory.'
+                });
+            }
+            updateData.stock = stockValue;
+        }
 
         if (updateData.category_name) {
             const { data: catData } = await supabase
