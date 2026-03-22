@@ -996,6 +996,18 @@ const AdminDashboard = () => {
                                     </div>
                                 ))}
 
+                                <div className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'transform 0.2s', position: 'relative', border: '1px solid rgba(251, 191, 36, 0.3)' }}
+                                    onClick={() => setSelectedCategory('LOW_STOCK')}
+                                    onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+                                    onMouseOut={e => e.currentTarget.style.transform = 'none'}
+                                >
+                                    <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>⚡</div>
+                                    <h3 style={{ color: '#fbbf24' }}>Low Stock (&lt;5)</h3>
+                                    <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                                        {products.filter(p => Number(p.stock) < 5 && Number(p.stock) > 0).length} Items
+                                    </p>
+                                </div>
+                                
                                 <div className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'transform 0.2s', position: 'relative', border: '1px solid rgba(239, 68, 68, 0.3)' }}
                                     onClick={() => setSelectedCategory('SOLD_OUT')}
                                     onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
@@ -1020,6 +1032,17 @@ const AdminDashboard = () => {
                                     <div className="admin-subcategory-navigator" style={{ gridColumn: '1 / -1', marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
                                         <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>Choose classification within {selectedCategory}</h2>
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                            <div key="all-items" className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'all 0.3s', border: '2px solid rgba(59, 130, 246, 0.5)', backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
+                                                onClick={() => setSelectedSubCategory('__ALL__')}
+                                                onMouseOver={e => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.2)'; }}
+                                                onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.5)'; e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'; }}
+                                            >
+                                                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✨</div>
+                                                <h3 style={{ fontSize: '1.1rem', color: '#60a5fa', fontWeight: 'bold' }}>View All</h3>
+                                                <div style={{ padding: '0.3rem', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '4px', fontSize: '0.75rem', color: '#60a5fa', marginTop: '1rem' }}>
+                                                    {products.filter(p => (p.categories?.name || p.category_id || p.category_name) === selectedCategory).length} TOTAL
+                                                </div>
+                                            </div>
                                             {subCatsMap[selectedCategory.toLowerCase()].map(sc => (
                                                 <div key={sc} className="stat-card glass-panel" style={{ cursor: 'pointer', textAlign: 'center', transition: 'all 0.3s', border: '1px solid rgba(59, 130, 246, 0.2)' }}
                                                     onClick={() => setSelectedSubCategory(sc)}
@@ -1039,9 +1062,29 @@ const AdminDashboard = () => {
                             </div>
                         )}
 
-                        {(selectedSubCategory || (selectedCategory && !subCatsMap[selectedCategory.toLowerCase()]) || searchTerm) && !isEditing && (
+                        {(selectedSubCategory || (selectedCategory && !subCatsMap[selectedCategory.toLowerCase()]) || searchTerm || selectedCategory === 'LOW_STOCK' || selectedCategory === 'SOLD_OUT') && !isEditing && (
                             <div className="admin-table-container glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
                                 {searchTerm && !selectedCategory && <h3 style={{ padding: '1rem', margin: 0, borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#60a5fa' }}>Global Search Results</h3>}
+
+                                {selectedCategory === 'LOW_STOCK' && (
+                                    <div style={{ display: 'flex', gap: '1rem', padding: '1rem', background: 'rgba(0,0,0,0.2)', alignItems: 'center', borderRadius: '8px 8px 0 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                                        <h4 style={{ margin: 0, color: '#e2e8f0' }}>Low Stock Items - Restock Needed</h4>
+                                        <input
+                                            type="number"
+                                            placeholder="Stock to add"
+                                            value={bulkAllLowStock}
+                                            onChange={e => setBulkAllLowStock(e.target.value)}
+                                            style={{ padding: '0.4rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.3)', color: '#fff', width: '150px' }}
+                                        />
+                                        <button
+                                            className="admin-btn-primary"
+                                            style={{ padding: '0.4rem 1rem', fontSize: '0.9rem' }}
+                                            onClick={handleRestockAllLowStock}
+                                        >
+                                            Add Stock to All Low Stock Items
+                                        </button>
+                                    </div>
+                                )}
 
                                 {selectedCategory === 'SOLD_OUT' && (
                                     <div style={{ display: 'flex', gap: '1rem', padding: '1rem', background: 'rgba(0,0,0,0.2)', alignItems: 'center', borderRadius: '8px 8px 0 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -1093,10 +1136,12 @@ const AdminDashboard = () => {
                                             .filter(p => {
                                                 if (!p) return false;
                                                 if (searchTerm && !selectedCategory) return true; // Show all for global search
-                                                return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
+                                                if (selectedCategory === 'SOLD_OUT') return Number(p.stock) === 0;
+                                                if (selectedCategory === 'LOW_STOCK') return Number(p.stock) < 5 && Number(p.stock) > 0;
+                                                return (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
                                             .filter(p => {
-                                                if (!selectedSubCategory) return true;
+                                                if (!selectedSubCategory || selectedSubCategory === '__ALL__') return true;
                                                 return p.cardType === selectedSubCategory;
                                             })
                                             .filter(p => p?.name?.toLowerCase()?.includes(searchTerm.toLowerCase()))
@@ -1129,10 +1174,12 @@ const AdminDashboard = () => {
                                         {products
                                             .filter(p => {
                                                 if (searchTerm && !selectedCategory) return true;
-                                                return selectedCategory === 'SOLD_OUT' ? Number(p.stock) === 0 : (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
+                                                if (selectedCategory === 'SOLD_OUT') return Number(p.stock) === 0;
+                                                if (selectedCategory === 'LOW_STOCK') return Number(p.stock) < 5 && Number(p.stock) > 0;
+                                                return (p.categories?.name || p.category_id || p.category_name) === selectedCategory;
                                             })
                                             .filter(p => {
-                                                if (!selectedSubCategory) return true;
+                                                if (!selectedSubCategory || selectedSubCategory === '__ALL__') return true;
                                                 return p.cardType === selectedSubCategory;
                                             })
                                             .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).length === 0 && (
