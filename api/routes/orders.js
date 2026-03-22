@@ -447,18 +447,10 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
     // PERSISTENT CONFIG
     const payfastConfig = await getSetting('payfast', {});
 
-    const m1 = '2242';
-    const m2 = '7478';
-    const k1 = 'kt2fwj';
-    const k2 = 'kagmjli';
-    const pass1 = 'Desor';
-    const pass2 = 'mais190';
-    
-    const MERCHANT_ID = (payfastConfig.merchantId || process.env.PAYFAST_MERCHANT_ID || (m1 + m2)).toString().trim();
-    const MERCHANT_KEY = (payfastConfig.merchantKey || process.env.PAYFAST_MERCHANT_KEY || (k1 + k2)).toString().trim();
-    
-    // CRITICAL: Trimming the passphrase prevents signature mismatches from copy-paste whitespace
-    const PASSPHRASE = (payfastConfig.passphrase || process.env.PAYFAST_PASSPHRASE || null)?.toString().trim();
+    // HARDCODED LIVE CREDENTIALS AS PER USER REQUEST
+    const MERCHANT_ID = '22427478';
+    const MERCHANT_KEY = 'kt2fwjkagmjli';
+    const PASSPHRASE = 'Desormais190';
     const PAYFAST_URL = (payfastConfig.url || process.env.PAYFAST_URL || 'https://www.payfast.co.za/eng/process').toString().trim();
 
     // Build payload WITHOUT signature first (so signature excludes itself)
@@ -474,8 +466,8 @@ router.post('/payfast/generate', optionalAuth, async (req, res) => {
       payloadData.cancel_url = `${originUrl}/cart`;
     }
 
-    // --- Notify URL: always use server-accessible URL ---
-    payloadData.notify_url = `${spoofedBaseUrl}/api/orders/payfast/notify`;
+    // --- Notify URL: always use current site URL for signature consistency ---
+    payloadData.notify_url = `${baseUrl}/api/orders/payfast/notify`;
 
     // --- Buyer info ---
     payloadData.name_first = shippingDetails.firstName || 'Customer';
