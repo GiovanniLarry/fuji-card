@@ -225,7 +225,7 @@ const Checkout = () => {
 
   const paymentMethods = [
     { id: 'apple', name: 'Apple Pay', shortName: 'Apple Pay', icon: 'apple', description: 'Fast and secure one-click checkout' },
-    { id: 'payfast', name: 'PayFast Instructions', shortName: 'PayFast', icon: 'payfast', description: 'Secure Bank Transfer & EFT (WhatsApp)' },
+    { id: 'payfast', name: 'Secure Payment (PayFast)', shortName: 'PayFast', icon: 'payfast', description: 'Secure Cards, Bank Transfer & Instant EFT' },
     { id: 'paystack', name: 'Paystack Payment', shortName: '', icon: 'paystack', description: 'Cards · Bank · Transfer · USSD' },
     { id: 'cryptomus', name: 'Cryptocurrency', shortName: 'Crypto', icon: 'crypto', description: 'BTC · ETH · USDT · USDC · LTC' },
     { id: 'wise', name: 'Wise Transfer', shortName: 'Wise', icon: 'wise', description: 'Instant, low-fee international payments' },
@@ -423,7 +423,7 @@ const Checkout = () => {
 
     try {
       // Check if it's a WhatsApp payment method or if we are in fallback mode
-      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email', 'payfast'];
+      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email'];
 
       if (whatsappMethods.includes(formData.paymentMethod)) {
         // Send order via WhatsApp for new payment methods
@@ -466,7 +466,8 @@ const Checkout = () => {
             return;
           } else if (formData.paymentMethod === 'paystack') {
             const response = await ordersAPI.checkout(orderData);
-            const order = response.data.order;
+            const order = response.data?.order;
+            if (!order) throw new Error('Order creation failed for Paystack. Please try again.');
             
             // Calculate correct amount for Paystack based on their specific account currency
             const amountConverted = convertPrice(total, paystackCurrency);
@@ -509,7 +510,8 @@ const Checkout = () => {
             return;
           } else if (formData.paymentMethod === 'payfast') {
             const response = await ordersAPI.checkout(orderData);
-            const order = response.data.order;
+            const order = response.data?.order;
+            if (!order) throw new Error('Order creation failed for PayFast. Please try again.');
             await refreshCart();
 
             // Fetch PayFast payload (with USD conversion)
@@ -539,6 +541,7 @@ const Checkout = () => {
           } else {
             // Regular checkout
             const response = await ordersAPI.checkout(orderData);
+            if (!response.data?.order) throw new Error('Regular checkout failed to create order.');
             await refreshCart();
             navigate(`/order-confirmation/${response.data.order.id}`, { state: { order: response.data.order } });
             return;

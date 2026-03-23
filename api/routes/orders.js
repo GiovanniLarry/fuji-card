@@ -269,6 +269,11 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       for (const cartItem of cart.cart_items) {
         const product = cartItem.products;
 
+        if (!product) {
+          console.warn(`[Checkout] Missing product data for cart item. Skipping item.`);
+          continue;
+        }
+
         // Fetch fresh stock data to avoid cache issues
         const { data: freshProduct } = await supabase
           .from('products')
@@ -278,8 +283,13 @@ router.post('/checkout', optionalAuth, async (req, res) => {
 
         const currentProduct = freshProduct || product;
 
-        if (!currentProduct || currentProduct.stock < cartItem.quantity) {
-          console.warn(`[Checkout] Processing order despite low stock for ${currentProduct?.name || 'product'}`);
+        if (!currentProduct) {
+          console.warn(`[Checkout] Critical: Product ${product.id} not found in DB during fresh fetch.`);
+          continue;
+        }
+
+        if (currentProduct.stock < cartItem.quantity) {
+          console.warn(`[Checkout] Processing order despite low stock for ${currentProduct.name}`);
         }
 
         orderItems.push({
@@ -305,8 +315,13 @@ router.post('/checkout', optionalAuth, async (req, res) => {
           product = fallbackProducts.find(p => p.id === mItem.product_id);
         }
 
-        if (!product || (product.stock !== undefined && product.stock < mItem.quantity)) {
-          console.warn(`[Checkout] Processing manual order despite low stock for ${product?.name || 'product'}`);
+        if (!product) {
+          console.warn(`[Checkout] Manual item product not found: ${mItem.product_id}. Skipping.`);
+          continue;
+        }
+
+        if (product.stock !== undefined && product.stock < mItem.quantity) {
+          console.warn(`[Checkout] Processing manual order despite low stock for ${product.name}`);
         }
         orderItems.push({
           product_id: product.id,
@@ -364,7 +379,10 @@ router.post('/checkout', optionalAuth, async (req, res) => {
       .select()
       .single();
 
-    if (orderError) throw orderError;
+    if (orderError || !newOrder) {
+      console.error('[Checkout] Substep failed: order record not established');
+      throw new Error('Order creation failed in database record stage.');
+    }
 
     // Create order items and deduct stock
     for (const item of orderItems) {
