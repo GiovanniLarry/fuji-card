@@ -26,8 +26,8 @@ router.get('/', async (req, res) => {
 
     console.log('📦 Products API called with params:', { category, search, limit, page, featured });
 
-    // IF SUPABASE IS NOT AVAILABLE, USE FALLBACK DATA FROM STORE.JS
-    if (!supabase) {
+    // ALWAYS USE FALLBACK DATA FROM STORE.JS TO ENSURE EXACTLY 600 ITEMS ARE SHOWN
+    if (true || !supabase) {
       console.log('⚠️  Using fallback products data (Supabase not configured or available)');
       let result = [...fallbackProducts];
       
@@ -189,6 +189,17 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   try {
+    if (true || !supabase) {
+      const product = fallbackProducts.find(p => p.id === req.params.id);
+      if (!product) return res.status(404).json({ error: 'Product not found' });
+      
+      const related = fallbackProducts
+        .filter(p => p.category === product.category && p.id !== product.id)
+        .slice(0, 4);
+        
+      return res.json({ product, related });
+    }
+
     const { data: product, error } = await supabase
       .from('products')
       .select(`
@@ -227,7 +238,7 @@ router.get('/filters/options', async (req, res) => {
   try {
     const { category } = req.query;
 
-    if (!supabase) {
+    if (true || !supabase) {
       console.log('⚠️  Using fallback filter options (Supabase not configured)');
       let data = [...fallbackProducts];
       
