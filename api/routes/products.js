@@ -227,6 +227,22 @@ router.get('/filters/options', async (req, res) => {
   try {
     const { category } = req.query;
 
+    if (!supabase) {
+      console.log('⚠️  Using fallback filter options (Supabase not configured)');
+      let data = [...fallbackProducts];
+      
+      if (category) {
+        data = data.filter(p => p.category?.toLowerCase() === category.toLowerCase());
+      }
+
+      const rarities = [...new Set(data.map(p => p.rarity).filter(r => r && r !== 'N/A'))];
+      const conditions = [...new Set(data.map(p => p.condition))];
+      const languages = [...new Set(data.map(p => p.language).filter(l => l && l !== 'N/A'))];
+      const sets = [...new Set(data.map(p => p.set_name || p.set).filter(s => s && s !== 'N/A'))];
+
+      return res.json({ rarities, conditions, languages, sets });
+    }
+
     let query = supabase.from('products').select(`
       rarity, 
       condition, 

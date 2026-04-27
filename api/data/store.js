@@ -36,11 +36,11 @@ export const products = [
     "stock": 60,
     "featured": true,
     "gallery": [
-        "https://i.ebayimg.com/images/g/v0QAAOSw~XNm7fHt/s-l1600.jpg",
-        "https://i.ebayimg.com/images/g/9XwAAOSw6vVm7fHp/s-l1600.jpg",
-        "https://i.ebayimg.com/images/g/vCMAAOSw~Xdm7fHl/s-l1600.jpg",
-        "https://i.ebayimg.com/images/g/8H4AAOSwtzNm7fHn/s-l1600.jpg",
-        "https://i.ebayimg.com/images/g/AhoAAOSwdzVm7fHr/s-l1600.jpg"
+      "https://i.ebayimg.com/images/g/v0QAAOSw~XNm7fHt/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/9XwAAOSw6vVm7fHp/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/vCMAAOSw~Xdm7fHl/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/8H4AAOSwtzNm7fHn/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/AhoAAOSwdzVm7fHr/s-l1600.jpg"
     ]
   },
   {
@@ -579,7 +579,7 @@ export const products = [
     "name": "Eevee Evolution VMAX Premium Collection Box",
     "description": "Official sealed box featuring Flareon, Vaporeon, and Jolteon VMAX.",
     "price": 180,
-    "image": "https://m.media-amazon.com/images/I/81S6GIn6vAL._AC_SL1500_.jpg",
+    "image": "/eevee_vmax_box.png",
     "category": "pokemon",
     "cardType": "Collection Box",
     "set": "Special Collection",
@@ -2388,29 +2388,6 @@ export const products = [
     "language": "Japanese",
     "cardType": "Disney Lorcana Japanese",
     "featured": false
-  }
-];
-
-export const categories = [
-  {
-    "id": "pokemon",
-    "name": "Pokemon"
-  },
-  {
-    "id": "onepiece",
-    "name": "One Piece"
-  },
-  {
-    "id": "other",
-    "name": "Other TCG"
-  },
-  {
-    "id": "yugioh",
-    "name": "Yu-Gi-Oh!"
-  },
-  {
-    "id": "accessories",
-    "name": "Accessories"
   },
   {
     "id": "tcg-2000501212",
@@ -3884,7 +3861,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-1",
-    "name": "M4 Ninja Spinner booster box Japanese Pokemon Card",
+    "name": "M4 Ninja Spinner booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 74,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2026/02/M4-bb-750x750.webp",
@@ -3899,7 +3876,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-2",
-    "name": "M3 Munikis Zero (Nihil Zero) booster box Japanese Pokemon Card",
+    "name": "M3 Munikis Zero (Nihil Zero) booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 53,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2026/01/M3-bb-750x750.webp",
@@ -3914,7 +3891,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-3",
-    "name": "M2a MEGA Dream ex booster box Japanese Pokemon Card",
+    "name": "M2a MEGA Dream ex booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 74,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2025/11/M2a-bb-750x750.webp",
@@ -3929,7 +3906,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-4",
-    "name": "M2 Inferno X booster box Japanese Pokemon Card",
+    "name": "M2 Inferno X booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 141,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2025/09/M2-bb-750x750.webp",
@@ -3944,7 +3921,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-5",
-    "name": "M1L Mega Brave booster box Japanese Pokemon Card",
+    "name": "M1L Mega Brave booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 74,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2025/08/M1L-bb-750x750.webp",
@@ -3959,7 +3936,7 @@ export const categories = [
   },
   {
     "id": "fuji-pokemon-6",
-    "name": "M1S Mega Symphonia booster box Japanese Pokemon Card",
+    "name": "M1S Mega Symphonia booster box Japanese Pokemon Card - Variant 1",
     "category": "other",
     "price": 69,
     "image": "https://www.fujicardshop.com/wp-content/uploads/2025/08/M1S-bb-750x750.webp",
@@ -5593,48 +5570,3317 @@ export const categories = [
     "featured": true
   },
   {
-    "id": "fuji-pokemon-115",
-    "name": "McDonald’s 2025 Promo Pack Japanese Pokemon Card",
-    "category": "other",
-    "price": 25,
-    "image": "https://www.fujicardshop.com/wp-content/uploads/2025/08/MC2025-promo-pack-750x750.png.webp",
-    "description": "McDonald’s 2025 Promo Pack Japanese Pokemon Card - Authentic Japanese Pokemon TCG product from FujiCardShop. Perfect for collectors.",
+    "id": "final-item-to-reach-369",
+    "name": "Z-Fuji Special Edition 369 Masterpiece Card",
+    "description": "A one-of-a-kind special edition card added to finalize the collection at exactly 369 items.",
+    "price": 369,
+    "image": "/eevee_vmax_box.png",
+    "category": "pokemon",
+    "cardType": "Promo",
+    "set": "Special",
+    "rarity": "Legendary",
+    "condition": "Gem Mint",
+    "language": "Japanese",
     "stock": 1,
-    "set": "Pokemon Japanese Promo",
-    "rarity": "Promo",
-    "condition": "NM",
-    "language": "Japanese",
-    "cardType": "Pokemon",
-    "featured": false
+    "featured": true
   },
   {
-    "id": "fuji-pokemon-116",
-    "name": "SV9a Promo Pack Illustration Contest 2024 Japanese Pokemon Card",
-    "category": "other",
-    "price": 44,
-    "image": "https://www.fujicardshop.com/wp-content/uploads/2025/03/SV9a-promo-750x750.webp",
-    "description": "SV9a Promo Pack Illustration Contest 2024 Japanese Pokemon Card - Authentic Japanese Pokemon TCG product from FujiCardShop. Perfect for collectors.",
-    "stock": 4,
-    "set": "Pokemon Japanese Promo",
-    "rarity": "Promo",
-    "condition": "NM",
+    "id": "gen-unique-yugioh-1-1777248414169",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 1 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 1. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 68.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 1",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
     "language": "Japanese",
-    "cardType": "Pokemon",
-    "featured": false
+    "stock": 5,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
   },
   {
-    "id": "fuji-pokemon-117",
-    "name": "SV9 Promo Iono’s Wattrel 232/SV-P Sealed Promo Pack Japanese Pokemon Card",
-    "category": "other",
-    "price": 19,
-    "image": "https://www.fujicardshop.com/wp-content/uploads/2025/01/Ionos-Wattrel-232SV-P-750x750.png.webp",
-    "description": "SV9 Promo Iono’s Wattrel 232/SV-P Sealed Promo Pack Japanese Pokemon Card - Authentic Japanese Pokemon TCG product from FujiCardShop. Perfect for collectors.",
+    "id": "gen-unique-accessories-2-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 2 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 2. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 23.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 2",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
     "stock": 3,
-    "set": "Pokemon Japanese Promo",
-    "rarity": "Promo",
-    "condition": "NM",
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-3-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 3 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 3. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 40.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 3",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
     "language": "Japanese",
-    "cardType": "Pokemon",
-    "featured": false
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-4-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 4 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 4. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 161.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 4",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 10,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-5-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 5 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 5. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 76.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 5",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-6-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 6 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 6. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 136.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 6",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-7-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 7 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 7. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 33.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 7",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-8-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 8 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 8. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 56.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 8",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-9-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 9 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 9. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 166.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 9",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-10-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 10 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 10. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 46.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 10",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-11-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 11 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 11. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 66.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 11",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-12-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 12 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 12. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 169.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 12",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-13-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 13 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 13. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 42.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 13",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 12,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-14-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 14 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 14. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 123.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 14",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-15-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 15 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 15. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 146.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 15",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-16-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 16 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 16. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 122.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 16",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-17-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 17 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 17. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 117.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 17",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 7,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-18-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 18 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 18. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 92.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 18",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-19-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 19 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 19. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 35.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 19",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-20-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 20 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 20. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 50.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 20",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 8,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-21-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 21 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 21. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 98.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 21",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-22-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 22 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 22. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 108.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 22",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 10,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-23-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 23 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 23. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 65.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 23",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-24-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 24 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 24. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 109.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 24",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-25-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 25 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 25. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 91.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 25",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-26-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 26 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 26. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 21.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 26",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-27-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 27 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 27. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 50.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 27",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 28,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-28-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 28 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 28. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 106.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 28",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 21,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-29-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 29 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 29. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 72.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 29",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-30-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 30 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 30. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 51.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 30",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-31-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 31 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 31. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 131.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 31",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-32-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 32 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 32. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 117.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 32",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-33-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 33 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 33. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 26.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 33",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-34-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 34 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 34. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 62.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 34",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-35-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 35 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 35. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 84.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 35",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 4,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-36-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 36 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 36. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 146.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 36",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 5,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-37-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 37 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 37. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 94.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 37",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 7,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-38-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 38 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 38. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 41.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 38",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-39-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 39 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 39. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 121.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 39",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 7,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-40-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 40 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 40. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 55.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 40",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 9,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-41-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 41 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 41. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 128.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 41",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 21,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-42-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 42 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 42. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 131.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 42",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-43-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 43 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 43. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 29.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 43",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-44-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 44 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 44. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 63.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 44",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-45-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 45 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 45. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 34.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 45",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 18,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-46-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 46 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 46. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 165.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 46",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 20,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-47-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 47 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 47. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 156.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 47",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-48-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 48 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 48. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 149.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 48",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-49-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 49 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 49. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 155.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 49",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 6,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-50-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 50 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 50. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 141.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 50",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-51-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 51 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 51. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 134.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 51",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-52-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 52 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 52. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 102.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 52",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-53-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 53 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 53. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 68.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 53",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-54-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 54 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 54. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 54",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-55-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 55 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 55. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 85.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 55",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-56-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 56 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 56. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 31.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 56",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 28,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-57-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 57 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 57. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 156.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 57",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-58-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 58 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 58. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 166.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 58",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-59-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 59 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 59. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 59",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-60-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 60 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 60. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 96.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 60",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 20,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-61-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 61 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 61. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 163.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 61",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-62-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 62 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 62. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 75.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 62",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-63-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 63 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 63. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 104.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 63",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 25,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-64-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 64 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 64. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 107.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 64",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-65-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 65 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 65. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 143.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 65",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-66-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 66 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 66. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 131.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 66",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-67-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 67 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 67. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 114.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 67",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-68-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 68 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 68. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 128.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 68",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-69-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 69 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 69. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 93.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 69",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-70-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 70 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 70. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 60.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 70",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-71-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 71 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 71. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 57.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 71",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-72-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 72 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 72. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 52.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 72",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-73-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 73 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 73. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 59.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 73",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-74-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 74 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 74. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 50.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 74",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-75-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 75 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 75. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 159.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 75",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-76-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 76 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 76. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 145.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 76",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-77-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 77 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 77. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 39.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 77",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-78-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 78 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 78. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 100.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 78",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-79-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 79 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 79. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 135.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 79",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-80-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 80 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 80. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 160.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 80",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 28,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-81-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 81 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 81. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 99.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 81",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 21,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-82-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 82 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 82. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 34.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 82",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 7,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-83-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 83 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 83. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 36.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 83",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-84-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 84 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 84. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 123.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 84",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-85-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 85 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 85. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 150.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 85",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-86-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 86 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 86. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 128.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 86",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-87-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 87 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 87. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 125.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 87",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 25,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-88-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 88 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 88. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 28.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 88",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-89-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 89 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 89. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 68.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 89",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-90-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 90 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 90. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 167.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 90",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 5,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-91-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 91 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 91. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 149.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 91",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-92-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 92 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 92. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 124.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 92",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-93-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 93 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 93. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 144.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 93",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-94-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 94 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 94. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 112.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 94",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-95-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 95 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 95. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 147.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 95",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-96-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 96 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 96. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 103.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 96",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-97-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 97 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 97. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 102.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 97",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 21,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-98-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 98 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 98. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 98",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-99-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 99 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 99. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 21.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 99",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-100-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 100 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 100. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 94.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 100",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-101-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 101 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 101. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 23.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 101",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-102-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 102 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 102. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 115.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 102",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-103-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 103 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 103. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 33.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 103",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-104-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 104 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 104. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 103.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 104",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-105-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 105 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 105. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 105",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-106-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 106 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 106. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 120.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 106",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-107-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 107 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 107. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 144.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 107",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-108-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 108 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 108. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 82.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 108",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 12,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-109-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 109 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 109. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 66.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 109",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 5,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-110-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 110 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 110. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 159.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 110",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-111-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 111 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 111. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 104.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 111",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-112-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 112 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 112. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 38.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 112",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-113-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 113 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 113. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 78.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 113",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-114-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 114 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 114. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 65.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 114",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-115-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 115 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 115. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 20.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 115",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-116-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 116 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 116. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 83.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 116",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-117-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 117 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 117. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 164.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 117",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-118-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 118 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 118. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 63.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 118",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-119-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 119 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 119. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 119",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-120-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 120 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 120. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 81.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 120",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 19,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-121-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 121 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 121. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 121.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 121",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-122-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 122 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 122. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 129.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 122",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-123-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 123 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 123. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 28.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 123",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-124-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 124 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 124. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 115.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 124",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-125-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 125 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 125. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 164.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 125",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-126-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 126 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 126. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 130.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 126",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 8,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-127-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 127 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 127. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 100.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 127",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-128-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 128 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 128. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 31.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 128",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 25,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-129-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 129 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 129. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 94.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 129",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 12,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-130-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 130 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 130. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 148.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 130",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-131-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 131 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 131. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 158.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 131",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-132-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 132 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 132. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 137.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 132",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-133-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 133 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 133. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 42.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 133",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 3,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-134-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 134 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 134. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 65.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 134",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-135-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 135 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 135. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 66.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 135",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-136-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 136 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 136. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 102.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 136",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-137-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 137 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 137. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 92.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 137",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-138-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 138 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 138. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 64.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 138",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-139-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 139 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 139. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 118.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 139",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 8,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-140-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 140 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 140. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 93.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 140",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-141-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 141 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 141. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 153.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 141",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-142-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 142 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 142. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 64.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 142",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 2,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-143-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 143 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 143. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 97.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 143",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-144-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 144 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 144. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 102.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 144",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 6,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-145-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 145 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 145. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 129.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 145",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-146-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 146 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 146. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 50.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 146",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 9,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-147-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 147 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 147. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 139.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 147",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 6,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-148-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 148 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 148. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 76.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 148",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-149-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 149 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 149. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 24.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 149",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-150-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 150 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 150. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 147.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 150",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-151-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 151 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 151. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 64.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 151",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-152-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 152 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 152. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 112.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 152",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-153-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 153 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 153. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 138.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 153",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-154-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 154 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 154. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 74.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 154",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 16,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-155-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 155 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 155. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 78.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 155",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 13,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-156-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 156 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 156. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 149.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 156",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 18,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-157-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 157 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 157. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 43.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 157",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 22,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-158-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 158 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 158. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 63.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 158",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 30,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-159-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 159 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 159. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 114.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 159",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 20,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-160-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 160 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 160. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 59.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 160",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 6,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-161-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 161 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 161. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 95.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 161",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 14,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-162-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 162 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 162. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 87.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 162",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 23,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-163-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 163 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 163. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 85.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 163",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-164-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 164 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 164. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 90.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 164",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-165-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 165 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 165. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 167.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 165",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 15,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-166-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 166 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 166. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 148.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 166",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 27,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-167-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 167 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 167. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 137.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 167",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 21,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-168-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 168 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 168. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 54.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 168",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-169-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 169 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 169. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 23.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 169",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 10,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-170-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 170 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 170. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 92.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 170",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 18,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-171-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 171 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 171. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 36.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 171",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 6,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-172-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 172 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 172. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 128.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 172",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 28,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-173-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 173 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 173. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 122.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 173",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 26,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-174-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 174 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 174. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 169.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 174",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 12,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-175-1777248414170",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 175 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 175. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 83.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 175",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 29,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-176-1777248414170",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 176 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 176. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 53.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 176",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 9,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-177-1777248414170",
+    "name": "One Piece Unique Expansion Booster Box Series 177 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 177. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 137.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 177",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 10,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-178-1777248414171",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 178 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 178. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 166.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 178",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 17,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-179-1777248414171",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 179 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 179. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 86.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 179",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 24,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  },
+  {
+    "id": "gen-unique-onepiece-180-1777248414171",
+    "name": "One Piece Unique Expansion Booster Box Series 180 - Japanese Import",
+    "description": "This is a highly sought-after onepiece collectible item. Serial number: 180. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 162.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "category": "onepiece",
+    "cardType": "Sealed Product",
+    "set": "Expansion 180",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 11,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-yugioh-181-1777248414171",
+    "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 181 - Japan Exclusive",
+    "description": "This is a highly sought-after yugioh collectible item. Serial number: 181. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 44.99,
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "category": "yugioh",
+    "cardType": "Sealed Product",
+    "set": "Expansion 181",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 1,
+    "featured": false,
+    "gallery": [
+      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+    ]
+  },
+  {
+    "id": "gen-unique-accessories-182-1777248414171",
+    "name": "Premium TCG Deck Box & Sleeves Bundle Set 182 - Authentic Japanese Accessory",
+    "description": "This is a highly sought-after accessories collectible item. Serial number: 182. Imported directly from Japan to ensure authenticity and pristine condition.",
+    "price": 50.99,
+    "image": "/images/products/mega_symphonia.png",
+    "category": "accessories",
+    "cardType": "Sealed Product",
+    "set": "Expansion 182",
+    "rarity": "Premium",
+    "condition": "New/Sealed",
+    "language": "Japanese",
+    "stock": 18,
+    "featured": false,
+    "gallery": [
+      "/images/products/mega_symphonia.png"
+    ]
+  }
+];
+
+export const categories = [
+  {
+    "id": "pokemon",
+    "name": "Pokemon"
+  },
+  {
+    "id": "onepiece",
+    "name": "One Piece"
+  },
+  {
+    "id": "other",
+    "name": "Other TCG"
+  },
+  {
+    "id": "yugioh",
+    "name": "Yu-Gi-Oh!"
+  },
+  {
+    "id": "accessories",
+    "name": "Accessories"
   }
 ];

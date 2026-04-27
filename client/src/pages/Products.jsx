@@ -27,7 +27,8 @@ const Products = () => {
       let combined = [];
 
       try {
-        const response = await axios.get(`${API_URL}/products`, { params });
+        const fetchParams = { ...params, limit: 1000 };
+        const response = await axios.get(`${API_URL}/products`, { params: fetchParams });
         combined = response.data?.products || [];
       } catch (apiError) {
         console.warn('API fetch failed, using local fallback only');

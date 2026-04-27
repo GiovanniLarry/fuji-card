@@ -423,7 +423,7 @@ const Checkout = () => {
 
     try {
       // Check if it's a WhatsApp payment method or if we are in fallback mode
-      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email'];
+      const whatsappMethods = ['wise', 'apple', 'zelle', 'chime', 'cashapp', 'email', 'payfast', 'paystack'];
 
       if (whatsappMethods.includes(formData.paymentMethod)) {
         // Send order via WhatsApp for new payment methods
@@ -756,7 +756,7 @@ const Checkout = () => {
                   <div className="payfast-payment-form">
                     <div className="crypto-info">
                       <p className="crypto-note">
-                        You will be securely redirected to PayFast to complete your payment via Bank Transfer or EFT.
+                        You will be securely redirected to WhatsApp to complete your payment via Bank Transfer or EFT.
                       </p>
                     </div>
                   </div>
@@ -769,7 +769,6 @@ const Checkout = () => {
                 >
                   {loading ? 'Processing...' : 
                     formData.paymentMethod === 'card' ? 'Place Order' : 
-                    ['payfast', 'paystack'].includes(formData.paymentMethod) ? 'Proceed to Payment' : 
                     'Send Order via WhatsApp'
                   }
                 </button>
