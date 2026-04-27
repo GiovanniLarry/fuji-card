@@ -5589,7 +5589,7 @@ export const products = [
     "name": "Yu-Gi-Oh! OCG Special Legendary Collection Volume 1 - Japan Exclusive",
     "description": "This is a highly sought-after yugioh collectible item. Serial number: 1. Imported directly from Japan to ensure authenticity and pristine condition.",
     "price": 68.99,
-    "image": "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg",
+    "image": "/yugioh_collection_box.png",
     "category": "yugioh",
     "cardType": "Sealed Product",
     "set": "Expansion 1",
@@ -5599,7 +5599,7 @@ export const products = [
     "stock": 5,
     "featured": false,
     "gallery": [
-      "https://tcgplayer-cdn.tcgplayer.com/product/527615_in_1000x1000.jpg"
+      "/yugioh_collection_box.png"
     ]
   },
   {
@@ -5607,7 +5607,7 @@ export const products = [
     "name": "Premium TCG Deck Box & Sleeves Bundle Set 2 - Authentic Japanese Accessory",
     "description": "This is a highly sought-after accessories collectible item. Serial number: 2. Imported directly from Japan to ensure authenticity and pristine condition.",
     "price": 23.99,
-    "image": "/images/products/mega_symphonia.png",
+    "image": "/premium_deck_box.png",
     "category": "accessories",
     "cardType": "Sealed Product",
     "set": "Expansion 2",
@@ -5617,7 +5617,7 @@ export const products = [
     "stock": 3,
     "featured": false,
     "gallery": [
-      "/images/products/mega_symphonia.png"
+      "/premium_deck_box.png"
     ]
   },
   {
@@ -5625,7 +5625,7 @@ export const products = [
     "name": "One Piece Unique Expansion Booster Box Series 3 - Japanese Import",
     "description": "This is a highly sought-after onepiece collectible item. Serial number: 3. Imported directly from Japan to ensure authenticity and pristine condition.",
     "price": 40.99,
-    "image": "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg",
+    "image": "/one_piece_booster_box.png",
     "category": "onepiece",
     "cardType": "Sealed Product",
     "set": "Expansion 3",
@@ -5635,7 +5635,7 @@ export const products = [
     "stock": 29,
     "featured": false,
     "gallery": [
-      "https://tcgplayer-cdn.tcgplayer.com/product/525624_in_1000x1000.jpg"
+      "/one_piece_booster_box.png"
     ]
   },
   {
